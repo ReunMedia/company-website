@@ -1,0 +1,64 @@
+---
+import { client } from "../graphql/urql";
+import { graphql } from "../graphql/generated";
+import { markdownToHtml } from "../utils/markdownToHtml";
+import TheWorkShowcaseVue from "./TheWorkShowcase.vue";
+import { directusAssetUrl } from "../utils/directusAssetUrl";
+
+const theWorkShowcaseQuery = graphql(`
+  query theWorkShowcaseQuery($langCode: String!) {
+    workShowcaseItems(
+      filter: { translations: { languages_code: { code: { _eq: $langCode } } } }
+    ) {
+      id
+      coverImage {
+        id
+      }
+      translations(filter: { languages_code: { code: { _eq: $langCode } } }) {
+        id
+        title
+        slug
+        markdownContent
+        localizedCoverImage {
+          id
+        }
+      }
+    }
+  }
+`);
+
+const { data, error } =
+  (await client?.query(theWorkShowcaseQuery, {
+    langCode: Astro.currentLocale ?? "",
+  })) ?? {};
+
+// GraphQL error should prevent building the site
+if (error) {
+  throw error;
+}
+
+const showcaseItems = await Promise.all(
+  (data?.workShowcaseItems ?? []).map(async (item) => {
+    const itemTranslations = item.translations?.[0];
+    // Use localized cover image with a fallback.
+    const coverImage = itemTranslations?.localizedCoverImage ?? item.coverImage;
+    const htmlContent = await markdownToHtml(
+      itemTranslations?.markdownContent ?? "",
+    );
+    return {
+      title: itemTranslations?.title ?? "",
+      slug: itemTranslations?.slug ?? "",
+      coverImage: {
+        url: directusAssetUrl(coverImage?.id ?? ""),
+      },
+      htmlContent,
+    };
+  }),
+);
+---
+
+<TheWorkShowcaseVue
+  client:only="vue"
+  currentLocale={Astro.currentLocale ?? ""}
+  showcaseItems={showcaseItems}
+/>

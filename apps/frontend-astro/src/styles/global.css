@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "tailwind-scrollbar" {
+  /*
+   * These enable rounded scrollbar defined in `BaseHtml.astro` but are
+   * currently disabled because of `dialog-scrollbar-padding` utility in
+   * `utilities.css`
+   *
+   * See:
+   * https://adoxography.github.io/tailwind-scrollbar/getting-started#configuration
+   */
+  /* nocompatible: true; */
+  /* preferredStrategy: 'pseudoelements'; */
+}
+@import "./theme.css";
+@import "./prose-content.css";
+@import "./utilities.css";
+
+/**
+ * Use display font for all headings.
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-display;
+}

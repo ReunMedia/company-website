@@ -1,0 +1,23 @@
+{
+  "collection": "languages",
+  "meta": {
+    "insert_order": 1,
+    "create": true,
+    "update": true,
+    "delete": true
+  },
+  "data": [
+    {
+      "_sync_id": "languages-en-US",
+      "code": "en-US",
+      "direction": "ltr",
+      "name": "English"
+    },
+    {
+      "_sync_id": "languages-fi-FI",
+      "code": "fi-FI",
+      "direction": "ltr",
+      "name": "Finnish"
+    }
+  ]
+}

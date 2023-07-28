@@ -1,0 +1,275 @@
+[
+  {
+    "collection": "contactFormResponses",
+    "action": "create",
+    "permissions": {},
+    "validation": {
+      "_and": [
+        {
+          "acceptPrivacy": {
+            "_eq": true
+          }
+        }
+      ]
+    },
+    "presets": null,
+    "fields": [
+      "name",
+      "email",
+      "message",
+      "acceptPrivacy",
+      "additionalJsonData"
+    ],
+    "policy": "_sync_default_public_policy",
+    "_syncId": "d12a2920-be0e-4df0-959f-a6c0c1f35ec6"
+  },
+  {
+    "collection": "directus_files",
+    "action": "read",
+    "permissions": {
+      "_and": [
+        {
+          "_or": [
+            {
+              "folder": {
+                "name": {
+                  "_eq": "public"
+                }
+              }
+            },
+            {
+              "folder": {
+                "parent": {
+                  "name": {
+                    "_eq": "public"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "id",
+      "filename_download",
+      "title",
+      "type",
+      "created_on",
+      "modified_on",
+      "charset",
+      "filesize",
+      "width",
+      "height",
+      "duration",
+      "description",
+      "location",
+      "tags",
+      "focal_point_x",
+      "focal_point_y",
+      "uploaded_on",
+      "storage",
+      "metadata"
+    ],
+    "policy": "_sync_default_public_policy",
+    "_syncId": "a0402b49-3b08-4fe4-8b4b-22e1ffead0bd"
+  },
+  {
+    "collection": "globalOptions_translations",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "_sync_default_public_policy",
+    "_syncId": "101e7bc7-8de2-47b5-91a9-e15c9974ebd7"
+  },
+  {
+    "collection": "globalOptions",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "_sync_default_public_policy",
+    "_syncId": "5e1bb533-1521-45b9-9b70-188c102cb1df"
+  },
+  {
+    "collection": "heroContent_translations",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "_sync_default_public_policy",
+    "_syncId": "9e044980-ee02-48b8-bdd0-948c1a53f3b8"
+  },
+  {
+    "collection": "heroContent",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "_sync_default_public_policy",
+    "_syncId": "c0771708-9f0c-4f1e-b031-a811b5662aa3"
+  },
+  {
+    "collection": "languages",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "_sync_default_public_policy",
+    "_syncId": "872fdd79-9693-4759-bf83-0dfc09155c52"
+  },
+  {
+    "collection": "pages_translations",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "_sync_default_public_policy",
+    "_syncId": "5c35201e-034b-4220-ac86-f7707fd9fcac"
+  },
+  {
+    "collection": "pages",
+    "action": "read",
+    "permissions": {
+      "_and": [
+        {
+          "status": {
+            "_eq": "published"
+          }
+        },
+        {
+          "_or": [
+            {
+              "date_published": {
+                "_null": true
+              }
+            },
+            {
+              "date_published": {
+                "_lte": "$NOW"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "_sync_default_public_policy",
+    "_syncId": "05a646af-cf4a-42d9-814b-5f93600a7efd"
+  },
+  {
+    "collection": "servicesList_translations",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "_sync_default_public_policy",
+    "_syncId": "ce1496b3-d5b8-4187-a32f-23403a06c8b4"
+  },
+  {
+    "collection": "servicesList",
+    "action": "read",
+    "permissions": {
+      "_and": [
+        {
+          "status": {
+            "_eq": "published"
+          }
+        },
+        {
+          "_or": [
+            {
+              "date_published": {
+                "_null": true
+              }
+            },
+            {
+              "date_published": {
+                "_lte": "$NOW"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "id",
+      "sort",
+      "date_created",
+      "date_published",
+      "status",
+      "date_updated",
+      "translations"
+    ],
+    "policy": "_sync_default_public_policy",
+    "_syncId": "b9fa6a0b-be7a-4971-a97d-8e6af0a641cb"
+  },
+  {
+    "collection": "workShowcaseItems_translations",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "_sync_default_public_policy",
+    "_syncId": "8432f79b-57ea-4f28-9540-eb6bc7e9c96b"
+  },
+  {
+    "collection": "workShowcaseItems",
+    "action": "read",
+    "permissions": {
+      "_and": [
+        {
+          "status": {
+            "_eq": "published"
+          }
+        }
+      ]
+    },
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "id",
+      "date_created",
+      "date_updated",
+      "coverImage",
+      "sort",
+      "status",
+      "translations"
+    ],
+    "policy": "_sync_default_public_policy",
+    "_syncId": "42c378a0-82ce-422a-9cb1-02588e4d3019"
+  }
+]

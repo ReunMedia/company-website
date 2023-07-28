@@ -1,0 +1,6 @@
+# .dockerignore is used to improve build times by limiting files that are sent
+# to Docker daemon
+
+.astro
+dist
+node_modules

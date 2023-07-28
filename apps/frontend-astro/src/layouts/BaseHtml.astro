@@ -1,0 +1,52 @@
+---
+import "../styles/global.css";
+import "@fontsource/poppins";
+import "@fontsource-variable/inter";
+import { getPathByLocale } from "astro:i18n";
+import type { LocalizedPath } from "../types/localizedPath";
+import DynamicPageLocalizedLinks from "../components/DynamicPageLocalizedLinks.astro";
+
+export interface Props {
+  /**
+   * Page title
+   */
+  title?: string | undefined;
+  metaDescription?: string | undefined;
+  /**
+   * Alternative localized paths the page. Used to create
+   * `<link rel="alternate">` tags and language switcher links.
+   */
+  localizedPaths?: LocalizedPath[] | undefined;
+}
+
+const { title = "Reun Media", metaDescription, localizedPaths } = Astro.props;
+---
+
+<!doctype html>
+<html
+  lang={getPathByLocale(Astro.currentLocale ?? "en")}
+  class="theme-sky-light scrollbar-thin scrollbar-track-theme-background-highlight scrollbar-thumb-theme-primary scrollbar-thumb-rounded-full"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Reun Media" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <title>{title}</title>
+    <meta name="description" content={metaDescription} />
+    <script is:inline src="/static/dist/setInitialTheme.js"></script>
+
+    <DynamicPageLocalizedLinks {localizedPaths} />
+
+    <slot name="additional-head" />
+  </head>
+  <body class="bg-theme-background text-theme-text-base">
+    <slot />
+  </body>
+</html>

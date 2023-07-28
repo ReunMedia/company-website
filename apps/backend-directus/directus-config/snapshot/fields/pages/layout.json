@@ -1,0 +1,54 @@
+{
+  "collection": "pages",
+  "field": "layout",
+  "type": "string",
+  "meta": {
+    "collection": "pages",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "layout",
+    "group": null,
+    "hidden": false,
+    "interface": "select-dropdown",
+    "note": null,
+    "options": {
+      "choices": [
+        {
+          "text": "Default",
+          "value": "default"
+        },
+        {
+          "text": "Blank",
+          "value": "blank"
+        }
+      ]
+    },
+    "readonly": false,
+    "required": false,
+    "sort": 6,
+    "special": null,
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  },
+  "schema": {
+    "name": "layout",
+    "table": "pages",
+    "data_type": "varchar",
+    "default_value": "default",
+    "max_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "is_nullable": true,
+    "is_unique": false,
+    "is_indexed": false,
+    "is_primary_key": false,
+    "is_generated": false,
+    "generation_expression": null,
+    "has_auto_increment": false,
+    "foreign_key_table": null,
+    "foreign_key_column": null
+  }
+}

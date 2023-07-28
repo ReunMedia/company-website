@@ -1,0 +1,25 @@
+{
+  "collection": "heroContent_translations",
+  "field": "heroContent_id",
+  "related_collection": "heroContent",
+  "meta": {
+    "junction_field": "languages_code",
+    "many_collection": "heroContent_translations",
+    "many_field": "heroContent_id",
+    "one_allowed_collections": null,
+    "one_collection": "heroContent",
+    "one_collection_field": null,
+    "one_deselect_action": "nullify",
+    "one_field": "translations",
+    "sort_field": null
+  },
+  "schema": {
+    "table": "heroContent_translations",
+    "column": "heroContent_id",
+    "foreign_key_table": "heroContent",
+    "foreign_key_column": "id",
+    "constraint_name": null,
+    "on_update": "NO ACTION",
+    "on_delete": "SET NULL"
+  }
+}

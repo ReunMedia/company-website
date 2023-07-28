@@ -1,0 +1,29 @@
+{
+  "collection": "heroContent",
+  "field": "translations",
+  "type": "alias",
+  "meta": {
+    "collection": "heroContent",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "translations",
+    "group": null,
+    "hidden": false,
+    "interface": "translations",
+    "note": null,
+    "options": {
+      "userLanguage": true
+    },
+    "readonly": false,
+    "required": false,
+    "sort": 5,
+    "special": [
+      "translations"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

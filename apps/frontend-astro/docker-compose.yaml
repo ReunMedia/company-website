@@ -1,0 +1,18 @@
+# Production compose file for Astro
+
+services:
+  frontend-astro:
+    build:
+      context: .
+      args:
+        PUBLIC_DIRECTUS_URL: ${PUBLIC_DIRECTUS_URL}
+    restart: unless-stopped
+    expose:
+      - 80
+    environment:
+      # Uses Coolify's `${VAR}` syntax to add editable variables to UI. See:
+      # https://coolify.io/docs/knowledge-base/docker/compose#defining-environment-variables
+      #
+      # NOTE - These variable variables must be overridden in `.env` for
+      # development. See `.env.example` for more.
+      PUBLIC_DIRECTUS_URL: ${PUBLIC_DIRECTUS_URL}

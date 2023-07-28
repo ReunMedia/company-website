@@ -1,0 +1,124 @@
+/* `--tw-prose-headings` needs to be specified for `<dt>` */
+@utility prose {
+  --tw-prose-headings: rgba(var(--colors-theme-text-headings));
+  --tw-prose-counters: rgba(var(--colors-theme-text-muted));
+  --tw-prose-bullets: rgba(var(--colors-theme-text-muted));
+  --tw-prose-th-borders: rgba(var(--colors-theme-borders));
+}
+
+/**
+* All ProseContent styles are be nested inside a deep selector to make them
+* affect content inside `v-html`.
+*/
+.prose-content {
+  /**
+ * Override Tailwind Typography CSS variables for colors that can't be easily
+ * adjusted with utility classes.
+ */
+
+  /**
+ * Use utility classes for styling including colors wherever possible.
+ */
+  /* prettier-ignore */
+  @apply max-w-none
+  text-inherit
+  prose-headings:font-display
+  prose-headings:font-normal
+  prose-headings:text-theme-text-headings
+  prose-a:font-normal
+  prose-a:text-theme-text-links
+  prose-blockquote:border-l-theme-background-highlight
+  prose-blockquote:font-normal
+  prose-blockquote:text-inherit
+  prose-strong:text-inherit
+  /* Disabled because Shiki theme is used instead */
+  /* prose-code:bg-theme-background-highlight */
+  prose-code:text-inherit
+  prose-pre:rounded-2xl
+  prose-pre:bg-theme-background-highlight
+  prose-pre:text-inherit
+  prose-hr:border-theme-borders
+  prose-lead:font-light
+  prose-lead:tracking-wide
+  prose-lead:text-inherit;
+
+  /**
+ * Images and videos
+ */
+  & *:not(figure) > img,
+  & *:not(figure) > iframe,
+  & *:not(figure) > video {
+    @apply rounded-2xl;
+    @apply border-2;
+    @apply border-theme-borders;
+    @apply mx-auto;
+  }
+
+  /**
+ * Figure and figcaption styling.
+ *
+ * TODO - Figure could have fixed breakpoints instead of being fluid to make
+ * image widths consistent across the entire page.
+ */
+  /* Image container (figure) styling */
+  @apply prose-figure:rounded-2xl;
+  @apply prose-figure:border-2;
+  @apply prose-figure:border-theme-borders;
+  @apply [.theme-sky-dark_&]:prose-figure:bg-theme-background-card;
+
+  /* Caption (figcaption) styling */
+  @apply prose-figcaption:m-0;
+  @apply prose-figcaption:p-4;
+  @apply prose-figcaption:text-theme-text-muted;
+
+  /* Make sure image doesn't overflow rounded corners */
+  @apply prose-figure:overflow-hidden;
+
+  /* Fit figure container to image content */
+  @apply prose-figure:max-w-fit;
+
+  /* Make sure caption resizes to image width instead of widening the container */
+  @apply prose-figcaption:[contain:inline-size];
+
+  /* Always center figure images even if they are narrower than content. */
+  @apply prose-figure:mx-auto;
+
+  /*
+   * Set minimum container size and make smaller images fill it by using flex
+   * Figure container is full-width on mobile and has a minimum size on larger
+   * screens. The minimum width is responsively applied with a media query and
+   * accounts for main content padding.
+   */
+  @apply prose-figure:min-w-full;
+  @media only screen and (min-width: theme(--breakpoint-sm)) {
+    @apply prose-figure:min-w-[var(--breakpoint-sm)];
+  }
+  @apply prose-figure:flex;
+  @apply prose-figure:flex-col;
+
+  /* Remove vertical margin and horizontally center media inside figure */
+  figure img,
+  figure video,
+  figure iframe {
+    @apply mx-auto my-0 min-w-full;
+  }
+
+  /**
+ * Tables
+ */
+  @apply prose-thead:border-b-2;
+  @apply prose-th:font-body;
+  @apply prose-th:font-semibold;
+  @apply prose-th:text-theme-text-base;
+
+  /**
+ * Kbd
+ *
+ * This is undocumented but exists in Tailwind's prose styles.
+ */
+  kbd {
+    @apply text-inherit;
+    @apply font-normal;
+    @apply bg-theme-background-highlight;
+  }
+}

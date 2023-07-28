@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Services List",
+    "parent": "8898d8e1-98d5-46b1-b65e-4689580bc9ec",
+    "_syncId": "328131a0-27b8-41b2-b6a3-4b4e1de03ad9"
+  },
+  {
+    "name": "Hero Content",
+    "parent": "8898d8e1-98d5-46b1-b65e-4689580bc9ec",
+    "_syncId": "6de09563-e543-4909-b6ef-f34182fc0bbc"
+  },
+  {
+    "name": "public",
+    "parent": null,
+    "_syncId": "8898d8e1-98d5-46b1-b65e-4689580bc9ec"
+  },
+  {
+    "name": "Work Showcase Items",
+    "parent": "8898d8e1-98d5-46b1-b65e-4689580bc9ec",
+    "_syncId": "9feee2ae-62ec-4643-a7e7-9ab4b5e43fd4"
+  },
+  {
+    "name": "Pages",
+    "parent": "8898d8e1-98d5-46b1-b65e-4689580bc9ec",
+    "_syncId": "bd848772-e37e-4a35-9896-0ce0947ed351"
+  }
+]

@@ -1,0 +1,61 @@
+# Production compose file for Directus
+
+services:
+  backend-directus:
+    build: .
+    restart: unless-stopped
+    volumes:
+      - directus-database:/directus/database
+      - directus-uploads:/directus/uploads
+      - directus-extensions:/directus/extensions
+    environment:
+      # Uses Coolify's `${VAR}` syntax to add editable variables to UI. See:
+      # https://coolify.io/docs/knowledge-base/docker/compose#defining-environment-variables
+
+      # General
+      # https://directus.io/docs/configuration/general
+      PUBLIC_URL: "${PUBLIC_URL}:-https://reun.eu/api/"
+      # GraphQL introspection is disabled in production for additional security.
+      # See `apps/frontend-astro/codegen.ts` for info on schema handling.
+      GRAPHQL_INTROSPECTION: false
+      TELEMETRY: false
+      ADMIN_EMAIL: "${ADMIN_EMAIL}"
+      ADMIN_PASSWORD: "${ADMIN_PASSWORD}"
+
+      # Cache
+      # https://directus.io/docs/configuration/cache
+      # Caching is disabled (default). It doesn't make sense to use cache, since
+      # the TTL would have to be be very long (time between content changes
+      # might be several days) and very short (subsequent changes should be
+      # instantly reflected on builds) at the same time.
+      CACHE_ENABLED: false
+
+      # Database
+      # https://directus.io/docs/configuration/database
+      DB_CLIENT: "sqlite3"
+      DB_FILENAME: "/directus/database/data.db"
+
+      # Email
+      # https://directus.io/docs/configuration/email
+      EMAIL_TRANSPORT: smtp
+      EMAIL_SMTP_HOST: "${EMAIL_SMTP_HOST}:-smtp-relay.gmail.com"
+      EMAIL_SMTP_PORT: "${EMAIL_SMTP_PORT}:-587"
+      EMAIL_SMTP_SECURE: true
+
+      # Flows
+      # https://directus.io/docs/configuration/flows
+      FLOWS_ENV_ALLOW_LIST: "PUBLIC_URL"
+
+      # Security & Limits
+      # https://directus.io/docs/configuration/security-limits
+      SECRET: "${SECRET}"
+      CORS_ENABLED: true
+      CORS_ORIGIN: true
+      # Rate limiter must be disabled (default) or Directus Sync fails because
+      # it runs multiple requests.
+      RATE_LIMITER_ENABLED: false
+
+volumes:
+  directus-database:
+  directus-uploads:
+  directus-extensions:

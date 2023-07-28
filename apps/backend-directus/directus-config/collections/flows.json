@@ -1,0 +1,43 @@
+[
+  {
+    "name": "Contact form honeypot",
+    "icon": "bolt",
+    "color": null,
+    "description": "Detect submitted form honeypot and silently reject submission",
+    "status": "active",
+    "trigger": "event",
+    "accountability": "activity",
+    "options": {
+      "type": "filter",
+      "scope": [
+        "items.create"
+      ],
+      "collections": [
+        "contactFormResponses"
+      ],
+      "return": "$last"
+    },
+    "operation": "080f5cb8-5156-41ef-a306-d578d7af15ae",
+    "_syncId": "b5375bf1-6b78-4b8d-965c-fe64b75228e5"
+  },
+  {
+    "name": "Contact form email notification",
+    "icon": "mail",
+    "color": null,
+    "description": "Send a notification email on a new contact form submission",
+    "status": "active",
+    "trigger": "event",
+    "accountability": "all",
+    "options": {
+      "type": "action",
+      "scope": [
+        "items.create"
+      ],
+      "collections": [
+        "contactFormResponses"
+      ]
+    },
+    "operation": "3fd37532-ed88-4cfc-be5d-dd163ddbc325",
+    "_syncId": "cf79f445-dd07-4a2f-be3a-33ad23f2421f"
+  }
+]

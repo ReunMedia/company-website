@@ -1,0 +1,62 @@
+/**
+  * Dialog scrollbar padding fix
+  *
+  * Opening a Headless UI dialog removes scrollbar and adds padding to `<html>`.
+  * This makes full-width elements have a white vertical line at the right side.
+  *
+  * This utility counteracts that padding whenever `<html>` has the `overflow`
+  * style applied by opening Headless UI dialog.
+  *
+  * NOTE - This utility might have to be added to a separate wrapper element
+  * with the desired background.
+  *
+  * References and additional reading:
+  *
+  * - https://stackoverflow.com/questions/8426882/css-selector-by-inline-style-attribute
+  * - https://github.com/tailwindlabs/headlessui/issues/762
+  * - https://github.com/tailwindlabs/tailwindcss/discussions/11129
+  * - https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-gutter
+  * - https://css-tricks.com/almanac/properties/s/scrollbar-gutter/
+  * - https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-width
+  * - https://stackoverflow.com/questions/28360978/how-can-i-get-browser-scrollbar-width
+  */
+@utility dialog-scrollbar-padding {
+  html[style*="overflow"] & {
+    /**
+     * Calculate scrollbar width.
+     */
+    --scrollbar-width: calc(100vw - 100%);
+
+    /**
+     * Shift this element to the right by scrollbar width. This makes it flush
+     * with the right side of the viewport but also shifts content of the
+     * element.
+     */
+    margin-right: calc(var(--scrollbar-width) * -1);
+
+    /**
+     * Add scrollbar gutter to shift content back left by the scrollbar width.
+     */
+    scrollbar-gutter: stable;
+
+    /* This triggers the `scrollbar-gutter` behaviour */
+    overflow-y: auto;
+  }
+  /**
+  * These two blocks allow us to switch between `scrollbar` and `scrollbar-thin`
+  * on `<html>` without breaking the  padding fix by adjusting the scrollbar
+  * gutter width based on `<html>` scrollbar width.
+  *
+  * NOTE - This fix doesn't work when using `nocompatible` features in
+  * `tailwind-scrollbar`, since they might change the scrollbar width by using
+  * pseudo elements, that don't get reported correctly by the browser's
+  * `scrollbar-width`
+  */
+  .scrollbar-thin & {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar & {
+    scrollbar-width: auto;
+  }
+}

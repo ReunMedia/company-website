@@ -1,0 +1,47 @@
+{
+  "collection": "workShowcaseItems",
+  "field": "coverImage",
+  "type": "uuid",
+  "meta": {
+    "collection": "workShowcaseItems",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "coverImage",
+    "group": null,
+    "hidden": false,
+    "interface": "file-image",
+    "note": "Recommended image size is 1920x1080 with 1920x640 safe area in the middle. A template can be found in the file directory for work showcase items.",
+    "options": {
+      "folder": "9feee2ae-62ec-4643-a7e7-9ab4b5e43fd4"
+    },
+    "readonly": false,
+    "required": false,
+    "sort": 6,
+    "special": [
+      "file"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  },
+  "schema": {
+    "name": "coverImage",
+    "table": "workShowcaseItems",
+    "data_type": "char",
+    "default_value": null,
+    "max_length": 36,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "is_nullable": true,
+    "is_unique": false,
+    "is_indexed": false,
+    "is_primary_key": false,
+    "is_generated": false,
+    "generation_expression": null,
+    "has_auto_increment": false,
+    "foreign_key_table": "directus_files",
+    "foreign_key_column": "id"
+  }
+}

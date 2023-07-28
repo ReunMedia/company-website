@@ -1,0 +1,29 @@
+{
+  "collection": "globalOptions_translations",
+  "field": "footerData",
+  "type": "alias",
+  "meta": {
+    "collection": "globalOptions_translations",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "footerData",
+    "group": null,
+    "hidden": false,
+    "interface": "group-detail",
+    "note": null,
+    "options": null,
+    "readonly": false,
+    "required": false,
+    "sort": 9,
+    "special": [
+      "alias",
+      "no-data",
+      "group"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

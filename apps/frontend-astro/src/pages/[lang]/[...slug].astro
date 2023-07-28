@@ -1,0 +1,143 @@
+---
+import type { GetStaticPaths } from "astro";
+import { graphql } from "../../graphql/generated";
+import { client } from "../../graphql/urql";
+import { getPathByLocale } from "astro:i18n";
+import { capitalize } from "es-toolkit/string";
+import type { LocalizedPath } from "../../types/localizedPath";
+import DynamicPage from "../../layouts/DynamicPage.astro";
+
+/**
+ * Directus page that has been converted to Astro
+ */
+export interface AstroPage {
+  id: string;
+  /**
+   * Page layout to use from `src/layouts/dynamicPages`. Case-insensitive.
+   */
+  layout: string;
+  slug: string;
+  title: string;
+  metaDescription: string;
+  /**
+   * Markdown content
+   */
+  content: string;
+  /**
+   * Alternative URL paths for this page in different languages.
+   */
+  localizedPaths: LocalizedPath[];
+}
+
+export const pagesLoaderQuery = graphql(`
+  query pagesLoaderQuery {
+    pages {
+      id
+      layout
+      translations {
+        languages_id {
+          code
+        }
+        slug
+        title
+        metaDescription
+        content
+      }
+    }
+  }
+`);
+
+export const getStaticPaths = (async () => {
+  const { data, error } = (await client?.query(pagesLoaderQuery, {})) ?? {};
+
+  // GraphQL error should prevent building the site
+  if (error) {
+    throw error;
+  }
+
+  return (
+    // Loop through each page
+    data?.pages.flatMap((directusPage) => {
+      // Each page may have content in multiple languages and a separate Astro
+      // page needs to be generated for each one of them.
+
+      const translations = directusPage.translations?.filter((x) => !!x) ?? [];
+
+      // Get alternative locale paths for this page in the form of
+      // `[lang]/[slug]`
+      const localizedPaths =
+        // Go through each translation of this page.
+        translations.reduce<AstroPage["localizedPaths"]>((acc, x) => {
+          const code = x.languages_id?.code ?? "";
+          let slug = x.slug ?? "";
+
+          // If translation has no language code, trigger an error
+          if (!code && !slug) {
+            console.error(
+              "Unable to get alternative locale path. Missing slug or translation language ID",
+              { pageId: directusPage.id },
+            );
+            return acc;
+          }
+
+          const path = getPathByLocale(code);
+          acc.push({ code, path, slug });
+
+          return acc;
+        }, []);
+
+      return (
+        translations
+          // Loop through all translations of this page.
+          .map((translations) => {
+            // Extract variables that are used for AstroPage
+            const langCode = translations.languages_id?.code;
+            // Layout string from API is case-insensitive.
+            const layout = capitalize(directusPage.layout ?? "");
+            const slug = translations.slug;
+            const title = translations.title ?? "";
+            const content = translations.content ?? "";
+            const metaDescription = translations.metaDescription ?? "";
+
+            // `langCode` and `slug` are mandatory in order to construct the
+            // page URL.
+            if (!langCode || !slug) {
+              console.error(
+                "Unable to generate page. Missing slug or translation language ID",
+                { pageId: directusPage.id },
+              );
+              return undefined;
+            }
+
+            // Construct URL params in form of `[lang]/[slug]`
+            const params = {
+              lang: getPathByLocale(langCode),
+              slug: slug,
+            };
+
+            // Since we're creating multiple Astro pages from a single Directus
+            // page based on translations, we create a custom prop that contains
+            // page data specific to Astro.
+            const props: { astroPage: AstroPage } = {
+              astroPage: {
+                id: directusPage.id,
+                layout,
+                slug,
+                title,
+                metaDescription,
+                content,
+                localizedPaths,
+              },
+            };
+            return { params, props };
+          })
+          .filter((x) => !!x) ?? []
+      );
+    }) ?? []
+  );
+}) satisfies GetStaticPaths;
+
+const { astroPage } = Astro.props;
+---
+
+<DynamicPage astroPage={astroPage} />

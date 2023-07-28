@@ -1,0 +1,33 @@
+---
+import { arrayIncludes, objectKeys } from "ts-extras";
+import type { AstroPage } from "../pages/[lang]/[...slug].astro";
+import { markdownToHtml } from "../utils/markdownToHtml";
+import Blank from "./Blank.astro";
+import Default from "./Default.astro";
+
+interface Props {
+  astroPage: AstroPage;
+}
+
+const { astroPage } = Astro.props;
+
+const contentHtml = await markdownToHtml(astroPage.content);
+
+const layouts = { Blank, Default };
+
+const Layout =
+  // TODO - There might be a better type guard, but this works for now.
+  arrayIncludes(objectKeys(layouts), astroPage.layout)
+    ? layouts[astroPage.layout]
+    : layouts.Default;
+---
+
+<Layout
+  localizedPaths={astroPage.localizedPaths}
+  title={astroPage.title ? `${astroPage.title} - Reun Media` : undefined}
+  metaDescription={astroPage.metaDescription}
+>
+  <div class="prose-content prose">
+    <Fragment set:html={contentHtml} />
+  </div>
+</Layout>

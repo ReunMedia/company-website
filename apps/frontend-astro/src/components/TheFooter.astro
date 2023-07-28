@@ -1,0 +1,157 @@
+---
+import { client } from "../graphql/urql";
+import TheFooterLinks from "./TheFooterLinks.astro";
+import { graphql } from "../graphql/generated";
+import { Icon } from "astro-icon/components";
+import { markdownToHtml } from "../utils/markdownToHtml";
+import { copyrightYear } from "../utils/copyrightYear";
+
+//#region Interfaces for JSON fields
+type ContactInfoLinks = {
+  label?: string | null;
+  linkTarget?: string | null;
+}[];
+
+type SocialMediaLinks = {
+  label?: string | null;
+  linkTarget?: string | null;
+  icon?: string | null;
+}[];
+
+type FooterAdditionalLinks = {
+  label?: string | null;
+  linkTarget?: string | null;
+}[];
+
+interface JsonFields {
+  contactInfoLinks?: ContactInfoLinks | null;
+  socialMediaLinks?: SocialMediaLinks | null;
+  footerAdditionalLinks?: FooterAdditionalLinks | null;
+}
+//#endregion
+
+const theAstroFooterDataQuery = graphql(`
+  query theAstroFooterDataQuery($langCode: String!) {
+    globalOptions {
+      copyrightYearStart
+      translations(filter: { languages_code: { code: { _eq: $langCode } } }) {
+        companyName
+        address
+        contactInfoLinks
+        socialMediaLinks
+        footerAdditionalLinks
+        footerAdditionalContent
+      }
+    }
+  }
+`);
+
+const { data, error } =
+  (await client?.query(theAstroFooterDataQuery, {
+    langCode: Astro.currentLocale ?? "",
+  })) ?? {};
+
+// GraphQL error should prevent building the site
+if (error) {
+  throw error;
+}
+
+const { copyrightYearStart, translations } = data?.globalOptions || {};
+const { address, companyName, footerAdditionalContent } =
+  translations?.[0] || {};
+const { contactInfoLinks, socialMediaLinks, footerAdditionalLinks } =
+  (translations?.[0] as JsonFields) || {};
+
+const footerAdditionalContentHtml = await markdownToHtml(
+  footerAdditionalContent ?? "",
+);
+---
+
+<div class="dialog-scrollbar-padding bg-slate-900">
+  <footer
+    class="footerContent space-y-8 overflow-hidden py-16 text-center text-theme-text-on-dark"
+  >
+    <address class="not-italic">
+      {/* Company name */}
+      <h2 class="pb-2 text-xl text-theme-text-on-dark">{companyName}</h2>
+      {
+        /* Address is split by `,` and all whitespace for individual elements
+            is changed to &npsp; to make sure they wrap properly. */
+      }
+      {
+        address
+          ?.split(",")
+          // `\u00A0` equals `&nbsp;` but won't be escaped by Astro
+          .map((x) => x.trim().replaceAll(" ", "\u00A0"))
+          .join(", ")
+      }
+      <br />
+      {/* Contact info links */}
+      <TheFooterLinks links={contactInfoLinks ?? []} />
+    </address>
+
+    {/* <PageFooterIcons /> */}
+    <div class="flex justify-center space-x-4">
+      {
+        socialMediaLinks?.map((link) => (
+          <a
+            href={link.linkTarget ?? ""}
+            title={link.label ?? ""}
+            rel="noopener noreferrer"
+            aria-label={link.label}
+          >
+            <Icon class="h-8 w-8" name={link.icon} />
+          </a>
+        ))
+      }
+    </div>
+
+    {/* Additional links and text */}
+    <TheFooterLinks class="text-sm" links={footerAdditionalLinks ?? []} />
+
+    <div class="mx-auto flex flex-col items-center">
+      <Fragment set:html={footerAdditionalContentHtml} />
+    </div>
+
+    {/* Copyright */}
+    <p
+      data-the-footer-copyright={JSON.stringify({
+        copyrightYearStart,
+        companyName,
+      })}
+      class="text-xs font-light italic text-theme-text-on-dark/30"
+    >
+      Copyright © {copyrightYear(copyrightYearStart)}
+      {companyName}
+    </p>
+  </footer>
+</div>
+
+<script>
+  import { copyrightYear } from "../utils/copyrightYear";
+
+  const el = document.querySelector<HTMLParagraphElement>(
+    "p[data-the-footer-copyright]",
+  );
+
+  if (el) {
+    const { copyrightYearStart, companyName = "" } = JSON.parse(
+      el?.dataset.theFooterCopyright ?? "{}",
+    );
+    el.textContent = `Copyright © ${copyrightYear(copyrightYearStart)} ${companyName}`;
+  }
+</script>
+
+<style>
+  @reference "../styles/global.css";
+
+  .footerContent {
+    a {
+      @apply underline;
+    }
+
+    strong {
+      @apply font-semibold;
+    }
+  }
+</style>

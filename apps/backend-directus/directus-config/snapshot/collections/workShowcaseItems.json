@@ -1,0 +1,28 @@
+{
+  "collection": "workShowcaseItems",
+  "meta": {
+    "accountability": "all",
+    "archive_app_filter": true,
+    "archive_field": "status",
+    "archive_value": "archived",
+    "collapse": "open",
+    "collection": "workShowcaseItems",
+    "color": null,
+    "display_template": null,
+    "group": "indexContent",
+    "hidden": false,
+    "icon": "shopping_bag",
+    "item_duplication_fields": null,
+    "note": null,
+    "preview_url": null,
+    "singleton": false,
+    "sort": 3,
+    "sort_field": "sort",
+    "translations": null,
+    "unarchive_value": "draft",
+    "versioning": false
+  },
+  "schema": {
+    "name": "workShowcaseItems"
+  }
+}

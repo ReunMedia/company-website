@@ -1,0 +1,35 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import TheTopMenuVue from "./TheTopMenu.vue";
+import type { Props as TheTopMenuProps } from "./TheTopMenu.vue";
+import astroConfig from "../config.ts";
+
+export interface Props
+  extends Pick<
+    TheTopMenuProps["selectLanguageButtonProps"],
+    "localizedPaths"
+  > {}
+
+const { localizedPaths } = Astro.props;
+
+let indexButtonUrl = getRelativeLocaleUrl(Astro.currentLocale ?? "");
+
+// Detect if we're currently at index page and if so, omit index URL to hide
+// index button.
+if (indexButtonUrl === Astro.url.pathname) {
+  indexButtonUrl = "";
+}
+
+const selectLanguageButtonProps: TheTopMenuProps["selectLanguageButtonProps"] =
+  {
+    currentPath: Astro.url.pathname,
+    locales: astroConfig.i18n?.locales ?? [],
+    localizedPaths,
+  };
+---
+
+<TheTopMenuVue
+  client:only="vue"
+  indexButtonUrl={indexButtonUrl}
+  selectLanguageButtonProps={selectLanguageButtonProps}
+/>

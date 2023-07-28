@@ -1,0 +1,1016 @@
+"""ISO8601 Date values"""
+scalar Date
+
+enum EventEnum {
+  create
+  delete
+  update
+}
+
+"""BigInt value"""
+scalar GraphQLBigInt
+
+"""A Float or a String"""
+scalar GraphQLStringOrFloat
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+type Mutation {
+  create_contactFormResponses_item(data: create_contactFormResponses_input!): Boolean
+  create_contactFormResponses_items(data: [create_contactFormResponses_input!]): Boolean
+}
+
+type Query {
+  globalOptions(version: String): globalOptions
+  globalOptions_by_version(version: String!): version_globalOptions
+  globalOptions_translations(filter: globalOptions_translations_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [globalOptions_translations!]!
+  globalOptions_translations_aggregated(filter: globalOptions_translations_filter, groupBy: [String], limit: Int, offset: Int, page: Int, search: String, sort: [String]): [globalOptions_translations_aggregated!]!
+  globalOptions_translations_by_id(id: ID!, version: String): globalOptions_translations
+  globalOptions_translations_by_version(id: ID!, version: String!): version_globalOptions_translations
+  heroContent(version: String): heroContent
+  heroContent_by_version(version: String!): version_heroContent
+  heroContent_translations(filter: heroContent_translations_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [heroContent_translations!]!
+  heroContent_translations_aggregated(filter: heroContent_translations_filter, groupBy: [String], limit: Int, offset: Int, page: Int, search: String, sort: [String]): [heroContent_translations_aggregated!]!
+  heroContent_translations_by_id(id: ID!, version: String): heroContent_translations
+  heroContent_translations_by_version(id: ID!, version: String!): version_heroContent_translations
+  languages(filter: languages_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [languages!]!
+  languages_aggregated(filter: languages_filter, groupBy: [String], limit: Int, offset: Int, page: Int, search: String, sort: [String]): [languages_aggregated!]!
+  languages_by_id(id: ID!, version: String): languages
+  languages_by_version(id: ID!, version: String!): version_languages
+  pages(filter: pages_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [pages!]!
+  pages_aggregated(filter: pages_filter, groupBy: [String], limit: Int, offset: Int, page: Int, search: String, sort: [String]): [pages_aggregated!]!
+  pages_by_id(id: ID!, version: String): pages
+  pages_by_version(id: ID!, version: String!): version_pages
+  pages_translations(filter: pages_translations_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [pages_translations!]!
+  pages_translations_aggregated(filter: pages_translations_filter, groupBy: [String], limit: Int, offset: Int, page: Int, search: String, sort: [String]): [pages_translations_aggregated!]!
+  pages_translations_by_id(id: ID!, version: String): pages_translations
+  pages_translations_by_version(id: ID!, version: String!): version_pages_translations
+  servicesList(filter: servicesList_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [servicesList!]!
+  servicesList_aggregated(filter: servicesList_filter, groupBy: [String], limit: Int, offset: Int, page: Int, search: String, sort: [String]): [servicesList_aggregated!]!
+  servicesList_by_id(id: ID!, version: String): servicesList
+  servicesList_by_version(id: ID!, version: String!): version_servicesList
+  servicesList_translations(filter: servicesList_translations_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [servicesList_translations!]!
+  servicesList_translations_aggregated(filter: servicesList_translations_filter, groupBy: [String], limit: Int, offset: Int, page: Int, search: String, sort: [String]): [servicesList_translations_aggregated!]!
+  servicesList_translations_by_id(id: ID!, version: String): servicesList_translations
+  servicesList_translations_by_version(id: ID!, version: String!): version_servicesList_translations
+  workShowcaseItems(filter: workShowcaseItems_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [workShowcaseItems!]!
+  workShowcaseItems_aggregated(filter: workShowcaseItems_filter, groupBy: [String], limit: Int, offset: Int, page: Int, search: String, sort: [String]): [workShowcaseItems_aggregated!]!
+  workShowcaseItems_by_id(id: ID!, version: String): workShowcaseItems
+  workShowcaseItems_by_version(id: ID!, version: String!): version_workShowcaseItems
+  workShowcaseItems_translations(filter: workShowcaseItems_translations_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [workShowcaseItems_translations!]!
+  workShowcaseItems_translations_aggregated(filter: workShowcaseItems_translations_filter, groupBy: [String], limit: Int, offset: Int, page: Int, search: String, sort: [String]): [workShowcaseItems_translations_aggregated!]!
+  workShowcaseItems_translations_by_id(id: ID!, version: String): workShowcaseItems_translations
+  workShowcaseItems_translations_by_version(id: ID!, version: String!): version_workShowcaseItems_translations
+}
+
+type Subscription {
+  directus_files_mutated(event: EventEnum): directus_files_mutated
+  globalOptions_mutated(event: EventEnum): globalOptions_mutated
+  globalOptions_translations_mutated(event: EventEnum): globalOptions_translations_mutated
+  heroContent_mutated(event: EventEnum): heroContent_mutated
+  heroContent_translations_mutated(event: EventEnum): heroContent_translations_mutated
+  languages_mutated(event: EventEnum): languages_mutated
+  pages_mutated(event: EventEnum): pages_mutated
+  pages_translations_mutated(event: EventEnum): pages_translations_mutated
+  servicesList_mutated(event: EventEnum): servicesList_mutated
+  servicesList_translations_mutated(event: EventEnum): servicesList_translations_mutated
+  workShowcaseItems_mutated(event: EventEnum): workShowcaseItems_mutated
+  workShowcaseItems_translations_mutated(event: EventEnum): workShowcaseItems_translations_mutated
+}
+
+input big_int_filter_operators {
+  _between: [GraphQLBigInt]
+  _eq: GraphQLBigInt
+  _gt: GraphQLBigInt
+  _gte: GraphQLBigInt
+  _in: [GraphQLBigInt]
+  _lt: GraphQLBigInt
+  _lte: GraphQLBigInt
+  _nbetween: [GraphQLBigInt]
+  _neq: GraphQLBigInt
+  _nin: [GraphQLBigInt]
+  _nnull: Boolean
+  _null: Boolean
+}
+
+input count_function_filter_operators {
+  count: number_filter_operators
+}
+
+type count_functions {
+  count: Int
+}
+
+input create_contactFormResponses_input {
+  """Must be 'true' to submit response"""
+  acceptPrivacy: Boolean!
+  additionalJsonData: JSON
+  email: String!
+  message: String!
+  name: String!
+}
+
+input date_filter_operators {
+  _between: [GraphQLStringOrFloat]
+  _eq: String
+  _gt: String
+  _gte: String
+  _in: [String]
+  _lt: String
+  _lte: String
+  _nbetween: [GraphQLStringOrFloat]
+  _neq: String
+  _nin: [String]
+  _nnull: Boolean
+  _null: Boolean
+}
+
+input datetime_function_filter_operators {
+  day: number_filter_operators
+  hour: number_filter_operators
+  minute: number_filter_operators
+  month: number_filter_operators
+  second: number_filter_operators
+  week: number_filter_operators
+  weekday: number_filter_operators
+  year: number_filter_operators
+}
+
+type datetime_functions {
+  day: Int
+  hour: Int
+  minute: Int
+  month: Int
+  second: Int
+  week: Int
+  weekday: Int
+  year: Int
+}
+
+type directus_files {
+  charset: String
+  created_on: Date
+  created_on_func: datetime_functions
+  description: String
+  duration: Int
+  filename_download: String!
+  filesize: GraphQLBigInt
+  focal_point_x: Int
+  focal_point_y: Int
+  height: Int
+  id: ID!
+  location: String
+  metadata: JSON
+  metadata_func: count_functions
+  modified_on: Date
+  modified_on_func: datetime_functions
+  storage: String!
+  tags: JSON
+  tags_func: count_functions
+  title: String
+  type: String
+  uploaded_on: Date
+  uploaded_on_func: datetime_functions
+  width: Int
+}
+
+input directus_files_filter {
+  _and: [directus_files_filter]
+  _or: [directus_files_filter]
+  charset: string_filter_operators
+  created_on: date_filter_operators
+  created_on_func: datetime_function_filter_operators
+  description: string_filter_operators
+  duration: number_filter_operators
+  filename_download: string_filter_operators
+  filesize: big_int_filter_operators
+  focal_point_x: number_filter_operators
+  focal_point_y: number_filter_operators
+  height: number_filter_operators
+  id: string_filter_operators
+  location: string_filter_operators
+  metadata: string_filter_operators
+  metadata_func: count_function_filter_operators
+  modified_on: date_filter_operators
+  modified_on_func: datetime_function_filter_operators
+  storage: string_filter_operators
+  tags: string_filter_operators
+  tags_func: count_function_filter_operators
+  title: string_filter_operators
+  type: string_filter_operators
+  uploaded_on: date_filter_operators
+  uploaded_on_func: datetime_function_filter_operators
+  width: number_filter_operators
+}
+
+type directus_files_mutated {
+  data: directus_files
+  event: EventEnum
+  key: ID!
+}
+
+type globalOptions {
+  copyrightYearStart: Int
+  id: ID!
+  translations(filter: globalOptions_translations_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [globalOptions_translations]
+  translations_func: count_functions
+}
+
+input globalOptions_filter {
+  _and: [globalOptions_filter]
+  _or: [globalOptions_filter]
+  copyrightYearStart: number_filter_operators
+  id: number_filter_operators
+  translations: globalOptions_translations_filter
+  translations_func: count_function_filter_operators
+}
+
+type globalOptions_mutated {
+  data: globalOptions
+  event: EventEnum
+  key: ID!
+}
+
+type globalOptions_translations {
+  address: String
+  companyName: String
+  contactInfoLinks: JSON
+  contactInfoLinks_func: count_functions
+
+  """Additional content inserted to the footer before copyright text."""
+  footerAdditionalContent: String
+
+  """Additional links or text displayed below social media links."""
+  footerAdditionalLinks: JSON
+  footerAdditionalLinks_func: count_functions
+  globalOptions_id(filter: globalOptions_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): globalOptions
+  id: ID!
+
+  """SEO meta description for home page."""
+  indexMetaDescription: String
+  languages_code(filter: languages_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): languages
+  socialMediaLinks: JSON
+  socialMediaLinks_func: count_functions
+}
+
+type globalOptions_translations_aggregated {
+  avg: globalOptions_translations_aggregated_fields
+  avgDistinct: globalOptions_translations_aggregated_fields
+  count: globalOptions_translations_aggregated_count
+  countAll: Int
+  countDistinct: globalOptions_translations_aggregated_count
+  group: JSON
+  max: globalOptions_translations_aggregated_fields
+  min: globalOptions_translations_aggregated_fields
+  sum: globalOptions_translations_aggregated_fields
+  sumDistinct: globalOptions_translations_aggregated_fields
+}
+
+type globalOptions_translations_aggregated_count {
+  address: Int
+  companyName: Int
+  contactInfoLinks: Int
+
+  """Additional content inserted to the footer before copyright text."""
+  footerAdditionalContent: Int
+
+  """Additional links or text displayed below social media links."""
+  footerAdditionalLinks: Int
+  globalOptions_id: Int
+  id: Int
+
+  """SEO meta description for home page."""
+  indexMetaDescription: Int
+  languages_code: Int
+  socialMediaLinks: Int
+}
+
+type globalOptions_translations_aggregated_fields {
+  globalOptions_id: Float
+  id: Float
+}
+
+input globalOptions_translations_filter {
+  _and: [globalOptions_translations_filter]
+  _or: [globalOptions_translations_filter]
+  address: string_filter_operators
+  companyName: string_filter_operators
+  contactInfoLinks: string_filter_operators
+  contactInfoLinks_func: count_function_filter_operators
+  footerAdditionalContent: string_filter_operators
+  footerAdditionalLinks: string_filter_operators
+  footerAdditionalLinks_func: count_function_filter_operators
+  globalOptions_id: globalOptions_filter
+  id: number_filter_operators
+  indexMetaDescription: string_filter_operators
+  languages_code: languages_filter
+  socialMediaLinks: string_filter_operators
+  socialMediaLinks_func: count_function_filter_operators
+}
+
+type globalOptions_translations_mutated {
+  data: globalOptions_translations
+  event: EventEnum
+  key: ID!
+}
+
+type heroContent {
+  backgroundImageDark(filter: directus_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): directus_files
+  backgroundImageLight(filter: directus_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): directus_files
+  date_updated: Date
+  date_updated_func: datetime_functions
+  id: ID!
+  translations(filter: heroContent_translations_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [heroContent_translations]
+  translations_func: count_functions
+}
+
+input heroContent_filter {
+  _and: [heroContent_filter]
+  _or: [heroContent_filter]
+  backgroundImageDark: directus_files_filter
+  backgroundImageLight: directus_files_filter
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  id: number_filter_operators
+  translations: heroContent_translations_filter
+  translations_func: count_function_filter_operators
+}
+
+type heroContent_mutated {
+  data: heroContent
+  event: EventEnum
+  key: ID!
+}
+
+type heroContent_translations {
+  ctaButtonText: String
+  heroContent_id(filter: heroContent_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): heroContent
+  id: ID!
+  languages_code(filter: languages_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): languages
+  message: String
+
+  """
+  Tagline under the logo and in the index page title. Bullet points (•) are displayed in brand color.
+  """
+  tagline: String
+}
+
+type heroContent_translations_aggregated {
+  avg: heroContent_translations_aggregated_fields
+  avgDistinct: heroContent_translations_aggregated_fields
+  count: heroContent_translations_aggregated_count
+  countAll: Int
+  countDistinct: heroContent_translations_aggregated_count
+  group: JSON
+  max: heroContent_translations_aggregated_fields
+  min: heroContent_translations_aggregated_fields
+  sum: heroContent_translations_aggregated_fields
+  sumDistinct: heroContent_translations_aggregated_fields
+}
+
+type heroContent_translations_aggregated_count {
+  ctaButtonText: Int
+  heroContent_id: Int
+  id: Int
+  languages_code: Int
+  message: Int
+
+  """
+  Tagline under the logo and in the index page title. Bullet points (•) are displayed in brand color.
+  """
+  tagline: Int
+}
+
+type heroContent_translations_aggregated_fields {
+  heroContent_id: Float
+  id: Float
+}
+
+input heroContent_translations_filter {
+  _and: [heroContent_translations_filter]
+  _or: [heroContent_translations_filter]
+  ctaButtonText: string_filter_operators
+  heroContent_id: heroContent_filter
+  id: number_filter_operators
+  languages_code: languages_filter
+  message: string_filter_operators
+  tagline: string_filter_operators
+}
+
+type heroContent_translations_mutated {
+  data: heroContent_translations
+  event: EventEnum
+  key: ID!
+}
+
+type languages {
+  code: ID!
+  direction: String
+  name: String
+}
+
+type languages_aggregated {
+  count: languages_aggregated_count
+  countAll: Int
+  countDistinct: languages_aggregated_count
+  group: JSON
+}
+
+type languages_aggregated_count {
+  code: Int
+  direction: Int
+  name: Int
+}
+
+input languages_filter {
+  _and: [languages_filter]
+  _or: [languages_filter]
+  code: string_filter_operators
+  direction: string_filter_operators
+  name: string_filter_operators
+}
+
+type languages_mutated {
+  data: languages
+  event: EventEnum
+  key: ID!
+}
+
+input number_filter_operators {
+  _between: [GraphQLStringOrFloat]
+  _eq: GraphQLStringOrFloat
+  _gt: GraphQLStringOrFloat
+  _gte: GraphQLStringOrFloat
+  _in: [GraphQLStringOrFloat]
+  _lt: GraphQLStringOrFloat
+  _lte: GraphQLStringOrFloat
+  _nbetween: [GraphQLStringOrFloat]
+  _neq: GraphQLStringOrFloat
+  _nin: [GraphQLStringOrFloat]
+  _nnull: Boolean
+  _null: Boolean
+}
+
+type pages {
+  date_created: Date
+  date_created_func: datetime_functions
+  date_published: Date
+  date_published_func: datetime_functions
+  date_updated: Date
+  date_updated_func: datetime_functions
+  id: ID!
+  layout: String
+  status: String
+  translations(filter: pages_translations_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [pages_translations]
+  translations_func: count_functions
+}
+
+type pages_aggregated {
+  avg: pages_aggregated_fields
+  avgDistinct: pages_aggregated_fields
+  count: pages_aggregated_count
+  countAll: Int
+  countDistinct: pages_aggregated_count
+  group: JSON
+  max: pages_aggregated_fields
+  min: pages_aggregated_fields
+  sum: pages_aggregated_fields
+  sumDistinct: pages_aggregated_fields
+}
+
+type pages_aggregated_count {
+  date_created: Int
+  date_published: Int
+  date_updated: Int
+  id: Int
+  layout: Int
+  status: Int
+  translations: Int
+}
+
+type pages_aggregated_fields {
+  id: Float
+}
+
+input pages_filter {
+  _and: [pages_filter]
+  _or: [pages_filter]
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  date_published: date_filter_operators
+  date_published_func: datetime_function_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  id: number_filter_operators
+  layout: string_filter_operators
+  status: string_filter_operators
+  translations: pages_translations_filter
+  translations_func: count_function_filter_operators
+}
+
+type pages_mutated {
+  data: pages
+  event: EventEnum
+  key: ID!
+}
+
+type pages_translations {
+  """Supports GFM"""
+  content: String
+  id: ID!
+  languages_id(filter: languages_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): languages
+
+  """SEO meta description."""
+  metaDescription: String
+  pages_id(filter: pages_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): pages
+
+  """
+  Do not include language prefix. It is automatically added. E.g. ("news" becomes "/en/news")
+  """
+  slug: String!
+  title: String
+}
+
+type pages_translations_aggregated {
+  avg: pages_translations_aggregated_fields
+  avgDistinct: pages_translations_aggregated_fields
+  count: pages_translations_aggregated_count
+  countAll: Int
+  countDistinct: pages_translations_aggregated_count
+  group: JSON
+  max: pages_translations_aggregated_fields
+  min: pages_translations_aggregated_fields
+  sum: pages_translations_aggregated_fields
+  sumDistinct: pages_translations_aggregated_fields
+}
+
+type pages_translations_aggregated_count {
+  """Supports GFM"""
+  content: Int
+  id: Int
+  languages_id: Int
+
+  """SEO meta description."""
+  metaDescription: Int
+  pages_id: Int
+
+  """
+  Do not include language prefix. It is automatically added. E.g. ("news" becomes "/en/news")
+  """
+  slug: Int
+  title: Int
+}
+
+type pages_translations_aggregated_fields {
+  id: Float
+  pages_id: Float
+}
+
+input pages_translations_filter {
+  _and: [pages_translations_filter]
+  _or: [pages_translations_filter]
+  content: string_filter_operators
+  id: number_filter_operators
+  languages_id: languages_filter
+  metaDescription: string_filter_operators
+  pages_id: pages_filter
+  slug: string_filter_operators
+  title: string_filter_operators
+}
+
+type pages_translations_mutated {
+  data: pages_translations
+  event: EventEnum
+  key: ID!
+}
+
+type servicesList {
+  date_created: Date
+  date_created_func: datetime_functions
+  date_published: Date
+  date_published_func: datetime_functions
+  date_updated: Date
+  date_updated_func: datetime_functions
+  id: ID!
+  sort: Int
+  status: String
+  translations(filter: servicesList_translations_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [servicesList_translations]
+  translations_func: count_functions
+}
+
+type servicesList_aggregated {
+  avg: servicesList_aggregated_fields
+  avgDistinct: servicesList_aggregated_fields
+  count: servicesList_aggregated_count
+  countAll: Int
+  countDistinct: servicesList_aggregated_count
+  group: JSON
+  max: servicesList_aggregated_fields
+  min: servicesList_aggregated_fields
+  sum: servicesList_aggregated_fields
+  sumDistinct: servicesList_aggregated_fields
+}
+
+type servicesList_aggregated_count {
+  date_created: Int
+  date_published: Int
+  date_updated: Int
+  id: Int
+  sort: Int
+  status: Int
+  translations: Int
+}
+
+type servicesList_aggregated_fields {
+  id: Float
+  sort: Float
+}
+
+input servicesList_filter {
+  _and: [servicesList_filter]
+  _or: [servicesList_filter]
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  date_published: date_filter_operators
+  date_published_func: datetime_function_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  id: number_filter_operators
+  sort: number_filter_operators
+  status: string_filter_operators
+  translations: servicesList_translations_filter
+  translations_func: count_function_filter_operators
+}
+
+type servicesList_mutated {
+  data: servicesList
+  event: EventEnum
+  key: ID!
+}
+
+type servicesList_translations {
+  id: ID!
+  languages_code(filter: languages_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): languages
+
+  """Supports GFM"""
+  markdownContent: String
+  servicesList_id(filter: servicesList_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): servicesList
+  title: String
+}
+
+type servicesList_translations_aggregated {
+  avg: servicesList_translations_aggregated_fields
+  avgDistinct: servicesList_translations_aggregated_fields
+  count: servicesList_translations_aggregated_count
+  countAll: Int
+  countDistinct: servicesList_translations_aggregated_count
+  group: JSON
+  max: servicesList_translations_aggregated_fields
+  min: servicesList_translations_aggregated_fields
+  sum: servicesList_translations_aggregated_fields
+  sumDistinct: servicesList_translations_aggregated_fields
+}
+
+type servicesList_translations_aggregated_count {
+  id: Int
+  languages_code: Int
+
+  """Supports GFM"""
+  markdownContent: Int
+  servicesList_id: Int
+  title: Int
+}
+
+type servicesList_translations_aggregated_fields {
+  id: Float
+  servicesList_id: Float
+}
+
+input servicesList_translations_filter {
+  _and: [servicesList_translations_filter]
+  _or: [servicesList_translations_filter]
+  id: number_filter_operators
+  languages_code: languages_filter
+  markdownContent: string_filter_operators
+  servicesList_id: servicesList_filter
+  title: string_filter_operators
+}
+
+type servicesList_translations_mutated {
+  data: servicesList_translations
+  event: EventEnum
+  key: ID!
+}
+
+input string_filter_operators {
+  _contains: String
+  _empty: Boolean
+  _ends_with: String
+  _eq: String
+  _icontains: String
+  _iends_with: String
+  _in: [String]
+  _istarts_with: String
+  _ncontains: String
+  _nempty: Boolean
+  _nends_with: String
+  _neq: String
+  _niends_with: String
+  _nin: [String]
+  _nistarts_with: String
+  _nnull: Boolean
+  _nstarts_with: String
+  _null: Boolean
+  _starts_with: String
+}
+
+""""""
+type version_globalOptions {
+  copyrightYearStart: Int
+  id: ID!
+  translations: JSON
+  translations_func: count_functions
+}
+
+""""""
+type version_globalOptions_translations {
+  address: String
+  companyName: String
+  contactInfoLinks: JSON
+  contactInfoLinks_func: count_functions
+
+  """Additional content inserted to the footer before copyright text."""
+  footerAdditionalContent: String
+
+  """Additional links or text displayed below social media links."""
+  footerAdditionalLinks: JSON
+  footerAdditionalLinks_func: count_functions
+  globalOptions_id: JSON
+  id: ID!
+
+  """SEO meta description for home page."""
+  indexMetaDescription: String
+  languages_code: JSON
+  socialMediaLinks: JSON
+  socialMediaLinks_func: count_functions
+}
+
+""""""
+type version_heroContent {
+  backgroundImageDark: JSON
+  backgroundImageLight: JSON
+  date_updated: Date
+  date_updated_func: datetime_functions
+  id: ID!
+  translations: JSON
+  translations_func: count_functions
+}
+
+""""""
+type version_heroContent_translations {
+  ctaButtonText: String
+  heroContent_id: JSON
+  id: ID!
+  languages_code: JSON
+  message: String
+
+  """
+  Tagline under the logo and in the index page title. Bullet points (•) are displayed in brand color.
+  """
+  tagline: String
+}
+
+""""""
+type version_languages {
+  code: ID!
+  direction: String
+  name: String
+}
+
+""""""
+type version_pages {
+  date_created: Date
+  date_created_func: datetime_functions
+  date_published: Date
+  date_published_func: datetime_functions
+  date_updated: Date
+  date_updated_func: datetime_functions
+  id: ID!
+  layout: String
+  status: String
+  translations: JSON
+  translations_func: count_functions
+}
+
+""""""
+type version_pages_translations {
+  """Supports GFM"""
+  content: String
+  id: ID!
+  languages_id: JSON
+
+  """SEO meta description."""
+  metaDescription: String
+  pages_id: JSON
+
+  """
+  Do not include language prefix. It is automatically added. E.g. ("news" becomes "/en/news")
+  """
+  slug: String!
+  title: String
+}
+
+""""""
+type version_servicesList {
+  date_created: Date
+  date_created_func: datetime_functions
+  date_published: Date
+  date_published_func: datetime_functions
+  date_updated: Date
+  date_updated_func: datetime_functions
+  id: ID!
+  sort: Int
+  status: String
+  translations: JSON
+  translations_func: count_functions
+}
+
+""""""
+type version_servicesList_translations {
+  id: ID!
+  languages_code: JSON
+
+  """Supports GFM"""
+  markdownContent: String
+  servicesList_id: JSON
+  title: String
+}
+
+""""""
+type version_workShowcaseItems {
+  coverImage: JSON
+  date_created: Date
+  date_created_func: datetime_functions
+  date_updated: Date
+  date_updated_func: datetime_functions
+  id: ID!
+  sort: Int
+  status: String
+  translations: JSON
+  translations_func: count_functions
+}
+
+""""""
+type version_workShowcaseItems_translations {
+  id: ID!
+  languages_code: JSON
+  localizedCoverImage: JSON
+
+  """Supports GFM"""
+  markdownContent: String
+
+  """
+  Used for anchor link (e.g. #my-product). All slugs in the same language must be unique.
+  """
+  slug: String!
+  title: String
+  workShowcaseItems_id: JSON
+}
+
+type workShowcaseItems {
+  coverImage(filter: directus_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): directus_files
+  date_created: Date
+  date_created_func: datetime_functions
+  date_updated: Date
+  date_updated_func: datetime_functions
+  id: ID!
+  sort: Int
+  status: String
+  translations(filter: workShowcaseItems_translations_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [workShowcaseItems_translations]
+  translations_func: count_functions
+}
+
+type workShowcaseItems_aggregated {
+  avg: workShowcaseItems_aggregated_fields
+  avgDistinct: workShowcaseItems_aggregated_fields
+  count: workShowcaseItems_aggregated_count
+  countAll: Int
+  countDistinct: workShowcaseItems_aggregated_count
+  group: JSON
+  max: workShowcaseItems_aggregated_fields
+  min: workShowcaseItems_aggregated_fields
+  sum: workShowcaseItems_aggregated_fields
+  sumDistinct: workShowcaseItems_aggregated_fields
+}
+
+type workShowcaseItems_aggregated_count {
+  """
+  Recommended image size is 1920x1080 with 1920x640 safe area in the middle. A template can be found in the file directory for work showcase items.
+  """
+  coverImage: Int
+  date_created: Int
+  date_updated: Int
+  id: Int
+  sort: Int
+  status: Int
+  translations: Int
+}
+
+type workShowcaseItems_aggregated_fields {
+  id: Float
+  sort: Float
+}
+
+input workShowcaseItems_filter {
+  _and: [workShowcaseItems_filter]
+  _or: [workShowcaseItems_filter]
+  coverImage: directus_files_filter
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  id: number_filter_operators
+  sort: number_filter_operators
+  status: string_filter_operators
+  translations: workShowcaseItems_translations_filter
+  translations_func: count_function_filter_operators
+}
+
+type workShowcaseItems_mutated {
+  data: workShowcaseItems
+  event: EventEnum
+  key: ID!
+}
+
+type workShowcaseItems_translations {
+  id: ID!
+  languages_code(filter: languages_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): languages
+  localizedCoverImage(filter: directus_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): directus_files
+
+  """Supports GFM"""
+  markdownContent: String
+
+  """
+  Used for anchor link (e.g. #my-product). All slugs in the same language must be unique.
+  """
+  slug: String!
+  title: String
+  workShowcaseItems_id(filter: workShowcaseItems_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): workShowcaseItems
+}
+
+type workShowcaseItems_translations_aggregated {
+  avg: workShowcaseItems_translations_aggregated_fields
+  avgDistinct: workShowcaseItems_translations_aggregated_fields
+  count: workShowcaseItems_translations_aggregated_count
+  countAll: Int
+  countDistinct: workShowcaseItems_translations_aggregated_count
+  group: JSON
+  max: workShowcaseItems_translations_aggregated_fields
+  min: workShowcaseItems_translations_aggregated_fields
+  sum: workShowcaseItems_translations_aggregated_fields
+  sumDistinct: workShowcaseItems_translations_aggregated_fields
+}
+
+type workShowcaseItems_translations_aggregated_count {
+  id: Int
+  languages_code: Int
+
+  """Set image to override default cover for this translation."""
+  localizedCoverImage: Int
+
+  """Supports GFM"""
+  markdownContent: Int
+
+  """
+  Used for anchor link (e.g. #my-product). All slugs in the same language must be unique.
+  """
+  slug: Int
+  title: Int
+  workShowcaseItems_id: Int
+}
+
+type workShowcaseItems_translations_aggregated_fields {
+  id: Float
+  workShowcaseItems_id: Float
+}
+
+input workShowcaseItems_translations_filter {
+  _and: [workShowcaseItems_translations_filter]
+  _or: [workShowcaseItems_translations_filter]
+  id: number_filter_operators
+  languages_code: languages_filter
+  localizedCoverImage: directus_files_filter
+  markdownContent: string_filter_operators
+  slug: string_filter_operators
+  title: string_filter_operators
+  workShowcaseItems_id: workShowcaseItems_filter
+}
+
+type workShowcaseItems_translations_mutated {
+  data: workShowcaseItems_translations
+  event: EventEnum
+  key: ID!
+}

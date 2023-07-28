@@ -1,0 +1,28 @@
+{
+  "collection": "servicesList",
+  "meta": {
+    "accountability": "all",
+    "archive_app_filter": true,
+    "archive_field": "status",
+    "archive_value": "archived",
+    "collapse": "open",
+    "collection": "servicesList",
+    "color": null,
+    "display_template": "{{translations}}",
+    "group": "indexContent",
+    "hidden": false,
+    "icon": "home_repair_service",
+    "item_duplication_fields": null,
+    "note": null,
+    "preview_url": null,
+    "singleton": false,
+    "sort": 2,
+    "sort_field": "sort",
+    "translations": null,
+    "unarchive_value": "draft",
+    "versioning": false
+  },
+  "schema": {
+    "name": "servicesList"
+  }
+}

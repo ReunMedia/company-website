@@ -1,0 +1,78 @@
+{
+  "collection": "globalOptions_translations",
+  "field": "footerAdditionalLinks",
+  "type": "json",
+  "meta": {
+    "collection": "globalOptions_translations",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "footerAdditionalLinks",
+    "group": "footerData",
+    "hidden": false,
+    "interface": "list",
+    "note": "Additional links or text displayed below social media links.",
+    "options": {
+      "fields": [
+        {
+          "field": "label",
+          "meta": {
+            "field": "label",
+            "interface": "input",
+            "note": "Label is displayed even if the link target is empty.",
+            "options": {
+              "placeholder": "Privacy Policy"
+            },
+            "type": "string",
+            "width": "half"
+          },
+          "name": "label",
+          "type": "string"
+        },
+        {
+          "field": "linkTarget",
+          "meta": {
+            "field": "linkTarget",
+            "interface": "input",
+            "note": "Supports following template variables: {language}.",
+            "options": {
+              "placeholder": "/{language}/privacy"
+            },
+            "type": "string",
+            "width": "half"
+          },
+          "name": "linkTarget",
+          "type": "string"
+        }
+      ]
+    },
+    "readonly": false,
+    "required": false,
+    "sort": 1,
+    "special": [
+      "cast-json"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  },
+  "schema": {
+    "name": "footerAdditionalLinks",
+    "table": "globalOptions_translations",
+    "data_type": "json",
+    "default_value": null,
+    "max_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "is_nullable": true,
+    "is_unique": false,
+    "is_indexed": false,
+    "is_primary_key": false,
+    "is_generated": false,
+    "generation_expression": null,
+    "has_auto_increment": false,
+    "foreign_key_table": null,
+    "foreign_key_column": null
+  }
+}

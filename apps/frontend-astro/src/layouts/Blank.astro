@@ -1,0 +1,16 @@
+---
+import BaseHtml from "./BaseHtml.astro";
+import type { Props as BaseHtmlProps } from "./BaseHtml.astro";
+
+type Props = BaseHtmlProps;
+
+const props = Astro.props;
+---
+
+<BaseHtml {...props}>
+  <slot name="additional-head" slot="additional-head" />
+
+  <main>
+    <slot />
+  </main>
+</BaseHtml>

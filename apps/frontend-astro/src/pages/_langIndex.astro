@@ -1,0 +1,67 @@
+---
+/**
+ * Localized index page.
+ */
+
+import TheContactForm from "../components/TheContactForm.astro";
+import TheHero from "../components/TheHero.astro";
+import TheServicesOverview from "../components/TheServicesOverview.astro";
+import TheWorkShowcase from "../components/TheWorkShowcase.astro";
+import Default from "../layouts/Default.astro";
+import { client } from "../graphql/urql";
+import { graphql } from "../graphql/generated";
+import astroConfig from "../config.ts";
+import type { LocalizedPath } from "../types/localizedPath";
+
+/**
+ * Query to get Hero tagline to use as index page title.
+ */
+const theLangIndexQuery = graphql(`
+  query theLangIndexQuery($langCode: String!) {
+    heroContent {
+      translations(filter: { languages_code: { code: { _eq: $langCode } } }) {
+        tagline
+      }
+    }
+    globalOptions {
+      translations(filter: { languages_code: { code: { _eq: $langCode } } }) {
+        indexMetaDescription
+      }
+    }
+  }
+`);
+
+const { data, error } =
+  (await client?.query(theLangIndexQuery, {
+    langCode: Astro.currentLocale ?? "",
+  })) ?? {};
+
+// GraphQL error should prevent building the site
+if (error) {
+  throw error;
+}
+
+const tagline = data?.heroContent?.translations?.[0]?.tagline;
+const metaDescription =
+  data?.globalOptions?.translations?.[0]?.indexMetaDescription ?? "";
+
+const localizedPaths: LocalizedPath[] =
+  astroConfig.i18n?.locales.map(({ codes, path }) => {
+    return { code: codes[0], path, slug: "" };
+  }) ?? [];
+---
+
+<Default
+  title={tagline ? `${tagline} - Reun Media` : undefined}
+  localizedPaths={localizedPaths}
+  metaDescription={metaDescription}
+>
+  <Fragment slot="header">
+    <TheHero ctaScrollTargetSelector="#main-content" />
+  </Fragment>
+  <div id="main-content" slot="default">
+    <TheServicesOverview />
+    <TheWorkShowcase />
+    <TheContactForm />
+  </div>
+</Default>

@@ -1,0 +1,67 @@
+---
+import { sanitizeUrl } from "@braintree/sanitize-url";
+import { getPathByLocale } from "astro:i18n";
+import pupa from "pupa";
+
+interface Props {
+  links?: {
+    label?: string | null;
+    linkTarget?: string | null;
+  }[];
+  class?: string;
+}
+
+const { links = [], class: className = "" } = Astro.props;
+
+const linkGroups = () => {
+  const middleCount = links.length % 2;
+  const edgesCount = (links.length - middleCount) / 2;
+
+  const leftElements = links.slice(0, edgesCount);
+  const middleElements = links.slice(edgesCount, edgesCount + middleCount);
+  const rightElements = links.slice(edgesCount + middleCount, links.length);
+
+  return [leftElements, middleElements, rightElements];
+};
+
+//#region Link target templating
+const processLinkTarget = (linkTarget: string | null | undefined) => {
+  if (!linkTarget) return linkTarget;
+  return sanitizeUrl(
+    pupa(
+      linkTarget,
+      {
+        language: getPathByLocale(Astro.currentLocale ?? ""),
+      },
+      {
+        ignoreMissing: true,
+      },
+    ),
+  );
+};
+//#endregion
+---
+
+<div
+  class:list={[
+    "flex divide-white/5",
+    // Only add dividers if there are multiple links
+    { "divide-x": links.length > 1 },
+    className,
+  ]}
+>
+  {
+    linkGroups().map((linkGroup) => (
+      <div class="first:flex-1 first:basis-0 first:text-right last:flex-1 last:basis-0 last:text-left divide-x divide-white/5">
+        {linkGroup.map((link) => {
+          const Element = link.linkTarget ? "a" : "span";
+          return (
+            <Element class="px-2" href={processLinkTarget(link.linkTarget)}>
+              {link.label}
+            </Element>
+          );
+        })}
+      </div>
+    ))
+  }
+</div>

@@ -1,0 +1,48 @@
+---
+import { client } from "../graphql/urql";
+import { graphql } from "../graphql/generated";
+import { markdownToHtml } from "../utils/markdownToHtml";
+
+const theServicesOverviewQuery = graphql(`
+  query theServicesOverviewQuery($langCode: String!) {
+    servicesList {
+      translations(filter: { languages_code: { code: { _eq: $langCode } } }) {
+        title
+        markdownContent
+      }
+    }
+  }
+`);
+
+const { data, error } =
+  (await client?.query(theServicesOverviewQuery, {
+    langCode: Astro.currentLocale ?? "",
+  })) ?? {};
+
+// GraphQL error should prevent building the site
+if (error) {
+  throw error;
+}
+
+const services = await Promise.all(
+  (data?.servicesList ?? []).map(async (service) => {
+    return {
+      title: service.translations?.[0]?.title,
+      contentHtml: await markdownToHtml(
+        service.translations?.[0]?.markdownContent ?? "",
+      ),
+    };
+  }),
+);
+---
+
+<div class="mx-auto max-w-2xl space-y-16 pt-8">
+  {
+    services.map(({ title, contentHtml }) => (
+      <section>
+        <h2 class="mb-8 ml-4 text-4xl text-theme-primary">{title}</h2>
+        <div class="prose-content prose" set:html={contentHtml} />
+      </section>
+    ))
+  }
+</div>

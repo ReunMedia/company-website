@@ -1,0 +1,25 @@
+---
+/**
+ * Use this component inside `<head>` to add `<link rel="alternate">` tags
+ *
+ * See: https://developers.google.com/search/docs/specialty/international/localized-versions
+ */
+
+import { getAbsoluteLocaleUrl } from "astro:i18n";
+import type { LocalizedPath } from "../types/localizedPath";
+
+export interface Props {
+  localizedPaths?: LocalizedPath[] | undefined;
+}
+
+const { localizedPaths = [] } = Astro.props;
+---
+
+<Fragment>
+  {
+    localizedPaths.map(({ code, slug }) => {
+      const href = getAbsoluteLocaleUrl(code, slug);
+      return <link rel="alternate" hreflang={code} {href} />;
+    })
+  }
+</Fragment>

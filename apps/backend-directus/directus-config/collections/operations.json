@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Check for honeypot",
+    "key": "exec_p225p",
+    "type": "exec",
+    "position_x": 20,
+    "position_y": 1,
+    "options": {
+      "code": "module.exports = async function(data) {\n\tif(data?.$trigger?.payload?.additionalJsonData?.honeypot) {\n        throw new Error(\"Honeypot check failed\");\n    }\n    delete data?.$trigger?.payload?.additionalJsonData?.honeypot\n\treturn data.$trigger.payload;\n}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "b5375bf1-6b78-4b8d-965c-fe64b75228e5",
+    "_syncId": "080f5cb8-5156-41ef-a306-d578d7af15ae"
+  },
+  {
+    "name": "Send Email",
+    "key": "mail_c7v9z",
+    "type": "mail",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "subject": "New contact form response",
+      "to": [
+        "john.doe@example.com"
+      ],
+      "body": "There is a new contact form response.\n\nYou can read it at {{$env.PUBLIC_URL}}/admin/content/contactFormResponses/{{$trigger.key}}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "cf79f445-dd07-4a2f-be3a-33ad23f2421f",
+    "_syncId": "3fd37532-ed88-4cfc-be5d-dd163ddbc325"
+  }
+]

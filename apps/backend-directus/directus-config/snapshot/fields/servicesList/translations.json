@@ -1,0 +1,31 @@
+{
+  "collection": "servicesList",
+  "field": "translations",
+  "type": "alias",
+  "meta": {
+    "collection": "servicesList",
+    "conditions": null,
+    "display": "translations",
+    "display_options": {
+      "userLanguage": true
+    },
+    "field": "translations",
+    "group": null,
+    "hidden": false,
+    "interface": "translations",
+    "note": null,
+    "options": {
+      "userLanguage": true
+    },
+    "readonly": false,
+    "required": false,
+    "sort": 7,
+    "special": [
+      "translations"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

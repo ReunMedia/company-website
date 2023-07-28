@@ -1,0 +1,90 @@
+---
+/**
+ * This page detects visitor's browser's preferred language and redirects to
+ * appropriate language index.
+ */
+
+import Blank from "../layouts/Blank.astro";
+import LogomarkLoadingAnimatedSvg from "../assets/logomark-loading-animated.svg?raw";
+import { getRelativeLocaleUrlList } from "astro:i18n";
+import astroConfig from "../config.ts";
+
+const locales = getRelativeLocaleUrlList().map((x) => x.replaceAll("/", ""));
+const defaultLocale = astroConfig.i18n?.defaultLocale;
+const delay = 3;
+const url = `/${defaultLocale}/`;
+---
+
+<Blank>
+  <Fragment slot="additional-head">
+    <meta http-equiv="refresh" content={`${delay};url=${url}`} />
+  </Fragment>
+
+  <div
+    data-index-redirect={JSON.stringify({ locales, delay, defaultLocale })}
+    class="flex flex-col h-dvh w-dvw items-center justify-center transition-opacity duration-300"
+  >
+    <div class="h-full"></div>
+    <div class="w-full max-w-40">
+      <a href={url} aria-labelledby="fallback-link">
+        <Fragment set:html={LogomarkLoadingAnimatedSvg} />
+      </a>
+    </div>
+    <div class="h-full">
+      <p class="text-center my-4 text-lg font-display text-theme-secondary">
+        Entering<br /><a
+          class="text-theme-primary"
+          href={url}
+          aria-labelledby="fallback-link">Reun Media</a
+        >
+      </p>
+    </div>
+  </div>
+  <a
+    id="fallback-link"
+    href={url}
+    class="absolute bottom-16 w-full mx-auto transition-opacity duration-1000 opacity-0 text-center text-xs font-light underline"
+    aria-label="Enter Reun Media home page"
+  >
+    Click here if you're not redirected automatically
+  </a>
+</Blank>
+
+<script>
+  // Client-side JS preferred language redirect
+
+  const wrapperEl = document.querySelector<HTMLDivElement>(
+    "div[data-index-redirect]",
+  );
+
+  // Get frontmatter data
+  const { locales, delay, defaultLocale } =
+    JSON.parse(wrapperEl?.dataset.indexRedirect ?? "{}") ?? {};
+
+  // Get elements that are changed dynamically
+  const metaEl = document.querySelector('meta[http-equiv="refresh"]');
+  const anchorEls = document.querySelectorAll("a");
+
+  // Check if current browser language matches any of the available locales and
+  // select the most preferred one or fallback to default locale.
+  const regex = new RegExp("^(" + locales.join("|") + ")");
+  const lang = regex.exec(navigator.language)?.[0] ?? defaultLocale;
+  if (lang && wrapperEl) {
+    // Dynamically update attributes to the preferred language
+    const newUrl = `/${lang}/`;
+    metaEl?.setAttribute("content", `${delay};url=${newUrl}`);
+    [...anchorEls].map((el) => el?.setAttribute("href", newUrl));
+
+    // Fade out loader before redirect
+    setTimeout(() => (wrapperEl.style.opacity = "0"), 2700);
+
+    // Just in case the redirect doesn't trigger, fade in a fallback link that
+    // can be used to enter the site.
+    setTimeout(() => {
+      const aEl = document.getElementById("fallback-link");
+      if (aEl) {
+        requestAnimationFrame(() => (aEl.style.opacity = "1"));
+      }
+    }, 3500);
+  }
+</script>
