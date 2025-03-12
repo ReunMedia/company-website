@@ -8,11 +8,11 @@ Following tools are required for development and need to be installed first:
 - [Node.js](https://nodejs.org/)
 - [pnpm](https://pnpm.io/installation)
 
-Start Directus backend container:
+Clone the repository:
 
 ```sh
-cd apps/backend-directus
-docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d --build
+git clone git@github.com:Reun-Media/company-website.git
+cd company-website
 ```
 
 Install frontend dependencies:
@@ -22,9 +22,23 @@ cd apps/frontend-astro
 pnpm install
 ```
 
-Start frontend dev server:
+Setup frontend `.env` file:
 
 ```sh
+cp .env.example .env
+```
+
+Start Directus backend container:
+
+```sh
+cd ../backend-directus
+docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d --build
+```
+
+Start GraphQL Codegen and frontend dev server:
+
+```sh
+cd ../frontend-astro
 pnpm codegen:watch & pnpm dev
 ```
 
