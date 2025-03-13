@@ -8,7 +8,8 @@
     "build:scripts": "esbuild src/scripts/setInitialTheme.ts --minify --outfile=public/static/dist/setInitialTheme.js",
     "codegen": "graphql-codegen",
     "codegen:watch": "graphql-codegen --watch",
-    "dev": "pnpm build:scripts && astro dev",
+    "dev": "concurrently -p command \"pnpm build:scripts\" \"pnpm codegen:watch\" \"astro dev\"",
+    "docker:test": "docker compose -f docker-compose.yaml -f docker-compose.test.yaml --env-file .env up -d --build",
     "lint": "concurrently -p command \"npmPkgJsonLint .\" \"prettier . --check\" \"eslint\" \"astro check\"",
     "preview": "astro preview"
   },

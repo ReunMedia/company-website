@@ -1,4 +1,9 @@
 # Production compose file for Astro
+#
+# We're using `docker-compose.yaml` instead of just `Dockerfile` so that we can
+# define `ENV` variables that are automatically shown in Coolify UI as well as
+# include a separate `docker-compose.test.yaml` that can be used to test the
+# image locally.
 
 services:
   frontend-astro:

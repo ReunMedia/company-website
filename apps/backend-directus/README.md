@@ -3,12 +3,12 @@
 ## Start Directus development container
 
 ```sh
-docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d --build
+pnpm dev
 ```
 
-> [!NOTE]
->
-> You can safely ignore warnings about env variables not being set.
+This starts container in detached mode (background). You can safely ignore
+warnings about env variables not being set as `docker-compose.dev.yaml`
+overrides them.
 
 ## Saving / loading Directus schema
 
@@ -17,26 +17,28 @@ pnpm snapshot
 ```
 
 This saves the sync schema to `data/directus-config`. You can alternatively run
-`npx directus-sync pull` in the container. 
+`npx directus-sync pull` inside the container. 
 
 The schema is automatically applied when the container is started, but you can
 also apply it manually by running `npx directus-sync push` in the container.
 
 ## Running tests
 
-```sh
-pnpm test
-```
-
 > [!NOTE]
 >
 > Directus instance must be running in order to run tests and some tests persist
 > data to database.
 
+```sh
+pnpm test
+```
+
 ## Building and deployment
 
-Deploy `apps/backend-directus/docker-compose.yaml` to Coolify (or another
-service supporting Docker Compose).
+This app uses Docker Compose for deployment. See
+[`docker-compose.yaml`](docker-compose.yaml) for a list of environment variables
+that need to be configured and deploy to Coolify or another service supporting
+Docker Compose.
 
 ## Troubleshooting
 

@@ -32,14 +32,14 @@ Start Directus backend container:
 
 ```sh
 cd ../backend-directus
-docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d --build
+pnpm dev
 ```
 
-Start GraphQL Codegen and frontend dev server:
+Start frontend dev server:
 
 ```sh
 cd ../frontend-astro
-pnpm codegen:watch & pnpm dev
+pnpm dev
 ```
 
 See README in [backend-directus](apps/backend-directus/README.md) and

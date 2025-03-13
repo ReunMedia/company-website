@@ -13,38 +13,45 @@ Install dependencies:
 pnpm install
 ```
 
-Frontend uses GraphQL Codegen for GraphQL. It is recommended to run it in watch
-mode during development. You can start both GraphQL Codegen and Astro dev server
-with following command:
+Setup frontend `.env` file:
 
 ```sh
-pnpm codegen:watch & pnpm dev
+cp .env.example .env
 ```
+
+Start dev server:
+
+```sh
+pnpm dev
+```
+
+This starts both GraphQL Codegen and Astro dev server. Alternatively, you may
+start them manually:
+
+```sh
+pnpm build:scripts
+pnpm codegen:watch
+pnpm astro dev
+```
+
+`build:scripts` runs esbuild to build `scripts/setInitialTheme.ts` and needs to
+be run manually whenever that script is changed.
 
 ## Building and deployment
 
-Deploy `apps/frontend-nuxt/docker-compose.yaml` to Coolify (or another
-service supporting Docker Compose).
+This app uses Docker Compose for deployment. See
+[`docker-compose.yaml`](docker-compose.yaml) for a list of environment variables
+that need to be configured and deploy to Coolify or another service supporting
+Docker Compose.
 
 ### Testing production build
 
 There's a separate `docker-compose.test.yaml` that can be used to test
 production build locally.
 
-> [!NOTE]
->
-> Make sure you set up local `.env` file before testing.
-
 ```sh
-docker compose -f docker-compose.yaml -f docker-compose.test.yaml --env-file .env up -d --build
+pnpm docker:test
 ```
-
-> [!TIP]
->
-> We're using `docker-compose.yaml` instead of just `Dockerfile` so that we can
-> define `ENV` variables that are automatically shown in Coolify UI as well as
-> include a separate `docker-compose.test.yaml` that can be used to test the
-> image locally.
 
 ## Additional info
 
