@@ -14,9 +14,9 @@ services:
       ADMIN_PASSWORD: "admin123"
       ADMIN_TOKEN: "JGKoSfpk_pfk2-qeLqA2Az2ObNy51V7O"
       PUBLIC_URL: "http://localhost:8055"
+      EMAIL_FROM: "directus@example.com"
       EMAIL_SMTP_HOST: mailpit
       EMAIL_SMTP_PORT: 1025
-      EMAIL_SMTP_SECURE: false
       GRAPHQL_INTROSPECTION: true
       CONTACT_FORM_NOTIFICATION_EMAIL: "contact-form-notification@example.com"
 

@@ -40,10 +40,15 @@ services:
 
       # Email
       # https://directus.io/docs/configuration/email
+      # Sender for Directus emails. E.g. `directus@example.com`
       EMAIL_FROM: "${EMAIL_FROM}"
       EMAIL_TRANSPORT: smtp
       EMAIL_SMTP_HOST: "${EMAIL_SMTP_HOST:-smtp-relay.gmail.com}"
       EMAIL_SMTP_PORT: "${EMAIL_SMTP_PORT:-587}"
+      # Set this to your domain. E.g. `example.com`. If this is not set,
+      # Nodemailer (which Directus uses) uses the machine hostname, which might
+      # get rejected by some SMTP relays.
+      EMAIL_SMTP_NAME: "${EMAIL_SMTP_NAME}"
 
       # Flows
       # https://directus.io/docs/configuration/flows
