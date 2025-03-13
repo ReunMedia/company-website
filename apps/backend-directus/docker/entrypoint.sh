@@ -5,7 +5,7 @@
 
 directusSync() {
   echo "Waiting for Directus to start..."
-  # 2>&1 supresses repeated error when the server is not yet up
+  # 2>&1 suppresses repeated error when the server is not yet up
   until [ "$(wget -qO- http://0.0.0.0:8055/server/health 2>&1)" = '{"status":"ok"}' ]
   do
     sleep 1

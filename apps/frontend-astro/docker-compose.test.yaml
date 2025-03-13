@@ -1,8 +1,5 @@
 # This file is used to test production compose deployment locally. It contains
 # some overrides that allow the services to run in a local environment.
-#
-# Use the following command to launch the app:
-# docker-compose -f docker-compose.yaml -f docker-compose.test.yaml up -d --build
 
 services:
   frontend-astro:
