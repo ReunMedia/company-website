@@ -21,6 +21,9 @@ services:
       TELEMETRY: false
       ADMIN_EMAIL: "${ADMIN_EMAIL}"
       ADMIN_PASSWORD: "${ADMIN_PASSWORD}"
+      # This token is used by Directus Sync. If you regenerate the token in
+      # Directus UI, you must also update this ENV variable.
+      ADMIN_TOKEN: "${ADMIN_TOKEN}"
 
       # Cache
       # https://directus.io/docs/configuration/cache

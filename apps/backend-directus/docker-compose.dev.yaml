@@ -12,6 +12,7 @@ services:
       SECRET: "jEv3dh8iEis4f1Pp0j4VT4xV372iGEJmuej9drgagSERsqcqQF4WeiaiZtO4GElY"
       ADMIN_EMAIL: "admin@example.com"
       ADMIN_PASSWORD: "admin123"
+      ADMIN_TOKEN: "JGKoSfpk_pfk2-qeLqA2Az2ObNy51V7O"
       PUBLIC_URL: "http://localhost:8055"
       EMAIL_SMTP_HOST: mailpit
       EMAIL_SMTP_PORT: 1025
