@@ -14,7 +14,7 @@ services:
 
       # General
       # https://directus.io/docs/configuration/general
-      PUBLIC_URL: "${PUBLIC_URL}:-https://reun.eu/api/"
+      PUBLIC_URL: "${PUBLIC_URL:-https://reun.eu/api/}"
       # GraphQL introspection is disabled in production for additional security.
       # See `apps/frontend-astro/codegen.ts` for info on schema handling.
       GRAPHQL_INTROSPECTION: false
@@ -38,8 +38,8 @@ services:
       # Email
       # https://directus.io/docs/configuration/email
       EMAIL_TRANSPORT: smtp
-      EMAIL_SMTP_HOST: "${EMAIL_SMTP_HOST}:-smtp-relay.gmail.com"
-      EMAIL_SMTP_PORT: "${EMAIL_SMTP_PORT}:-587"
+      EMAIL_SMTP_HOST: "${EMAIL_SMTP_HOST:-smtp-relay.gmail.com}"
+      EMAIL_SMTP_PORT: "${EMAIL_SMTP_PORT:-587}"
       EMAIL_SMTP_SECURE: true
 
       # Flows
