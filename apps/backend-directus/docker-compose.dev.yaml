@@ -17,6 +17,7 @@ services:
       EMAIL_SMTP_PORT: 1025
       EMAIL_SMTP_SECURE: false
       GRAPHQL_INTROSPECTION: true
+      CONTACT_FORM_NOTIFICATION_EMAIL: "contact-form-notification@example.com"
 
   mailpit:
     image: axllent/mailpit

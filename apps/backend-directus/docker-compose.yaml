@@ -44,7 +44,7 @@ services:
 
       # Flows
       # https://directus.io/docs/configuration/flows
-      FLOWS_ENV_ALLOW_LIST: "PUBLIC_URL"
+      FLOWS_ENV_ALLOW_LIST: "PUBLIC_URL,CONTACT_FORM_NOTIFICATION_EMAIL"
 
       # Security & Limits
       # https://directus.io/docs/configuration/security-limits
@@ -54,6 +54,11 @@ services:
       # Rate limiter must be disabled (default) or Directus Sync fails because
       # it runs multiple requests.
       RATE_LIMITER_ENABLED: false
+
+      # User Variables
+      # Additional application-specific user environment variables
+      # Email address to send contact form submission notifications to
+      CONTACT_FORM_NOTIFICATION_EMAIL: "${CONTACT_FORM_NOTIFICATION_EMAIL}"
 
 volumes:
   directus-database:

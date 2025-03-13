@@ -22,7 +22,7 @@
     "options": {
       "subject": "New contact form response",
       "to": [
-        "john.doe@example.com"
+        "{{$env.CONTACT_FORM_NOTIFICATION_EMAIL}}"
       ],
       "body": "There is a new contact form response.\n\nYou can read it at {{$env.PUBLIC_URL}}/admin/content/contactFormResponses/{{$trigger.key}}"
     },
