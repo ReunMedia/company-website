@@ -85,33 +85,49 @@ const footerAdditionalContentHtml = await markdownToHtml(
           .map((x) => x.trim().replaceAll(" ", "\u00A0"))
           .join(", ")
       }
-      <br />
       {/* Contact info links */}
-      <TheFooterLinks links={contactInfoLinks ?? []} />
+      {
+        contactInfoLinks?.length && (
+          <>
+            <br />
+            <TheFooterLinks links={contactInfoLinks ?? []} />
+          </>
+        )
+      }
     </address>
 
     {/* <PageFooterIcons /> */}
-    <div class="flex justify-center space-x-4">
-      {
-        socialMediaLinks?.map((link) => (
-          <a
-            href={link.linkTarget ?? ""}
-            title={link.label ?? ""}
-            rel="noopener noreferrer"
-            aria-label={link.label}
-          >
-            <Icon class="h-8 w-8" name={link.icon} />
-          </a>
-        ))
-      }
-    </div>
+    {
+      socialMediaLinks?.length && (
+        <div class="flex justify-center space-x-4">
+          {socialMediaLinks?.map((link) => (
+            <a
+              href={link.linkTarget ?? ""}
+              title={link.label ?? ""}
+              rel="noopener noreferrer"
+              aria-label={link.label}
+            >
+              <Icon class="h-8 w-8" name={link.icon} />
+            </a>
+          ))}
+        </div>
+      )
+    }
 
     {/* Additional links and text */}
-    <TheFooterLinks class="text-sm" links={footerAdditionalLinks ?? []} />
+    {
+      footerAdditionalLinks?.length && (
+        <TheFooterLinks class="text-sm" links={footerAdditionalLinks ?? []} />
+      )
+    }
 
-    <div class="mx-auto flex flex-col items-center">
-      <Fragment set:html={footerAdditionalContentHtml} />
-    </div>
+    {
+      footerAdditionalContentHtml && (
+        <div class="mx-auto flex flex-col items-center">
+          <Fragment set:html={footerAdditionalContentHtml} />
+        </div>
+      )
+    }
 
     {/* Copyright */}
     <p
