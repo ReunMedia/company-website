@@ -39,7 +39,7 @@
     "@urql/vue": "^1.4.2",
     "@vee-validate/zod": "^4.15.0",
     "@vueuse/core": "^12.7.0",
-    "astro": "^5.3.1",
+    "astro": "^5.5.2",
     "astro-icon": "^1.1.5",
     "concurrently": "^9.1.2",
     "deepmerge-ts": "^7.1.4",
