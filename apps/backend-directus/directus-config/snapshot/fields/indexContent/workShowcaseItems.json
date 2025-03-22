@@ -1,0 +1,32 @@
+{
+  "collection": "indexContent",
+  "field": "workShowcaseItems",
+  "type": "alias",
+  "meta": {
+    "collection": "indexContent",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "workShowcaseItems",
+    "group": null,
+    "hidden": false,
+    "interface": "list-o2m",
+    "note": "Only published items will be visible.",
+    "options": {
+      "enableLink": true,
+      "filter": null,
+      "sort": "indexContent_sort",
+      "template": "{{status}}{{coverImage}}{{translations.title}}"
+    },
+    "readonly": false,
+    "required": false,
+    "sort": 10,
+    "special": [
+      "o2m"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

@@ -1,37 +1,33 @@
 {
-  "collection": "heroContent",
-  "field": "backgroundImageDark",
-  "type": "uuid",
+  "collection": "indexContent_translations",
+  "field": "indexContent_id",
+  "type": "integer",
   "meta": {
-    "collection": "heroContent",
+    "collection": "indexContent_translations",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "backgroundImageDark",
+    "field": "indexContent_id",
     "group": null,
-    "hidden": false,
-    "interface": "file-image",
-    "note": "Hero background image for dark color theme.",
-    "options": {
-      "folder": "6de09563-e543-4909-b6ef-f34182fc0bbc"
-    },
+    "hidden": true,
+    "interface": null,
+    "note": null,
+    "options": null,
     "readonly": false,
     "required": false,
-    "sort": 4,
-    "special": [
-      "file"
-    ],
+    "sort": 2,
+    "special": null,
     "translations": null,
     "validation": null,
     "validation_message": null,
-    "width": "half"
+    "width": "full"
   },
   "schema": {
-    "name": "backgroundImageDark",
-    "table": "heroContent",
-    "data_type": "char",
+    "name": "indexContent_id",
+    "table": "indexContent_translations",
+    "data_type": "integer",
     "default_value": null,
-    "max_length": 36,
+    "max_length": null,
     "numeric_precision": null,
     "numeric_scale": null,
     "is_nullable": true,
@@ -41,7 +37,7 @@
     "is_generated": false,
     "generation_expression": null,
     "has_auto_increment": false,
-    "foreign_key_table": "directus_files",
+    "foreign_key_table": "indexContent",
     "foreign_key_column": "id"
   }
 }

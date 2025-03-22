@@ -1,0 +1,27 @@
+{
+  "collection": "indexContent",
+  "field": "indexContentTranslations",
+  "type": "alias",
+  "meta": {
+    "collection": "indexContent",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "indexContentTranslations",
+    "group": null,
+    "hidden": false,
+    "interface": "translations",
+    "note": null,
+    "options": null,
+    "readonly": false,
+    "required": false,
+    "sort": 8,
+    "special": [
+      "translations"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

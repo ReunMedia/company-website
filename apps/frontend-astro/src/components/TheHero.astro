@@ -17,14 +17,16 @@ const { ctaScrollTargetSelector } = Astro.props;
 
 const query = graphql(`
   query theHeroContentQuery($langCode: String!) {
-    heroContent {
+    indexContent {
       backgroundImageLight {
         id
       }
       backgroundImageDark {
         id
       }
-      translations(filter: { languages_code: { code: { _eq: $langCode } } }) {
+      heroContentTranslations(
+        filter: { languages_code: { code: { _eq: $langCode } } }
+      ) {
         tagline
         message
         ctaButtonText
@@ -41,9 +43,9 @@ if (error) {
   throw error;
 }
 
-const { backgroundImageLight, backgroundImageDark } = data?.heroContent ?? {};
+const { backgroundImageLight, backgroundImageDark } = data?.indexContent ?? {};
 const { message, tagline, ctaButtonText } =
-  data?.heroContent?.translations?.[0] ?? {};
+  data?.indexContent?.heroContentTranslations?.[0] ?? {};
 ---
 
 <header class="min-h-[calc(100vh-(--spacing(16)))] text-center flex flex-col">

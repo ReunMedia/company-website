@@ -1,25 +1,21 @@
 {
-  "collection": "servicesList",
-  "field": "translations",
+  "collection": "indexContent",
+  "field": "heroContentTranslations",
   "type": "alias",
   "meta": {
-    "collection": "servicesList",
+    "collection": "indexContent",
     "conditions": null,
-    "display": "translations",
-    "display_options": {
-      "userLanguage": true
-    },
-    "field": "translations",
+    "display": null,
+    "display_options": null,
+    "field": "heroContentTranslations",
     "group": null,
     "hidden": false,
     "interface": "translations",
     "note": null,
-    "options": {
-      "userLanguage": true
-    },
+    "options": null,
     "readonly": false,
     "required": false,
-    "sort": 7,
+    "sort": 6,
     "special": [
       "translations"
     ],

@@ -11,15 +11,18 @@
     "display_template": null,
     "group": null,
     "hidden": false,
-    "icon": "folder",
+    "icon": "looks_one",
     "item_duplication_fields": null,
     "note": null,
     "preview_url": null,
-    "singleton": false,
-    "sort": 3,
+    "singleton": true,
+    "sort": 2,
     "sort_field": null,
     "translations": null,
     "unarchive_value": null,
     "versioning": false
+  },
+  "schema": {
+    "name": "indexContent"
   }
 }

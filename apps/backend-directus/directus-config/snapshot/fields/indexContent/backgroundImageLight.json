@@ -1,33 +1,37 @@
 {
-  "collection": "servicesList_translations",
-  "field": "servicesList_id",
-  "type": "integer",
+  "collection": "indexContent",
+  "field": "backgroundImageLight",
+  "type": "uuid",
   "meta": {
-    "collection": "servicesList_translations",
+    "collection": "indexContent",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "servicesList_id",
+    "field": "backgroundImageLight",
     "group": null,
-    "hidden": true,
-    "interface": null,
-    "note": null,
-    "options": null,
+    "hidden": false,
+    "interface": "file-image",
+    "note": "Hero background image for light color theme.",
+    "options": {
+      "folder": "6de09563-e543-4909-b6ef-f34182fc0bbc"
+    },
     "readonly": false,
     "required": false,
-    "sort": 2,
-    "special": null,
+    "sort": 4,
+    "special": [
+      "file"
+    ],
     "translations": null,
     "validation": null,
     "validation_message": null,
-    "width": "full"
+    "width": "half"
   },
   "schema": {
-    "name": "servicesList_id",
-    "table": "servicesList_translations",
-    "data_type": "integer",
+    "name": "backgroundImageLight",
+    "table": "indexContent",
+    "data_type": "char",
     "default_value": null,
-    "max_length": null,
+    "max_length": 36,
     "numeric_precision": null,
     "numeric_scale": null,
     "is_nullable": true,
@@ -37,7 +41,7 @@
     "is_generated": false,
     "generation_expression": null,
     "has_auto_increment": false,
-    "foreign_key_table": "servicesList",
+    "foreign_key_table": "directus_files",
     "foreign_key_column": "id"
   }
 }

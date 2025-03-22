@@ -1,25 +1,26 @@
 {
-  "collection": "heroContent",
-  "field": "translations",
+  "collection": "indexContent",
+  "field": "divider-af2qc3",
   "type": "alias",
   "meta": {
-    "collection": "heroContent",
+    "collection": "indexContent",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "translations",
+    "field": "divider-af2qc3",
     "group": null,
     "hidden": false,
-    "interface": "translations",
+    "interface": "presentation-divider",
     "note": null,
     "options": {
-      "userLanguage": true
+      "title": "Index content"
     },
     "readonly": false,
     "required": false,
-    "sort": 5,
+    "sort": 7,
     "special": [
-      "translations"
+      "alias",
+      "no-data"
     ],
     "translations": null,
     "validation": null,

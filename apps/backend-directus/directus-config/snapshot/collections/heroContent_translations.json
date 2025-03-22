@@ -9,7 +9,7 @@
     "collection": "heroContent_translations",
     "color": null,
     "display_template": null,
-    "group": "heroContent",
+    "group": "indexContent",
     "hidden": true,
     "icon": "import_export",
     "item_duplication_fields": null,

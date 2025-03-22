@@ -5,7 +5,7 @@
   "meta": {
     "collection": "workShowcaseItems",
     "conditions": null,
-    "display": null,
+    "display": "image",
     "display_options": null,
     "field": "coverImage",
     "group": null,

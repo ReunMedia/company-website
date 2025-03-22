@@ -1,37 +1,36 @@
 {
-  "collection": "heroContent",
-  "field": "backgroundImageLight",
-  "type": "uuid",
+  "collection": "indexContent_translations",
+  "field": "markdownContent",
+  "type": "text",
   "meta": {
-    "collection": "heroContent",
+    "collection": "indexContent_translations",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "backgroundImageLight",
+    "field": "markdownContent",
     "group": null,
     "hidden": false,
-    "interface": "file-image",
-    "note": "Hero background image for light color theme.",
+    "interface": "input-rich-text-md",
+    "note": "Supports GFM. Heading level 1 is used as section heading and can be used to add multiple sections.",
     "options": {
+      "customSyntax": null,
       "folder": "6de09563-e543-4909-b6ef-f34182fc0bbc"
     },
     "readonly": false,
     "required": false,
-    "sort": 3,
-    "special": [
-      "file"
-    ],
+    "sort": 4,
+    "special": null,
     "translations": null,
     "validation": null,
     "validation_message": null,
-    "width": "half"
+    "width": "full"
   },
   "schema": {
-    "name": "backgroundImageLight",
-    "table": "heroContent",
-    "data_type": "char",
+    "name": "markdownContent",
+    "table": "indexContent_translations",
+    "data_type": "text",
     "default_value": null,
-    "max_length": 36,
+    "max_length": null,
     "numeric_precision": null,
     "numeric_scale": null,
     "is_nullable": true,
@@ -41,7 +40,7 @@
     "is_generated": false,
     "generation_expression": null,
     "has_auto_increment": false,
-    "foreign_key_table": "directus_files",
-    "foreign_key_column": "id"
+    "foreign_key_table": null,
+    "foreign_key_column": null
   }
 }

@@ -3,7 +3,7 @@
   "field": "languages_code",
   "related_collection": "languages",
   "meta": {
-    "junction_field": "heroContent_id",
+    "junction_field": "indexContent_id",
     "many_collection": "heroContent_translations",
     "many_field": "languages_code",
     "one_allowed_collections": null,

@@ -7,20 +7,25 @@ import { directusAssetUrl } from "../utils/directusAssetUrl";
 
 const theWorkShowcaseQuery = graphql(`
   query theWorkShowcaseQuery($langCode: String!) {
-    workShowcaseItems(
-      filter: { translations: { languages_code: { code: { _eq: $langCode } } } }
-    ) {
-      id
-      coverImage {
+    indexContent {
+      workShowcaseItems(
+        # Only fetch items that have content for current language
+        filter: {
+          translations: { languages_code: { code: { _eq: $langCode } } }
+        }
+      ) {
         id
-      }
-      translations(filter: { languages_code: { code: { _eq: $langCode } } }) {
-        id
-        title
-        slug
-        markdownContent
-        localizedCoverImage {
+        coverImage {
           id
+        }
+        translations(filter: { languages_code: { code: { _eq: $langCode } } }) {
+          id
+          title
+          slug
+          markdownContent
+          localizedCoverImage {
+            id
+          }
         }
       }
     }
@@ -38,22 +43,25 @@ if (error) {
 }
 
 const showcaseItems = await Promise.all(
-  (data?.workShowcaseItems ?? []).map(async (item) => {
-    const itemTranslations = item.translations?.[0];
-    // Use localized cover image with a fallback.
-    const coverImage = itemTranslations?.localizedCoverImage ?? item.coverImage;
-    const htmlContent = await markdownToHtml(
-      itemTranslations?.markdownContent ?? "",
-    );
-    return {
-      title: itemTranslations?.title ?? "",
-      slug: itemTranslations?.slug ?? "",
-      coverImage: {
-        url: directusAssetUrl(coverImage?.id ?? ""),
-      },
-      htmlContent,
-    };
-  }),
+  (data?.indexContent?.workShowcaseItems ?? [])
+    .filter((x) => !!x)
+    .map(async (item) => {
+      const itemTranslations = item.translations?.[0];
+      // Use localized cover image with a fallback.
+      const coverImage =
+        itemTranslations?.localizedCoverImage ?? item.coverImage;
+      const htmlContent = await markdownToHtml(
+        itemTranslations?.markdownContent ?? "",
+      );
+      return {
+        title: itemTranslations?.title ?? "",
+        slug: itemTranslations?.slug ?? "",
+        coverImage: {
+          url: directusAssetUrl(coverImage?.id ?? ""),
+        },
+        htmlContent,
+      };
+    }),
 );
 ---
 

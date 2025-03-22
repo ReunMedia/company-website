@@ -1,10 +1,10 @@
 {
-  "collection": "servicesList_translations",
+  "collection": "indexContent_translations",
   "field": "languages_code",
   "related_collection": "languages",
   "meta": {
-    "junction_field": "servicesList_id",
-    "many_collection": "servicesList_translations",
+    "junction_field": "indexContent_id",
+    "many_collection": "indexContent_translations",
     "many_field": "languages_code",
     "one_allowed_collections": null,
     "one_collection": "languages",
@@ -14,7 +14,7 @@
     "sort_field": null
   },
   "schema": {
-    "table": "servicesList_translations",
+    "table": "indexContent_translations",
     "column": "languages_code",
     "foreign_key_table": "languages",
     "foreign_key_column": "code",

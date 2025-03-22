@@ -1,11 +1,11 @@
 {
-  "collection": "heroContent",
-  "field": "backgroundImageDark",
+  "collection": "indexContent",
+  "field": "backgroundImageLight",
   "related_collection": "directus_files",
   "meta": {
     "junction_field": null,
-    "many_collection": "heroContent",
-    "many_field": "backgroundImageDark",
+    "many_collection": "indexContent",
+    "many_field": "backgroundImageLight",
     "one_allowed_collections": null,
     "one_collection": "directus_files",
     "one_collection_field": null,
@@ -14,8 +14,8 @@
     "sort_field": null
   },
   "schema": {
-    "table": "heroContent",
-    "column": "backgroundImageDark",
+    "table": "indexContent",
+    "column": "backgroundImageLight",
     "foreign_key_table": "directus_files",
     "foreign_key_column": "id",
     "constraint_name": null,

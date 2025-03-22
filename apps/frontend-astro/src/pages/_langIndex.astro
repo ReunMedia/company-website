@@ -5,22 +5,29 @@
 
 import TheContactForm from "../components/TheContactForm.astro";
 import TheHero from "../components/TheHero.astro";
-import TheServicesOverview from "../components/TheServicesOverview.astro";
 import TheWorkShowcase from "../components/TheWorkShowcase.astro";
 import Default from "../layouts/Default.astro";
 import { client } from "../graphql/urql";
 import { graphql } from "../graphql/generated";
 import astroConfig from "../config.ts";
 import type { LocalizedPath } from "../types/localizedPath";
+import { markdownToHtml } from "../utils/markdownToHtml";
 
 /**
  * Query to get Hero tagline to use as index page title.
  */
 const theLangIndexQuery = graphql(`
   query theLangIndexQuery($langCode: String!) {
-    heroContent {
-      translations(filter: { languages_code: { code: { _eq: $langCode } } }) {
+    indexContent {
+      heroContentTranslations(
+        filter: { languages_code: { code: { _eq: $langCode } } }
+      ) {
         tagline
+      }
+      indexContentTranslations(
+        filter: { languages_code: { code: { _eq: $langCode } } }
+      ) {
+        markdownContent
       }
     }
     globalOptions {
@@ -41,7 +48,7 @@ if (error) {
   throw error;
 }
 
-const tagline = data?.heroContent?.translations?.[0]?.tagline;
+const tagline = data?.indexContent?.heroContentTranslations?.[0]?.tagline;
 const metaDescription =
   data?.globalOptions?.translations?.[0]?.indexMetaDescription ?? "";
 
@@ -49,6 +56,10 @@ const localizedPaths: LocalizedPath[] =
   astroConfig.i18n?.locales.map(({ codes, path }) => {
     return { code: codes[0], path, slug: "" };
   }) ?? [];
+
+const htmlContent = await markdownToHtml(
+  data?.indexContent?.indexContentTranslations?.[0]?.markdownContent ?? "",
+);
 ---
 
 <Default
@@ -59,8 +70,11 @@ const localizedPaths: LocalizedPath[] =
   <Fragment slot="header">
     <TheHero ctaScrollTargetSelector="#main-content" />
   </Fragment>
-  <div id="main-content" slot="default">
-    <TheServicesOverview />
+  <div class="pt-8" id="main-content" slot="default">
+    <section
+      class="prose prose-content prose-h1:text-center prose-h1:text-5xl"
+      set:html={htmlContent}
+    />
     <TheWorkShowcase />
     <TheContactForm />
   </div>

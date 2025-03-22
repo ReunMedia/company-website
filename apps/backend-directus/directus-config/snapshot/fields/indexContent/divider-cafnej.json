@@ -1,0 +1,30 @@
+{
+  "collection": "indexContent",
+  "field": "divider-cafnej",
+  "type": "alias",
+  "meta": {
+    "collection": "indexContent",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "divider-cafnej",
+    "group": null,
+    "hidden": false,
+    "interface": "presentation-divider",
+    "note": null,
+    "options": {
+      "title": "Work Showcase"
+    },
+    "readonly": false,
+    "required": false,
+    "sort": 9,
+    "special": [
+      "alias",
+      "no-data"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

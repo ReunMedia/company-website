@@ -30,12 +30,16 @@ type Query {
   globalOptions_translations_aggregated(filter: globalOptions_translations_filter, groupBy: [String], limit: Int, offset: Int, page: Int, search: String, sort: [String]): [globalOptions_translations_aggregated!]!
   globalOptions_translations_by_id(id: ID!, version: String): globalOptions_translations
   globalOptions_translations_by_version(id: ID!, version: String!): version_globalOptions_translations
-  heroContent(version: String): heroContent
-  heroContent_by_version(version: String!): version_heroContent
   heroContent_translations(filter: heroContent_translations_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [heroContent_translations!]!
   heroContent_translations_aggregated(filter: heroContent_translations_filter, groupBy: [String], limit: Int, offset: Int, page: Int, search: String, sort: [String]): [heroContent_translations_aggregated!]!
   heroContent_translations_by_id(id: ID!, version: String): heroContent_translations
   heroContent_translations_by_version(id: ID!, version: String!): version_heroContent_translations
+  indexContent(version: String): indexContent
+  indexContent_by_version(version: String!): version_indexContent
+  indexContent_translations(filter: indexContent_translations_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [indexContent_translations!]!
+  indexContent_translations_aggregated(filter: indexContent_translations_filter, groupBy: [String], limit: Int, offset: Int, page: Int, search: String, sort: [String]): [indexContent_translations_aggregated!]!
+  indexContent_translations_by_id(id: ID!, version: String): indexContent_translations
+  indexContent_translations_by_version(id: ID!, version: String!): version_indexContent_translations
   languages(filter: languages_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [languages!]!
   languages_aggregated(filter: languages_filter, groupBy: [String], limit: Int, offset: Int, page: Int, search: String, sort: [String]): [languages_aggregated!]!
   languages_by_id(id: ID!, version: String): languages
@@ -48,14 +52,6 @@ type Query {
   pages_translations_aggregated(filter: pages_translations_filter, groupBy: [String], limit: Int, offset: Int, page: Int, search: String, sort: [String]): [pages_translations_aggregated!]!
   pages_translations_by_id(id: ID!, version: String): pages_translations
   pages_translations_by_version(id: ID!, version: String!): version_pages_translations
-  servicesList(filter: servicesList_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [servicesList!]!
-  servicesList_aggregated(filter: servicesList_filter, groupBy: [String], limit: Int, offset: Int, page: Int, search: String, sort: [String]): [servicesList_aggregated!]!
-  servicesList_by_id(id: ID!, version: String): servicesList
-  servicesList_by_version(id: ID!, version: String!): version_servicesList
-  servicesList_translations(filter: servicesList_translations_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [servicesList_translations!]!
-  servicesList_translations_aggregated(filter: servicesList_translations_filter, groupBy: [String], limit: Int, offset: Int, page: Int, search: String, sort: [String]): [servicesList_translations_aggregated!]!
-  servicesList_translations_by_id(id: ID!, version: String): servicesList_translations
-  servicesList_translations_by_version(id: ID!, version: String!): version_servicesList_translations
   workShowcaseItems(filter: workShowcaseItems_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [workShowcaseItems!]!
   workShowcaseItems_aggregated(filter: workShowcaseItems_filter, groupBy: [String], limit: Int, offset: Int, page: Int, search: String, sort: [String]): [workShowcaseItems_aggregated!]!
   workShowcaseItems_by_id(id: ID!, version: String): workShowcaseItems
@@ -70,13 +66,12 @@ type Subscription {
   directus_files_mutated(event: EventEnum): directus_files_mutated
   globalOptions_mutated(event: EventEnum): globalOptions_mutated
   globalOptions_translations_mutated(event: EventEnum): globalOptions_translations_mutated
-  heroContent_mutated(event: EventEnum): heroContent_mutated
   heroContent_translations_mutated(event: EventEnum): heroContent_translations_mutated
+  indexContent_mutated(event: EventEnum): indexContent_mutated
+  indexContent_translations_mutated(event: EventEnum): indexContent_translations_mutated
   languages_mutated(event: EventEnum): languages_mutated
   pages_mutated(event: EventEnum): pages_mutated
   pages_translations_mutated(event: EventEnum): pages_translations_mutated
-  servicesList_mutated(event: EventEnum): servicesList_mutated
-  servicesList_translations_mutated(event: EventEnum): servicesList_translations_mutated
   workShowcaseItems_mutated(event: EventEnum): workShowcaseItems_mutated
   workShowcaseItems_translations_mutated(event: EventEnum): workShowcaseItems_translations_mutated
 }
@@ -317,38 +312,10 @@ type globalOptions_translations_mutated {
   key: ID!
 }
 
-type heroContent {
-  backgroundImageDark(filter: directus_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): directus_files
-  backgroundImageLight(filter: directus_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): directus_files
-  date_updated: Date
-  date_updated_func: datetime_functions
-  id: ID!
-  translations(filter: heroContent_translations_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [heroContent_translations]
-  translations_func: count_functions
-}
-
-input heroContent_filter {
-  _and: [heroContent_filter]
-  _or: [heroContent_filter]
-  backgroundImageDark: directus_files_filter
-  backgroundImageLight: directus_files_filter
-  date_updated: date_filter_operators
-  date_updated_func: datetime_function_filter_operators
-  id: number_filter_operators
-  translations: heroContent_translations_filter
-  translations_func: count_function_filter_operators
-}
-
-type heroContent_mutated {
-  data: heroContent
-  event: EventEnum
-  key: ID!
-}
-
 type heroContent_translations {
   ctaButtonText: String
-  heroContent_id(filter: heroContent_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): heroContent
   id: ID!
+  indexContent_id(filter: indexContent_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): indexContent
   languages_code(filter: languages_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): languages
   message: String
 
@@ -373,8 +340,8 @@ type heroContent_translations_aggregated {
 
 type heroContent_translations_aggregated_count {
   ctaButtonText: Int
-  heroContent_id: Int
   id: Int
+  indexContent_id: Int
   languages_code: Int
   message: Int
 
@@ -385,16 +352,16 @@ type heroContent_translations_aggregated_count {
 }
 
 type heroContent_translations_aggregated_fields {
-  heroContent_id: Float
   id: Float
+  indexContent_id: Float
 }
 
 input heroContent_translations_filter {
   _and: [heroContent_translations_filter]
   _or: [heroContent_translations_filter]
   ctaButtonText: string_filter_operators
-  heroContent_id: heroContent_filter
   id: number_filter_operators
+  indexContent_id: indexContent_filter
   languages_code: languages_filter
   message: string_filter_operators
   tagline: string_filter_operators
@@ -402,6 +369,97 @@ input heroContent_translations_filter {
 
 type heroContent_translations_mutated {
   data: heroContent_translations
+  event: EventEnum
+  key: ID!
+}
+
+type indexContent {
+  backgroundImageDark(filter: directus_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): directus_files
+  backgroundImageLight(filter: directus_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): directus_files
+  date_updated: Date
+  date_updated_func: datetime_functions
+  heroContentTranslations(filter: heroContent_translations_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [heroContent_translations]
+  heroContentTranslations_func: count_functions
+  id: ID!
+  indexContentTranslations(filter: indexContent_translations_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [indexContent_translations]
+  indexContentTranslations_func: count_functions
+  workShowcaseItems(filter: workShowcaseItems_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [workShowcaseItems]
+  workShowcaseItems_func: count_functions
+}
+
+input indexContent_filter {
+  _and: [indexContent_filter]
+  _or: [indexContent_filter]
+  backgroundImageDark: directus_files_filter
+  backgroundImageLight: directus_files_filter
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  heroContentTranslations: heroContent_translations_filter
+  heroContentTranslations_func: count_function_filter_operators
+  id: number_filter_operators
+  indexContentTranslations: indexContent_translations_filter
+  indexContentTranslations_func: count_function_filter_operators
+  workShowcaseItems: workShowcaseItems_filter
+  workShowcaseItems_func: count_function_filter_operators
+}
+
+type indexContent_mutated {
+  data: indexContent
+  event: EventEnum
+  key: ID!
+}
+
+type indexContent_translations {
+  id: ID!
+  indexContent_id(filter: indexContent_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): indexContent
+  languages_code(filter: languages_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): languages
+
+  """
+  Supports GFM. Heading level 1 is used as section heading and can be used to add multiple sections.
+  """
+  markdownContent: String
+}
+
+type indexContent_translations_aggregated {
+  avg: indexContent_translations_aggregated_fields
+  avgDistinct: indexContent_translations_aggregated_fields
+  count: indexContent_translations_aggregated_count
+  countAll: Int
+  countDistinct: indexContent_translations_aggregated_count
+  group: JSON
+  max: indexContent_translations_aggregated_fields
+  min: indexContent_translations_aggregated_fields
+  sum: indexContent_translations_aggregated_fields
+  sumDistinct: indexContent_translations_aggregated_fields
+}
+
+type indexContent_translations_aggregated_count {
+  id: Int
+  indexContent_id: Int
+  languages_code: Int
+
+  """
+  Supports GFM. Heading level 1 is used as section heading and can be used to add multiple sections.
+  """
+  markdownContent: Int
+}
+
+type indexContent_translations_aggregated_fields {
+  id: Float
+  indexContent_id: Float
+}
+
+input indexContent_translations_filter {
+  _and: [indexContent_translations_filter]
+  _or: [indexContent_translations_filter]
+  id: number_filter_operators
+  indexContent_id: indexContent_filter
+  languages_code: languages_filter
+  markdownContent: string_filter_operators
+}
+
+type indexContent_translations_mutated {
+  data: indexContent_translations
   event: EventEnum
   key: ID!
 }
@@ -587,124 +645,6 @@ type pages_translations_mutated {
   key: ID!
 }
 
-type servicesList {
-  date_created: Date
-  date_created_func: datetime_functions
-  date_published: Date
-  date_published_func: datetime_functions
-  date_updated: Date
-  date_updated_func: datetime_functions
-  id: ID!
-  sort: Int
-  status: String
-  translations(filter: servicesList_translations_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [servicesList_translations]
-  translations_func: count_functions
-}
-
-type servicesList_aggregated {
-  avg: servicesList_aggregated_fields
-  avgDistinct: servicesList_aggregated_fields
-  count: servicesList_aggregated_count
-  countAll: Int
-  countDistinct: servicesList_aggregated_count
-  group: JSON
-  max: servicesList_aggregated_fields
-  min: servicesList_aggregated_fields
-  sum: servicesList_aggregated_fields
-  sumDistinct: servicesList_aggregated_fields
-}
-
-type servicesList_aggregated_count {
-  date_created: Int
-  date_published: Int
-  date_updated: Int
-  id: Int
-  sort: Int
-  status: Int
-  translations: Int
-}
-
-type servicesList_aggregated_fields {
-  id: Float
-  sort: Float
-}
-
-input servicesList_filter {
-  _and: [servicesList_filter]
-  _or: [servicesList_filter]
-  date_created: date_filter_operators
-  date_created_func: datetime_function_filter_operators
-  date_published: date_filter_operators
-  date_published_func: datetime_function_filter_operators
-  date_updated: date_filter_operators
-  date_updated_func: datetime_function_filter_operators
-  id: number_filter_operators
-  sort: number_filter_operators
-  status: string_filter_operators
-  translations: servicesList_translations_filter
-  translations_func: count_function_filter_operators
-}
-
-type servicesList_mutated {
-  data: servicesList
-  event: EventEnum
-  key: ID!
-}
-
-type servicesList_translations {
-  id: ID!
-  languages_code(filter: languages_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): languages
-
-  """Supports GFM"""
-  markdownContent: String
-  servicesList_id(filter: servicesList_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): servicesList
-  title: String
-}
-
-type servicesList_translations_aggregated {
-  avg: servicesList_translations_aggregated_fields
-  avgDistinct: servicesList_translations_aggregated_fields
-  count: servicesList_translations_aggregated_count
-  countAll: Int
-  countDistinct: servicesList_translations_aggregated_count
-  group: JSON
-  max: servicesList_translations_aggregated_fields
-  min: servicesList_translations_aggregated_fields
-  sum: servicesList_translations_aggregated_fields
-  sumDistinct: servicesList_translations_aggregated_fields
-}
-
-type servicesList_translations_aggregated_count {
-  id: Int
-  languages_code: Int
-
-  """Supports GFM"""
-  markdownContent: Int
-  servicesList_id: Int
-  title: Int
-}
-
-type servicesList_translations_aggregated_fields {
-  id: Float
-  servicesList_id: Float
-}
-
-input servicesList_translations_filter {
-  _and: [servicesList_translations_filter]
-  _or: [servicesList_translations_filter]
-  id: number_filter_operators
-  languages_code: languages_filter
-  markdownContent: string_filter_operators
-  servicesList_id: servicesList_filter
-  title: string_filter_operators
-}
-
-type servicesList_translations_mutated {
-  data: servicesList_translations
-  event: EventEnum
-  key: ID!
-}
-
 input string_filter_operators {
   _contains: String
   _empty: Boolean
@@ -759,21 +699,10 @@ type version_globalOptions_translations {
 }
 
 """"""
-type version_heroContent {
-  backgroundImageDark: JSON
-  backgroundImageLight: JSON
-  date_updated: Date
-  date_updated_func: datetime_functions
-  id: ID!
-  translations: JSON
-  translations_func: count_functions
-}
-
-""""""
 type version_heroContent_translations {
   ctaButtonText: String
-  heroContent_id: JSON
   id: ID!
+  indexContent_id: JSON
   languages_code: JSON
   message: String
 
@@ -781,6 +710,33 @@ type version_heroContent_translations {
   Tagline under the logo and in the index page title. Bullet points (•) are displayed in brand color.
   """
   tagline: String
+}
+
+""""""
+type version_indexContent {
+  backgroundImageDark: JSON
+  backgroundImageLight: JSON
+  date_updated: Date
+  date_updated_func: datetime_functions
+  heroContentTranslations: JSON
+  heroContentTranslations_func: count_functions
+  id: ID!
+  indexContentTranslations: JSON
+  indexContentTranslations_func: count_functions
+  workShowcaseItems: JSON
+  workShowcaseItems_func: count_functions
+}
+
+""""""
+type version_indexContent_translations {
+  id: ID!
+  indexContent_id: JSON
+  languages_code: JSON
+
+  """
+  Supports GFM. Heading level 1 is used as section heading and can be used to add multiple sections.
+  """
+  markdownContent: String
 }
 
 """"""
@@ -824,32 +780,6 @@ type version_pages_translations {
 }
 
 """"""
-type version_servicesList {
-  date_created: Date
-  date_created_func: datetime_functions
-  date_published: Date
-  date_published_func: datetime_functions
-  date_updated: Date
-  date_updated_func: datetime_functions
-  id: ID!
-  sort: Int
-  status: String
-  translations: JSON
-  translations_func: count_functions
-}
-
-""""""
-type version_servicesList_translations {
-  id: ID!
-  languages_code: JSON
-
-  """Supports GFM"""
-  markdownContent: String
-  servicesList_id: JSON
-  title: String
-}
-
-""""""
 type version_workShowcaseItems {
   coverImage: JSON
   date_created: Date
@@ -857,7 +787,8 @@ type version_workShowcaseItems {
   date_updated: Date
   date_updated_func: datetime_functions
   id: ID!
-  sort: Int
+  indexContent_id: JSON
+  indexContent_sort: Int
   status: String
   translations: JSON
   translations_func: count_functions
@@ -887,7 +818,8 @@ type workShowcaseItems {
   date_updated: Date
   date_updated_func: datetime_functions
   id: ID!
-  sort: Int
+  indexContent_id(filter: indexContent_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): indexContent
+  indexContent_sort: Int
   status: String
   translations(filter: workShowcaseItems_translations_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [workShowcaseItems_translations]
   translations_func: count_functions
@@ -914,14 +846,16 @@ type workShowcaseItems_aggregated_count {
   date_created: Int
   date_updated: Int
   id: Int
-  sort: Int
+  indexContent_id: Int
+  indexContent_sort: Int
   status: Int
   translations: Int
 }
 
 type workShowcaseItems_aggregated_fields {
   id: Float
-  sort: Float
+  indexContent_id: Float
+  indexContent_sort: Float
 }
 
 input workShowcaseItems_filter {
@@ -933,7 +867,8 @@ input workShowcaseItems_filter {
   date_updated: date_filter_operators
   date_updated_func: datetime_function_filter_operators
   id: number_filter_operators
-  sort: number_filter_operators
+  indexContent_id: indexContent_filter
+  indexContent_sort: number_filter_operators
   status: string_filter_operators
   translations: workShowcaseItems_translations_filter
   translations_func: count_function_filter_operators
