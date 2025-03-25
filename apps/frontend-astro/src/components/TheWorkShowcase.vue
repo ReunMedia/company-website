@@ -66,9 +66,11 @@ const { tm, rt } = useI18n({
   messages: {
     "en-US": {
       sectionHeading: "Our Work",
+      closeButton: "Close",
     },
     "fi-FI": {
       sectionHeading: "Töitämme",
+      closeButton: "Sulje",
     },
   },
 });
@@ -111,6 +113,7 @@ const transitionProps = {
 };
 
 const sectionHeading = rt(tm("sectionHeading"));
+const closeButtonText = rt(tm("closeButton"));
 
 const onDialogClose = () => {
   // Exiting dialog acts as browser backwards navigation
@@ -199,7 +202,7 @@ function findItemByHash(hash: string) {
                     color-variant="transparent"
                     @click="onDialogClose"
                   >
-                    Close
+                    {{ closeButtonText }}
                   </ButtonPrimary>
                 </div>
               </div>
