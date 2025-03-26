@@ -5,7 +5,7 @@
   "meta": {
     "collection": "pages",
     "conditions": null,
-    "display": null,
+    "display": "translations",
     "display_options": {
       "template": "{{title}}"
     },
