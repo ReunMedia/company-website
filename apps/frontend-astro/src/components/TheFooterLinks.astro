@@ -2,6 +2,7 @@
 import { sanitizeUrl } from "@braintree/sanitize-url";
 import { getPathByLocale } from "astro:i18n";
 import pupa from "pupa";
+import { normalizeTrailingSlash } from "../utils/normalizeTrailingSlash";
 
 interface Props {
   links?: {
@@ -27,15 +28,17 @@ const linkGroups = () => {
 //#region Link target templating
 const processLinkTarget = (linkTarget: string | null | undefined) => {
   if (!linkTarget) return linkTarget;
-  return sanitizeUrl(
-    pupa(
-      linkTarget,
-      {
-        language: getPathByLocale(Astro.currentLocale ?? ""),
-      },
-      {
-        ignoreMissing: true,
-      },
+  return normalizeTrailingSlash(
+    sanitizeUrl(
+      pupa(
+        linkTarget,
+        {
+          language: getPathByLocale(Astro.currentLocale ?? ""),
+        },
+        {
+          ignoreMissing: true,
+        },
+      ),
     ),
   );
 };

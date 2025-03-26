@@ -16,6 +16,7 @@ import ButtonPrimary from "./ButtonPrimary.vue";
 import SvgIcon from "./SvgIcon.vue";
 import MdiLoading from "../icons/MdiLoading.svg";
 import { zodRequiredString } from "../utils/zodRequiredString";
+import { normalizeTrailingSlash } from "../utils/normalizeTrailingSlash";
 
 export interface Props {
   currentLocale: string;
@@ -263,7 +264,11 @@ const isSubmittingToServer = computed(
                   <template #link>
                     <a
                       class="underline"
-                      :href="t('form.acceptPrivacy.link.target')"
+                      :href="
+                        normalizeTrailingSlash(
+                          t('form.acceptPrivacy.link.target'),
+                        )
+                      "
                       >{{ t("form.acceptPrivacy.link.text") }}</a
                     >
                   </template>
