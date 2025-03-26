@@ -125,6 +125,30 @@
     "_syncId": "c0771708-9f0c-4f1e-b031-a811b5662aa3"
   },
   {
+    "collection": "indexContent_translations",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "_sync_default_public_policy",
+    "_syncId": "6907f763-0917-415b-9f5f-92c1018f6053"
+  },
+  {
+    "collection": "indexContent",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "_sync_default_public_policy",
+    "_syncId": "ad3bba0e-1b82-48bb-b4cc-916c5ce15845"
+  },
+  {
     "collection": "languages",
     "action": "read",
     "permissions": {},
@@ -267,7 +291,9 @@
       "coverImage",
       "sort",
       "status",
-      "translations"
+      "translations",
+      "indexContent_sort",
+      "indexContent_id"
     ],
     "policy": "_sync_default_public_policy",
     "_syncId": "42c378a0-82ce-422a-9cb1-02588e4d3019"
