@@ -35,6 +35,9 @@ cd ../backend-directus
 pnpm dev
 ```
 
+Use `admin@example.com` as email and `admin123` as password to sign in to
+Directus.
+
 Start frontend dev server:
 
 ```sh

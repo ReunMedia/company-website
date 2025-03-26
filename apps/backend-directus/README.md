@@ -10,6 +10,8 @@ This starts container in detached mode (background). You can safely ignore
 warnings about env variables not being set as `docker-compose.dev.yaml`
 overrides them.
 
+Use `admin@example.com` as email and `admin123` as password to sign in.
+
 ## Saving / loading Directus schema
 
 ```sh
