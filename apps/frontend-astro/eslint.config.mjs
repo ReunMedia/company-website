@@ -16,6 +16,7 @@ import eslintConfigPrettier from "eslint-config-prettier";
 import eslintPluginAstro from "eslint-plugin-astro";
 import tseslint from "typescript-eslint";
 import pluginVue from "eslint-plugin-vue";
+import globals from "globals";
 import { fileURLToPath } from "node:url";
 import { includeIgnoreFile } from "@eslint/compat";
 import path from "node:path";
@@ -57,6 +58,11 @@ export default tseslint.config(
   {
     rules: {
       "no-console": ["warn", { allow: ["warn", "error"] }],
+    },
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+      },
     },
   },
   // Respect .gitignore
