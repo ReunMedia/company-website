@@ -8,6 +8,14 @@ services:
       - directus-database:/directus/database
       - directus-uploads:/directus/uploads
       - directus-extensions:/directus/extensions
+      # Allow Dockerfile to replace contents of specific extension directories
+      # inside `/directus/extensions` by using a empty volumes. Since the whole
+      # Directus extensions directory is specified as a volume (in order to
+      # persist extensions installed from the Directus admin UI), extensions
+      # built in the Dockerfile get replaced with the contents of the volume
+      # unless they are explicitly "ignored".
+      - /directus/extensions/directus-extension-sync/
+      - /directus/extensions/custom-utils-endpoint/
     environment:
       # Uses Coolify's `${VAR}` syntax to add editable variables to UI. See:
       # https://coolify.io/docs/knowledge-base/docker/compose#defining-environment-variables

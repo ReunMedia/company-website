@@ -23,6 +23,11 @@ ARG PUBLIC_DIRECTUS_URL
 COPY astro.config.ts codegen.ts tsconfig.json /app/
 COPY public /app/public
 COPY src /app/src
+# Manually invalidate cache for build command to force fetching latest data from
+# Directus even if nothing in frontend code was changed.
+# See: https://docs.docker.com/build/cache/invalidation/
+# See: https://github.com/moby/moby/issues/1996
+ADD ${PUBLIC_DIRECTUS_URL}/custom-utils-endpoint/time build_time
 RUN pnpm run build
 
 FROM p3terx/darkhttpd:1.16 AS app
