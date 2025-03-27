@@ -11,7 +11,7 @@
     "group": null,
     "hidden": false,
     "interface": "input",
-    "note": null,
+    "note": "Used as `<title>` tag. Not automatically added to page content.",
     "options": null,
     "readonly": false,
     "required": false,
