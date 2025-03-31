@@ -589,6 +589,8 @@ type pages_translations {
   Do not include language prefix. It is automatically added. E.g. ("news" becomes "/en/news")
   """
   slug: String!
+
+  """Used as `<title>` tag. Not automatically added to page content."""
   title: String
 }
 
@@ -619,6 +621,8 @@ type pages_translations_aggregated_count {
   Do not include language prefix. It is automatically added. E.g. ("news" becomes "/en/news")
   """
   slug: Int
+
+  """Used as `<title>` tag. Not automatically added to page content."""
   title: Int
 }
 
@@ -776,6 +780,8 @@ type version_pages_translations {
   Do not include language prefix. It is automatically added. E.g. ("news" becomes "/en/news")
   """
   slug: String!
+
+  """Used as `<title>` tag. Not automatically added to page content."""
   title: String
 }
 

@@ -10,7 +10,7 @@
     "color": null,
     "display_template": null,
     "group": "indexContent",
-    "hidden": true,
+    "hidden": false,
     "icon": "shopping_bag",
     "item_duplication_fields": null,
     "note": null,
