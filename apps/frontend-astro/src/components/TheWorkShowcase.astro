@@ -52,6 +52,9 @@ const showcaseItems = await Promise.all(
         itemTranslations?.localizedCoverImage ?? item.coverImage;
       const htmlContent = await markdownToHtml(
         itemTranslations?.markdownContent ?? "",
+        true,
+        // Make content headings start from `h3`. Dialog title is `h2`.
+        3,
       );
       return {
         title: itemTranslations?.title ?? "",

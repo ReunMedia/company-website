@@ -143,6 +143,9 @@ importers:
       pupa:
         specifier: ^3.1.0
         version: 3.1.0
+      rehype-headings-normalize:
+        specifier: ^0.0.2
+        version: 0.0.2(rehype-stringify@10.0.1)(remark-parse@11.0.0)(remark-rehype@11.1.1)(unified@11.0.5)
       rehype-raw:
         specifier: ^7.0.0
         version: 7.0.0
@@ -3919,6 +3922,14 @@ packages:
 
   regex@6.0.1:
     resolution: {integrity: sha512-uorlqlzAKjKQZ5P+kTJr3eeJGSVroLKoHmquUj4zHWuR+hEyNqlXsSKlYYF5F4NI6nl7tWCs0apKJ0lmfsXAPA==}
+
+  rehype-headings-normalize@0.0.2:
+    resolution: {integrity: sha512-YIK76cnNu95g31etRITkKqxTJ2WAbfKUnzyKv5nSWoUlBM9YPR6n4MzyBke2gzy0WusejSBOGgiplw32rR296Q==}
+    peerDependencies:
+      rehype-stringify: ^10.0.0
+      remark-parse: ^11.0.0
+      remark-rehype: ^11.1.0
+      unified: ^11.0.4
 
   rehype-parse@9.0.1:
     resolution: {integrity: sha512-ksCzCD0Fgfh7trPDxr2rSylbwq9iYDkSn8TCDmEJ49ljEUBxDVCzCHv7QNzZOfODanX4+bWQ4WZqLCRWYLfhag==}
@@ -9305,6 +9316,15 @@ snapshots:
   regex@6.0.1:
     dependencies:
       regex-utilities: 2.3.0
+
+  rehype-headings-normalize@0.0.2(rehype-stringify@10.0.1)(remark-parse@11.0.0)(remark-rehype@11.1.1)(unified@11.0.5):
+    dependencies:
+      hast-util-heading-rank: 3.0.0
+      rehype-stringify: 10.0.1
+      remark-parse: 11.0.0
+      remark-rehype: 11.1.1
+      unified: 11.0.5
+      unist-util-visit: 5.0.0
 
   rehype-parse@9.0.1:
     dependencies:

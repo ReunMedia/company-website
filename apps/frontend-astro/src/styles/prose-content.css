@@ -121,4 +121,64 @@
     @apply font-normal;
     @apply bg-theme-background-highlight;
   }
+
+  /**
+   * A crude workaround to apply Tailwind Typography heading styles to shifted
+   * headings.
+   *
+   * NOTE - This only applies to default `base` type scale. Other sizes are not
+   * tested.
+   *
+   * TODO - This is a hacky workaround.
+   *
+   * See:
+   * https://github.com/tailwindlabs/tailwindcss-typography/blob/main/src/styles.js
+   */
+
+  &.prose-min-heading-level-2 h2,
+  &.prose-min-heading-level-3 h3 {
+    font-size: calc(calc(36 / 16) * 1em);
+    margin-top: 0;
+    margin-bottom: calc(calc(32 / 36) * 1em);
+    line-height: calc(40 / 36);
+  }
+
+  &.prose-min-heading-level-2 h3,
+  &.prose-min-heading-level-3 h4 {
+    font-size: calc(calc(24 / 16) * 1em);
+    margin-top: calc(calc(48 / 24) * 1em);
+    margin-bottom: calc(calc(24 / 24) * 1em);
+    line-height: calc(32 / 24);
+
+    /*
+       * Using `:not(.\9` hack to increase specifity without resorting to
+       *`!important`
+       */
+    & + *:not(.\9) {
+      margin-top: 0;
+    }
+  }
+
+  &.prose-min-heading-level-2 h4,
+  &.prose-min-heading-level-3 h5 {
+    font-size: calc(calc(20 / 16) * 1em);
+    margin-top: calc(calc(32 / 20) * 1em);
+    margin-bottom: calc(calc(12 / 20) * 1em);
+    line-height: calc(32 / 20);
+
+    & + *:not(.\9) {
+      margin-top: 0;
+    }
+  }
+
+  &.prose-min-heading-level-2 h5,
+  &.prose-min-heading-level-3 h6 {
+    margin-top: calc(calc(24 / 16) * 1em);
+    margin-bottom: calc(calc(8 / 16) * 1em);
+    line-height: calc(24 / 16);
+
+    & + *:not(.\9) {
+      margin-top: 0;
+    }
+  }
 }

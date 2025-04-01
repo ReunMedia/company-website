@@ -191,7 +191,7 @@ function findItemByHash(hash: string) {
                 <DialogDescription as="div">
                   <!-- eslint-disable vue/no-v-html -- because it's rendered from markdown and sanitized -->
                   <div
-                    class="prose prose-content px-6 md:px-12"
+                    class="prose prose-content prose-min-heading-level-2 px-6 md:px-12"
                     v-html="lastSelectedItem?.htmlContent"
                   />
                 </DialogDescription>

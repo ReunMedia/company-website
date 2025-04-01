@@ -8,18 +8,20 @@ import remarkParse from "remark-parse";
 import remarkRehype, {
   type Options as RemarkRehypeOptions,
 } from "remark-rehype";
+import rehypeHeadingsNormalize from "rehype-headings-normalize";
 import { unified } from "unified";
 import { sanitizeHtml } from "./sanitizeHtml";
 
-const processor = unified()
-  .use(remarkParse)
+const rootProcessor = unified()
+  .use(remarkParse) // Base Markdown parser
   // Astro includes `remark-gfm` and `remark-smartypants` by default so we
   // include them to mimick that.
   .use(remarkGfm)
   .use(remarkSmartypants)
   .use(remarkRehype, { allowDangerousHtml: true } satisfies RemarkRehypeOptions)
-  .use(rehypeSlug)
+  .use(rehypeSlug) // Add IDs to headings
   .use(rehypeRaw)
+  // Code block syntax highlight
   .use(rehypeShiki, {
     themes: {
       light: "github-light",
@@ -35,7 +37,6 @@ const processor = unified()
     },
   } satisfies RehypeShikiOptions)
   .use(rehypeStringify);
-
 /**
  * Converts markdown to sanitized HTML.
  *
@@ -46,12 +47,20 @@ const processor = unified()
 export async function markdownToHtml(
   markdown: string,
   sanitize = true,
+  minimumHeadingLevel = 1,
 ): Promise<string> {
-  const html = String(await processor.process(markdown));
+  // Create a new unfrozen processor so we can dynamically add plugins.
+  const processor = rootProcessor();
+
+  // Dynamically add heading normalization plugin
+  processor.use(rehypeHeadingsNormalize, { minimumLevel: minimumHeadingLevel });
+
+  const unsafeHtml = String(await processor.process(markdown));
+
   // We use `sanitize-html` instead of `rehype-sanitize` because it allows us to
   // use `iframe`s more easily. Allowing `iframe` in `rehype-sanitize` works,
   // but only allows the `iframe` tag itself and none of its content. Allowing
   // content would probably need way more complex rules.
-  const sanitizedHtml = sanitize ? sanitizeHtml(html) : html;
+  const sanitizedHtml = sanitize ? sanitizeHtml(unsafeHtml) : unsafeHtml;
   return sanitizedHtml;
 }
