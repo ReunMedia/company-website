@@ -11,7 +11,7 @@
     "group": null,
     "hidden": false,
     "interface": "input",
-    "note": null,
+    "note": "Title is automatically added. There's no need to include it in Markdown Content.",
     "options": null,
     "readonly": false,
     "required": false,

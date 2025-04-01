@@ -813,6 +813,10 @@ type version_workShowcaseItems_translations {
   Used for anchor link (e.g. #my-product). All slugs in the same language must be unique.
   """
   slug: String!
+
+  """
+  Title is automatically added. There's no need to include it in Markdown Content.
+  """
   title: String
   workShowcaseItems_id: JSON
 }
@@ -898,6 +902,10 @@ type workShowcaseItems_translations {
   Used for anchor link (e.g. #my-product). All slugs in the same language must be unique.
   """
   slug: String!
+
+  """
+  Title is automatically added. There's no need to include it in Markdown Content.
+  """
   title: String
   workShowcaseItems_id(filter: workShowcaseItems_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): workShowcaseItems
 }
@@ -929,6 +937,10 @@ type workShowcaseItems_translations_aggregated_count {
   Used for anchor link (e.g. #my-product). All slugs in the same language must be unique.
   """
   slug: Int
+
+  """
+  Title is automatically added. There's no need to include it in Markdown Content.
+  """
   title: Int
   workShowcaseItems_id: Int
 }
