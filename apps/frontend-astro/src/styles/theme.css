@@ -1,5 +1,5 @@
 @theme {
-  /* 
+  /*
    * Color palette
    */
   --color-sky-500: #24a5ff; /* HSV: 205, 86, 100 | rgb(36, 165, 255) */
@@ -28,10 +28,10 @@
    * Fonts
    */
   --font-display: Poppins, sans-serif;
-  --font-sans: Inter, sans-serif;
+  --font-sans: "Inter Variable", sans-serif;
   --font-body: var(--font-sans); /* Used by prose-content */
 
-  /* 
+  /*
    * Theme colors
    */
   --color-theme-primary: var(--color-theme-primary);
