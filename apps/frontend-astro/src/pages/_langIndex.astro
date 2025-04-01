@@ -59,6 +59,8 @@ const localizedPaths: LocalizedPath[] =
 
 const htmlContent = await markdownToHtml(
   data?.indexContent?.indexContentTranslations?.[0]?.markdownContent ?? "",
+  true,
+  2,
 );
 ---
 
@@ -72,7 +74,7 @@ const htmlContent = await markdownToHtml(
   </Fragment>
   <div class="pt-8" id="main-content" slot="default">
     <section
-      class="prose prose-content prose-h1:text-center prose-h1:text-5xl"
+      class="prose prose-content prose-min-heading-level-2 prose-h2:text-center prose-h2:text-5xl!"
       set:html={htmlContent}
     />
     <TheWorkShowcase />
