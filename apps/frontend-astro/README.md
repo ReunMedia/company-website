@@ -4,8 +4,8 @@
 
 > [!NOTE]
 >
-> Backend Directus container must be running during frontend development. See
-> [apps/backend-directus/README](../backend-directus/README.md) for more.
+> [Directus backend](../backend-directus/README.md) container must be running
+> during frontend development.
 
 Install dependencies:
 
@@ -35,7 +35,7 @@ pnpm astro dev
 ```
 
 `build:scripts` runs esbuild to build `scripts/setInitialTheme.ts` and needs to
-be run manually whenever that script is changed.
+be run whenever that script is changed.
 
 ## Building and deployment
 
@@ -60,13 +60,14 @@ pnpm docker:test
 Most of the packages used are self-explanatory, but here's a list of some that
 might not be so obvious.
 
-| Package                      | Usage                                         |
-| ---------------------------- | --------------------------------------------- |
-| `@braintree/sanitize-url`    | Footer dynamic link href sanitization         |
-| `@eslint/compat`             | Adding `.gitignore` to `eslint.config`        |
-| `@iconify-json/simple-icons` | Footer dynamic social media icons             |
-| `@parcel/watcher`            | Required by GraphQL Codegen CLI watch mode    |
-| `@vee-validate/zod`          | `zod` is used instead of `yup` to match Astro |
-| `concurrently`               | Running `lint` scripts concurrently           |
-| `esbuild`                    | Processing `scripts/setInitialTheme.ts`       |
-| `pupa`                       | Footer dynamic link templating                |
+| Package                       | Usage                                             |
+| ----------------------------- | ------------------------------------------------- |
+| `@braintree/sanitize-url`     | Footer dynamic link href sanitization             |
+| `@graphql-codegen/schema-ast` | Storing introspected schema to git for production |
+| `@eslint/compat`              | Adding `.gitignore` to `eslint.config`            |
+| `@iconify-json/simple-icons`  | Footer dynamic social media icons                 |
+| `@parcel/watcher`             | Required by GraphQL Codegen CLI watch mode        |
+| `@vee-validate/zod`           | `zod` is used instead of `yup` to match Astro     |
+| `concurrently`                | Running `lint` and other scripts concurrently     |
+| `esbuild`                     | Processing `scripts/setInitialTheme.ts`           |
+| `pupa`                        | Footer dynamic link templating                    |

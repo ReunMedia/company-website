@@ -12,7 +12,6 @@ Clone the repository:
 
 ```sh
 git clone git@github.com:Reun-Media/company-website.git
-cd company-website
 ```
 
 Install frontend dependencies:

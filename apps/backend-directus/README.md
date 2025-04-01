@@ -1,4 +1,4 @@
-# Directus backend
+# Directus Backend
 
 ## Start Directus development container
 
@@ -12,6 +12,12 @@ overrides them.
 
 Use `admin@example.com` as email and `admin123` as password to sign in.
 
+> [!TIP]
+>
+> The development compose file includes a pre-configured
+> [Mailpit](https://mailpit.axllent.org/) container for testing form submission
+> notification emails.
+
 ## Saving / loading Directus schema
 
 ```sh
@@ -19,7 +25,7 @@ pnpm snapshot
 ```
 
 This saves the sync schema to `data/directus-config`. You can alternatively run
-`npx directus-sync pull` inside the container. 
+`npx directus-sync pull` inside the container.
 
 The schema is automatically applied when the container is started, but you can
 also apply it manually by running `npx directus-sync push` in the container.
