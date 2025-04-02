@@ -11,7 +11,7 @@ Following tools are required for development and need to be installed first:
 Clone the repository:
 
 ```sh
-git clone git@github.com:Reun-Media/company-website.git
+git clone git@github.com:ReunMedia/company-website.git
 ```
 
 Install frontend dependencies:

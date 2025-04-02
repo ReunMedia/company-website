@@ -10,4 +10,4 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 _Tagged release after initial project setup._
 
-[0.0.1]: https://github.com/Reun-Media/company-website/releases/tag/0.0.1
+[0.0.1]: https://github.com/ReunMedia/company-website/releases/tag/0.0.1

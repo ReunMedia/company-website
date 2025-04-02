@@ -6,7 +6,7 @@
  * @author Reun Media <company@reun.eu>
  * @copyright 2024 Reun Media
  *
- * @see https://github.com/Reun-Media/project-templates
+ * @see https://github.com/ReunMedia/project-templates
  *
  * @version 1.3.1
  */
