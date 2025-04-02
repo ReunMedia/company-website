@@ -156,7 +156,7 @@ function findItemByHash(hash: string) {
           />
         </TransitionChild>
         <div
-          class="fixed inset-0 flex w-screen items-center justify-center overflow-y-auto px-8 py-16"
+          class="fixed inset-0 flex w-screen items-center justify-center overflow-y-auto px-4 py-16 sm:px-8"
           style="scrollbar-gutter: stable"
         >
           <TransitionChild
@@ -184,14 +184,14 @@ function findItemByHash(hash: string) {
                   :src="lastSelectedItem?.coverImage.url ?? ''"
                 />
                 <DialogTitle
-                  class="text-theme-primary px-6 pt-6 pb-4 text-5xl md:px-12 md:pt-12 md:pb-8"
+                  class="text-theme-primary px-4 pt-6 pb-4 text-5xl md:px-12 md:pt-12 md:pb-8"
                 >
                   {{ lastSelectedItem?.title }}
                 </DialogTitle>
                 <DialogDescription as="div">
                   <!-- eslint-disable vue/no-v-html -- because it's rendered from markdown and sanitized -->
                   <div
-                    class="prose prose-content prose-min-heading-level-2 px-6 md:px-12"
+                    class="prose prose-content prose-min-heading-level-2 px-4 md:px-12"
                     v-html="lastSelectedItem?.htmlContent"
                   />
                 </DialogDescription>
