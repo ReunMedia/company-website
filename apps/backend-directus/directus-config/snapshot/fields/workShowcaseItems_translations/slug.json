@@ -12,9 +12,7 @@
     "hidden": false,
     "interface": "input",
     "note": "Used for anchor link (e.g. #my-product). All slugs in the same language must be unique.",
-    "options": {
-      "slug": true
-    },
+    "options": {},
     "readonly": false,
     "required": true,
     "sort": 5,
