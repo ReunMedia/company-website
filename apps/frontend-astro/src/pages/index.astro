@@ -8,16 +8,63 @@ import Blank from "../layouts/Blank.astro";
 import LogomarkLoadingAnimatedSvg from "../assets/logomark-loading-animated.svg?raw";
 import { getRelativeLocaleUrlList } from "astro:i18n";
 import astroConfig from "../config.ts";
+import { graphql } from "../graphql/generated";
+import { client } from "../graphql/urql";
+import type { JsonFields } from "../components/TheFooter.astro";
+import { uniq } from "es-toolkit";
 
 const locales = getRelativeLocaleUrlList().map((x) => x.replaceAll("/", ""));
 const defaultLocale = astroConfig.i18n?.defaultLocale;
 const delay = 3;
 const url = `/${defaultLocale}/`;
+
+/**
+ * Social media verification links.
+ *
+ * Contains all social media link URLs from all languages defined in Global
+ * Options that have `rel=me` set to them. These links are then added as
+ * `<link>` tags to `<head>`. This is primarily done for Mastodon verification.
+ */
+const socialMediaVerificationLinks = await (async () => {
+  const indexPageQuery = graphql(`
+    query indexPageQuery {
+      globalOptions {
+        translations {
+          socialMediaLinks
+        }
+      }
+    }
+  `);
+  const { data, error } = (await client?.query(indexPageQuery, {})) ?? {};
+
+  // GraphQL error should prevent building the site
+  if (error) {
+    throw error;
+  }
+
+  // Get all social media links from all translations flattened to a single
+  // array.
+  const socialMediaLinks = (data?.globalOptions?.translations
+    ?.map((x) => x?.socialMediaLinks)
+    .flat() ?? []) as JsonFields["socialMediaLinks"];
+
+  // Get all URLs with `rel=me` while removing duplicates.
+  const uniqueUrlsWithRelMe = uniq(
+    socialMediaLinks
+      // Filter only links with URL and `rel=me`
+      ?.filter((x) => x.linkTarget && x.rel === "me")
+      // Get URLs from links with `rel=me`
+      .map((x) => x.linkTarget) ?? [],
+  );
+
+  return uniqueUrlsWithRelMe;
+})();
 ---
 
 <Blank>
   <Fragment slot="additional-head">
     <meta http-equiv="refresh" content={`${delay};url=${url}`} />
+    {socialMediaVerificationLinks.map((x) => <link rel="me" href={x} />)}
   </Fragment>
 
   <div

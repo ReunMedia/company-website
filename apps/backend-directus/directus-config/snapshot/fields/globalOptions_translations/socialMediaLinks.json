@@ -54,10 +54,25 @@
               "placeholder": "simple-icons:facebook | data:image/svg+xml;base64,PHN2Z..."
             },
             "type": "string",
-            "width": "full"
+            "width": "half"
           },
           "name": "icon",
           "type": "string"
+        },
+        {
+          "field": "rel",
+          "meta": {
+            "field": "rel",
+            "interface": "input",
+            "note": "Link `rel` attribute. Only \"me\" value is supported and may be used for Mastodon verification.",
+            "options": {
+              "trim": true
+            },
+            "type": "text",
+            "width": "half"
+          },
+          "name": "rel",
+          "type": "text"
         }
       ]
     },

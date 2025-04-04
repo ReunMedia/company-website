@@ -16,6 +16,7 @@ type SocialMediaLinks = {
   label?: string | null;
   linkTarget?: string | null;
   icon?: string | null;
+  rel?: string | null;
 }[];
 
 type FooterAdditionalLinks = {
@@ -23,7 +24,7 @@ type FooterAdditionalLinks = {
   linkTarget?: string | null;
 }[];
 
-interface JsonFields {
+export interface JsonFields {
   contactInfoLinks?: ContactInfoLinks | null;
   socialMediaLinks?: SocialMediaLinks | null;
   footerAdditionalLinks?: FooterAdditionalLinks | null;
@@ -100,16 +101,24 @@ const footerAdditionalContentHtml = await markdownToHtml(
     {
       socialMediaLinks?.length && (
         <div class="flex justify-center space-x-4">
-          {socialMediaLinks?.map((link) => (
-            <a
-              href={link.linkTarget ?? ""}
-              title={link.label ?? ""}
-              rel="noopener noreferrer"
-              aria-label={link.label}
-            >
-              <Icon class="h-8 w-8" name={link.icon} />
-            </a>
-          ))}
+          {socialMediaLinks?.map((link) => {
+            // Support dynamic `rel` attribute from backend
+            let rel = "noopener noreferrer";
+            // Only support `rel=me` for now
+            if (link.rel === "me") {
+              rel += " me";
+            }
+            return (
+              <a
+                href={link.linkTarget ?? ""}
+                title={link.label ?? ""}
+                rel={rel}
+                aria-label={link.label}
+              >
+                <Icon class="h-8 w-8" name={link.icon} />
+              </a>
+            );
+          })}
         </div>
       )
     }
