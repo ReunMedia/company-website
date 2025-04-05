@@ -116,8 +116,24 @@ const sectionHeading = rt(tm("sectionHeading"));
 const closeButtonText = rt(tm("closeButton"));
 
 const onDialogClose = () => {
-  // Exiting dialog acts as browser backwards navigation
-  history.back();
+  if (browserLocation.value.trigger !== "load") {
+    // Exiting opened dialog acts as browser backwards navigation
+    history.back();
+    return;
+  }
+
+  // If the dialog was opened by manually navigating to page instead of clickng
+  // a card, we remove the hash instaed of navigating back to previous page.
+
+  // Set reactive `browserLocation.hash` to trigger watcher.
+  browserLocation.value.hash = "";
+  // Setting `browserLocation.hash` still leaves `#` in the URL, so we use
+  // `replaceState` to get rid of it.
+  history.replaceState(
+    null,
+    "",
+    window.location.pathname + window.location.search,
+  );
 };
 
 /**
