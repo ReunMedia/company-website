@@ -124,7 +124,11 @@ const onDialogClose = () => {
  * Find showcase item by URL hash
  */
 function findItemByHash(hash: string) {
-  const item = showcaseItems.find((item) => "#" + item.slug === hash);
+  const item = showcaseItems.find(
+    // Use `decodeURIComponent` to support special characters (such as umlauts)
+    // in slug
+    (item) => "#" + item.slug === decodeURIComponent(hash),
+  );
   return item;
 }
 </script>
