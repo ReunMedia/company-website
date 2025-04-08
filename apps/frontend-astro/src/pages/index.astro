@@ -64,6 +64,7 @@ const socialMediaVerificationLinks = await (async () => {
 <Blank>
   <Fragment slot="additional-head">
     <meta http-equiv="refresh" content={`${delay};url=${url}`} />
+    <link rel="alternate" href={Astro.site} hreflang="x-default" />
     {socialMediaVerificationLinks.map((x) => <link rel="me" href={x} />)}
   </Fragment>
 
