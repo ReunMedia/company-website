@@ -5,6 +5,7 @@ import "@fontsource-variable/inter";
 import { getPathByLocale } from "astro:i18n";
 import type { LocalizedPath } from "../types/localizedPath";
 import DynamicPageLocalizedLinks from "../components/DynamicPageLocalizedLinks.astro";
+import { SEO } from "astro-seo";
 
 export interface Props {
   /**
@@ -17,9 +18,21 @@ export interface Props {
    * `<link rel="alternate">` tags and language switcher links.
    */
   localizedPaths?: LocalizedPath[] | undefined;
+  openGraph?:
+    | {
+        title: string | undefined;
+        imageUrl?: string | undefined;
+        description?: string | undefined;
+      }
+    | undefined;
 }
 
-const { title = "Reun Media", metaDescription, localizedPaths } = Astro.props;
+const {
+  title = "Reun Media",
+  metaDescription,
+  localizedPaths,
+  openGraph,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -43,6 +56,19 @@ const { title = "Reun Media", metaDescription, localizedPaths } = Astro.props;
     <script is:inline src="/static/dist/setInitialTheme.js"></script>
 
     <DynamicPageLocalizedLinks {localizedPaths} />
+
+    <SEO
+      openGraph={{
+        basic: {
+          title: openGraph?.title ?? "",
+          type: "website",
+          image: openGraph?.imageUrl ?? "",
+        },
+        optional: {
+          description: openGraph?.description ?? "",
+        },
+      }}
+    />
 
     <slot name="additional-head" />
   </head>
