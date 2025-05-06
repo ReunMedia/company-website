@@ -2,25 +2,25 @@
   /*
    * Color palette
    */
-  --color-sky-500: #24a5ff; /* HSV: 205, 86, 100 | rgb(36, 165, 255) */
+  --color-sky-500: var(--color-sky-500);
 
-  --color-denim-500: #16679f; /* HSV: 205, 86, 62  | rgb(22, 103, 159) */
+  --color-denim-500: var(--color-denim-500);
 
-  --color-amber-400: #e08700; /* HSV: 36, 100, 88 | rgb(224, 135, 0) */
-  --color-amber-600: #ff9a00; /* HSV: 36, 100, 100 | rgb(255, 154, 0) */
+  --color-amber-400: var(--color-amber-400);
+  --color-amber-600: var(--color-amber-600);
 
-  --color-silver-500: #dadee1; /* HSV: 206, 3, 88 | rgb(218, 222, 225) */
+  --color-silver-500: var(--color-silver-500);
 
-  --color-slate-100: #a7bdcc; /* HSV: 205, 18, 80 | rgb(167, 189, 204) */
-  --color-slate-300: #7d8e99; /* HSV: 205, 18, 60 | rgb(125, 142, 153) */
-  --color-slate-500: #73828c; /* HSV: 205, 18, 55 | rgb(115, 130, 140) */
-  --color-slate-700: #545e66; /* HSV: 205, 18, 40 | rgb(84, 94, 102) */
-  --color-slate-900: #2a2f33; /* HSV: 205, 18, 20 | rgb(42, 47, 51) */
+  --color-slate-100: var(--color-slate-100);
+  --color-slate-300: var(--color-slate-300);
+  --color-slate-500: var(--color-slate-500);
+  --color-slate-700: var(--color-slate-700);
+  --color-slate-900: var(--color-slate-900);
 
-  --color-clouds-500: #fafafa; /* HSV: 0, 0, 98 | rgb(250, 250, 250) */
+  --color-clouds-500: var(--color-clouds-500);
 
-  --color-night-400: #121b22; /* HSV: 206, 47, 13 | rgb(18, 27, 34) */
-  --color-night-600: #08121a; /* HSV: 207, 69, 10 | rgb(8, 18, 26) */
+  --color-night-400: var(--color-night-400);
+  --color-night-600: var(--color-night-600);
 }
 
 @theme inline {

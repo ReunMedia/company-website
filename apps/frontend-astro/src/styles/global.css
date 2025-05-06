@@ -12,6 +12,7 @@
   /* nocompatible: true; */
   /* preferredStrategy: 'pseudoelements'; */
 }
+@import "./colors.css";
 @import "./theme.css";
 @import "./prose-content.css";
 @import "./utilities.css";
