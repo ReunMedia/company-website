@@ -19,6 +19,8 @@ export interface AstroPage {
   slug: string;
   title: string;
   metaDescription: string;
+  openGraphTitle: string;
+  openGraphDescription: string;
   /**
    * Markdown content
    */
@@ -41,6 +43,8 @@ export const pagesLoaderQuery = graphql(`
         slug
         title
         metaDescription
+        openGraphTitle
+        openGraphDescription
         content
       }
     }
@@ -98,6 +102,12 @@ export const getStaticPaths = (async () => {
             const title = translations.title ?? "";
             const content = translations.content ?? "";
             const metaDescription = translations.metaDescription ?? "";
+            // In most cases, OpenGraph title should differ from the page title,
+            // but we use page title as fallback just in case user forgets to
+            // set it. Description doesn't use a fallback.
+            const openGraphTitle = translations.openGraphTitle ?? title;
+            const openGraphDescription =
+              translations.openGraphDescription ?? "";
 
             // `langCode` and `slug` are mandatory in order to construct the
             // page URL.
@@ -125,6 +135,8 @@ export const getStaticPaths = (async () => {
                 slug,
                 title,
                 metaDescription,
+                openGraphTitle,
+                openGraphDescription,
                 content,
                 localizedPaths,
               },

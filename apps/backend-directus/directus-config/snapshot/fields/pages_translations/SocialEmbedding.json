@@ -1,0 +1,29 @@
+{
+  "collection": "pages_translations",
+  "field": "SocialEmbedding",
+  "type": "alias",
+  "meta": {
+    "collection": "pages_translations",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "SocialEmbedding",
+    "group": null,
+    "hidden": false,
+    "interface": "group-detail",
+    "note": null,
+    "options": null,
+    "readonly": false,
+    "required": false,
+    "sort": 7,
+    "special": [
+      "alias",
+      "no-data",
+      "group"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

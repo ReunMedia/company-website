@@ -4,6 +4,8 @@ import type { AstroPage } from "../pages/[lang]/[...slug].astro";
 import { markdownToHtml } from "../utils/markdownToHtml";
 import Blank from "./Blank.astro";
 import Default from "./Default.astro";
+import { ogImage } from "@reunmedia/astro-og-images";
+import dynamicPageOgTemplate from "../ogImages/dynamicPageOgTemplate.ts";
 
 interface Props {
   astroPage: AstroPage;
@@ -20,12 +22,24 @@ const Layout =
   arrayIncludes(objectKeys(layouts), astroPage.layout)
     ? layouts[astroPage.layout]
     : layouts.Default;
+
+const ogImageUrl = await ogImage(
+  dynamicPageOgTemplate({
+    title: astroPage.openGraphTitle,
+    description: astroPage.openGraphDescription,
+  }),
+);
 ---
 
 <Layout
   localizedPaths={astroPage.localizedPaths}
   title={astroPage.title ? `${astroPage.title} - Reun Media` : undefined}
   metaDescription={astroPage.metaDescription}
+  openGraph={{
+    title: astroPage.openGraphTitle,
+    description: astroPage.openGraphDescription,
+    imageUrl: ogImageUrl,
+  }}
 >
   <div class="prose-content prose">
     <Fragment set:html={contentHtml} />

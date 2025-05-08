@@ -66,6 +66,13 @@ const {
         },
         optional: {
           description: openGraph?.description ?? "",
+          // Open Graph uses `_` instead of `-` as locale delimiter
+          locale: Astro.currentLocale?.replace("-", "_") ?? "",
+          siteName: "Reun Media",
+        },
+        image: {
+          // astro-og-images outputs PNG
+          type: "image/png",
         },
       }}
     />

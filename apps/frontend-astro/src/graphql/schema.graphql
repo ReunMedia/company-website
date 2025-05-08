@@ -583,6 +583,12 @@ type pages_translations {
 
   """SEO meta description."""
   metaDescription: String
+
+  """Briefly describe page content in 1-2 sentences."""
+  openGraphDescription: String
+
+  """Title of your page when shared on social media."""
+  openGraphTitle: String
   pages_id(filter: pages_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): pages
 
   """
@@ -615,6 +621,12 @@ type pages_translations_aggregated_count {
 
   """SEO meta description."""
   metaDescription: Int
+
+  """Briefly describe page content in 1-2 sentences."""
+  openGraphDescription: Int
+
+  """Title of your page when shared on social media."""
+  openGraphTitle: Int
   pages_id: Int
 
   """
@@ -638,6 +650,8 @@ input pages_translations_filter {
   id: number_filter_operators
   languages_id: languages_filter
   metaDescription: string_filter_operators
+  openGraphDescription: string_filter_operators
+  openGraphTitle: string_filter_operators
   pages_id: pages_filter
   slug: string_filter_operators
   title: string_filter_operators
@@ -774,6 +788,12 @@ type version_pages_translations {
 
   """SEO meta description."""
   metaDescription: String
+
+  """Briefly describe page content in 1-2 sentences."""
+  openGraphDescription: String
+
+  """Title of your page when shared on social media."""
+  openGraphTitle: String
   pages_id: JSON
 
   """
