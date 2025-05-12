@@ -11,14 +11,26 @@
  */
 export function cssColorsToJs(cssString: string): Record<string, string> {
   let str = cssString;
+
+  // Remove line breaks
+  str = str.replace(/[\n\r]/g, "");
   // Extract everything between `{}`
-  str = str.replace(/.*{(.*)}/ms, "$1");
+  str = str.replace(/.*{(.*)}/, "$1");
   // Remove comments
-  str = str.replace(/\/\*.*?\*\//gms, "");
+  str = str.replace(/\/\*.*?\*\//g, "");
   // Change CSS declarations to object properties
-  str = str.replace(/^\s*(.*?):\s*(.*);/gm, '"$1": "$2",');
-  // Remove trailing comma and any whitespace
+  // This regex contains some additional handling for CSS processed by Vite
+  str = str.replace(/\s*(.*?):\s*(.*?)(?:;|$)/g, '"$1": "$2",');
+  // Remove trailing comma and trailing whitespace
   str = str.replace(/,\s*$/, "");
+
   // Parse string as JSON
-  return JSON.parse(`{${str}}`);
+  try {
+    return JSON.parse(`{${str}}`);
+  } catch (e) {
+    if (e instanceof SyntaxError) {
+      throw new Error("Error when parsing CSS colors to JSON");
+    }
+    throw e;
+  }
 }
