@@ -1,0 +1,4 @@
+# Main `.gitignore` ignores all directories starting with `_`, so we selectively
+# revert that for this directory.
+!*.gitignore
+!*.astro

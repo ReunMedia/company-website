@@ -1,8 +1,13 @@
 ---
+/**
+ * This page is only accessible in dev mode at `/dev/og-preview/`. See
+ * `integrations/appIntegration.ts` for more.
+ */
+
 import { html } from "htm/preact";
 import { render } from "preact-render-to-string";
 import { OgTemplatePreview } from "@reunmedia/astro-og-images/components";
-import dynamicPageOgTemplate from "../ogImages/dynamicPageOgTemplate";
+import dynamicPageOgTemplate from "../../ogImages/dynamicPageOgTemplate";
 import { SEO } from "astro-seo";
 import { ogImage } from "@reunmedia/astro-og-images";
 

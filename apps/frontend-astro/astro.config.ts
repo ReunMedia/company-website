@@ -5,6 +5,7 @@ import vue from "@astrojs/vue";
 import config from "./src/config";
 import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 import ogImages from "@reunmedia/astro-og-images";
+import appIntegration from "./src/integrations/appIntegration";
 import { readFile } from "fs/promises";
 
 // NOTE - `src/config.ts` is used to configure settings that need to be
@@ -47,5 +48,6 @@ export default defineConfig({
         },
       ],
     }),
+    appIntegration(),
   ],
 });
