@@ -1,0 +1,39 @@
+---
+import { html } from "htm/preact";
+import { render } from "preact-render-to-string";
+import { OgTemplatePreview } from "@reunmedia/astro-og-images/components";
+import dynamicPageOgTemplate from "../ogImages/dynamicPageOgTemplate";
+import { SEO } from "astro-seo";
+import { ogImage } from "@reunmedia/astro-og-images";
+
+const imgOptions = {
+  title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Inc",
+  description:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eleifend porttitor penatibus taciti lectus sapien aliquet ac. Lacinia fringilla enim id ullamcorper id nunc mattis. Scelerisque ligula bibendum",
+} satisfies Parameters<typeof dynamicPageOgTemplate>[0];
+
+const preactTemplate = dynamicPageOgTemplate(imgOptions, html);
+const templateHtml = render(preactTemplate);
+const imageUrl = await ogImage(dynamicPageOgTemplate(imgOptions));
+---
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <SEO
+      openGraph={{
+        basic: {
+          title: imgOptions.title,
+          type: "website",
+          image: imageUrl ?? "",
+        },
+        optional: {
+          description: imgOptions.description,
+        },
+      }}
+    />
+  </head>
+  <body style={{ margin: 0 }}>
+    <OgTemplatePreview templateHtml={templateHtml} />
+  </body>
+</html>
