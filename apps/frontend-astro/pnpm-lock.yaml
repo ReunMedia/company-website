@@ -122,6 +122,9 @@ importers:
       sanitize-html:
         specifier: ^2.15.0
         version: 2.15.0
+      sharp:
+        specifier: ^0.34.1
+        version: 0.34.1
       shiki:
         specifier: ^3.2.1
         version: 3.2.1
