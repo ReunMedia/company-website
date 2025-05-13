@@ -36,9 +36,19 @@ const ogImageUrl = await ogImage(
   title={astroPage.title ? `${astroPage.title} - Reun Media` : undefined}
   metaDescription={astroPage.metaDescription}
   openGraph={{
-    title: astroPage.openGraphTitle,
-    description: astroPage.openGraphDescription,
-    imageUrl: ogImageUrl,
+    basic: {
+      title: astroPage.openGraphTitle,
+      image: ogImageUrl,
+    },
+    optional: {
+      description: astroPage.openGraphDescription,
+    },
+    image: {
+      // TODO - These shouldn't be hardcoded, but rather inferred from the
+      // computed options of OG image.
+      height: 627,
+      width: 1200,
+    },
   }}
 >
   <div class="prose-content prose">
