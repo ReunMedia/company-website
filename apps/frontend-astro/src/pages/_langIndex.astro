@@ -68,6 +68,11 @@ const htmlContent = await markdownToHtml(
   title={tagline ? `${tagline} - Reun Media` : undefined}
   localizedPaths={localizedPaths}
   metaDescription={metaDescription}
+  openGraph={{
+    basic: {
+      title: tagline ?? "",
+    },
+  }}
 >
   <Fragment slot="header">
     <TheHero ctaScrollTargetSelector="#main-content" />

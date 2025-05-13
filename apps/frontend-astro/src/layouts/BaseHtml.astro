@@ -6,7 +6,9 @@ import { getPathByLocale } from "astro:i18n";
 import type { LocalizedPath } from "../types/localizedPath";
 import DynamicPageLocalizedLinks from "../components/DynamicPageLocalizedLinks.astro";
 import { SEO, type SEOProps } from "astro-seo";
-import type { PickDeep } from "type-fest";
+import type { PartialDeep, PickDeep } from "type-fest";
+import defaultOgImageSource from "../assets/og-image-logo-with-bg.webp";
+import { getImage } from "astro:assets";
 
 export interface Props {
   /**
@@ -20,13 +22,15 @@ export interface Props {
    */
   localizedPaths?: LocalizedPath[] | undefined;
   openGraph?:
-    | PickDeep<
-        SEOProps["openGraph"],
-        | "basic.title"
-        | "basic.image"
-        | "optional.description"
-        | "image.height"
-        | "image.width"
+    | PartialDeep<
+        PickDeep<
+          SEOProps["openGraph"],
+          | "basic.title"
+          | "basic.image"
+          | "optional.description"
+          | "image.height"
+          | "image.width"
+        >
       >
     | undefined;
 }
@@ -37,6 +41,12 @@ const {
   localizedPaths,
   openGraph,
 } = Astro.props;
+
+const defaultOgImage = await getImage({
+  src: defaultOgImageSource,
+  format: "jpg",
+});
+const defaultOgImageUrl = new URL(defaultOgImage.src, Astro.url).href;
 ---
 
 <!doctype html>
@@ -66,7 +76,7 @@ const {
         basic: {
           type: "website",
           title: "",
-          image: "",
+          image: defaultOgImageUrl,
           ...openGraph?.basic,
         },
         optional: {
@@ -77,7 +87,11 @@ const {
         },
         image: {
           // astro-og-images outputs PNG
-          type: "image/png",
+          type: openGraph?.image
+            ? "image/png"
+            : `image/${defaultOgImage.options.format}`,
+          width: defaultOgImageSource.width,
+          height: defaultOgImageSource.height,
           ...openGraph?.image,
           // Alt tag is deliberately omitted, since OG images are mostly
           // decorative and might not always represent the content itself. See
