@@ -2,7 +2,7 @@ import type { AstroIntegration } from "astro";
 
 const createPlugin = (): AstroIntegration => {
   return {
-    name: "ogimages",
+    name: "app-integration",
     hooks: {
       "astro:config:setup": ({ logger, command, injectRoute }) => {
         if (command === "dev") {
