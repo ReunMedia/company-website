@@ -1,0 +1,17 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - run: pnpm npmPkgJsonLint .
+      root: apps/frontend-astro/
+      glob: "**/package.json"
+
+    - run: pnpm prettier {staged_files} --check --ignore-unknown
+      root: apps/frontend-astro/
+
+    - run: pnpm eslint {staged_files} --no-warn-ignored
+      root: apps/frontend-astro/
+
+    # Unfortunately `astro check` is slow and there doesn't seem to be a way to
+    # filter files it checks
+    - run: pnpm astro check
+      root: apps/frontend-astro/

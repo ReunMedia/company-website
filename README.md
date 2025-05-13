@@ -14,6 +14,13 @@ Clone the repository:
 git clone git@github.com:ReunMedia/company-website.git
 ```
 
+Install Git hooks:
+
+```sh
+pnpm install
+pnpm lefthook install
+```
+
 Install frontend dependencies:
 
 ```sh
