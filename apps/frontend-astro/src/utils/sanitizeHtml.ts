@@ -1,6 +1,6 @@
 import sanitizeHtml from "sanitize-html";
-import astroConfig from "../config.ts";
 import { deepmerge } from "deepmerge-ts";
+import { site } from "astro:config/client";
 
 const tailwindProseSanitizeConfig = {
   allowedClasses: {
@@ -90,7 +90,7 @@ const iframeSanitizeConfig = {
   allowedTags: ["iframe"],
   allowedIframeDomains: [
     // Allow configured Astro site if it exists
-    ...(astroConfig.site ? [new URL(astroConfig.site).hostname] : []),
+    ...(site ? [new URL(site).hostname] : []),
     // Allow localhost for development
     "localhost",
     "youtube-nocookie.com",

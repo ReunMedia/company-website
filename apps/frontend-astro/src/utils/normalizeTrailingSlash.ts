@@ -1,8 +1,4 @@
-import type { AstroUserConfig } from "astro";
-import astroConfig from "../config.ts";
-
-const trailingSlash: AstroUserConfig["trailingSlash"] =
-  astroConfig.trailingSlash;
+import { trailingSlash, site } from "astro:config/client";
 
 /**
  * Normalizes trailing slash according to Astro's `trailingSlash` configuration.
@@ -10,7 +6,7 @@ const trailingSlash: AstroUserConfig["trailingSlash"] =
 export function normalizeTrailingSlash(path: string): string {
   // If path is an absolute URL instead of relative path, normalization should
   // only apply to current Astro site.
-  if (URL.canParse(path) && !path.startsWith(astroConfig.site)) {
+  if (URL.canParse(path) && !path.startsWith(site ?? "")) {
     return path;
   }
 
