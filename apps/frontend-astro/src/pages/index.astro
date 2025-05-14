@@ -7,14 +7,14 @@
 import Blank from "../layouts/Blank.astro";
 import LogomarkLoadingAnimatedSvg from "../assets/logomark-loading-animated.svg?raw";
 import { getRelativeLocaleUrlList } from "astro:i18n";
-import astroConfig from "../config.ts";
 import { graphql } from "../graphql/generated";
 import { client } from "../graphql/urql";
 import type { JsonFields } from "../components/TheFooter.astro";
 import { uniq } from "es-toolkit";
+import { i18n } from "astro:config/client";
 
 const locales = getRelativeLocaleUrlList().map((x) => x.replaceAll("/", ""));
-const defaultLocale = astroConfig.i18n?.defaultLocale;
+const defaultLocale = i18n?.defaultLocale;
 const delay = 3;
 const url = `/${defaultLocale}/`;
 

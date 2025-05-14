@@ -2,20 +2,35 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import icon from "astro-icon";
 import vue from "@astrojs/vue";
-import config from "./src/config";
 import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 import ogImages from "@reunmedia/astro-og-images";
 import appIntegration from "./src/integrations/appIntegration";
 import { readFile } from "fs/promises";
 
-// NOTE - `src/config.ts` is used to configure settings that need to be
-// referenced in the code because `astro.config.ts` cannot be imported.
-
 // https://astro.build/config
 export default defineConfig({
-  site: config.site,
-  i18n: config.i18n,
-  trailingSlash: config.trailingSlash,
+  site: "https://reun.eu",
+  i18n: {
+    locales: [
+      {
+        path: "en",
+        // Prioritize ISO code, since that's what is used in Directus. Using
+        // `Astro.currentLocale` will return `en-US`
+        codes: ["en-US", "en"],
+      },
+      {
+        path: "fi",
+        codes: ["fi-FI", "fi"],
+      },
+    ],
+    defaultLocale: "en",
+    routing: {
+      prefixDefaultLocale: true,
+      // Use custom redirect in `index.astro`
+      redirectToDefaultLocale: false,
+    },
+  },
+  trailingSlash: "always",
   vite: {
     plugins: [
       tailwindcss(),

@@ -7,17 +7,7 @@ import BaseTopMenuButton from "./BaseTopMenuButton.vue";
 import BaseSideMenu from "./BaseSideMenu.vue";
 import type { LocalizedPath } from "../types/localizedPath";
 import { normalizeTrailingSlash } from "../utils/normalizeTrailingSlash.ts";
-
-interface Locale {
-  /**
-   * Path to locale without slashes (e.g. `en`)
-   */
-  path: string;
-  /**
-   * Name of the locale used as link text (e.g. `English`)
-   */
-  name: string;
-}
+import { normalizedLocales } from "../i18n/i18n.ts";
 
 export interface Props {
   /**
@@ -25,16 +15,12 @@ export interface Props {
    */
   currentPath: string;
   /**
-   * List of all available locales. Used to construct locale selector list.
-   */
-  locales: Locale[];
-  /**
    * Current page paths in alternative locales.
    */
   localizedPaths?: LocalizedPath[] | undefined;
 }
 
-const { currentPath, locales, localizedPaths = [] } = defineProps<Props>();
+const { currentPath, localizedPaths = [] } = defineProps<Props>();
 
 const currentLocalePath = currentPath.split("/")[1];
 
@@ -70,7 +56,7 @@ const getLocalizedPath = (localePath: string) => {
             class="absolute right-0 mt-2 flex flex-col overflow-hidden transition"
           >
             <MenuItem
-              v-for="locale in locales"
+              v-for="locale in normalizedLocales"
               v-slot="{ active }"
               :key="locale.path"
               ><a
