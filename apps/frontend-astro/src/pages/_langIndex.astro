@@ -49,6 +49,7 @@ if (error) {
 }
 
 const tagline = data?.indexContent?.heroContentTranslations?.[0]?.tagline;
+const title = tagline ? `${tagline} - Reun Media` : undefined;
 const metaDescription =
   data?.globalOptions?.translations?.[0]?.indexMetaDescription ?? "";
 
@@ -65,12 +66,15 @@ const htmlContent = await markdownToHtml(
 ---
 
 <Default
-  title={tagline ? `${tagline} - Reun Media` : undefined}
+  title={title}
   localizedPaths={localizedPaths}
   metaDescription={metaDescription}
   openGraph={{
     basic: {
-      title: tagline ?? "",
+      title: title ?? "",
+    },
+    optional: {
+      description: metaDescription,
     },
   }}
 >
