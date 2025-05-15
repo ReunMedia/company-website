@@ -9,7 +9,7 @@ import { readFile } from "fs/promises";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://reun.eu",
+  site: process.env.PUBLIC_ASTRO_SITE || "https://reun.eu",
   i18n: {
     locales: [
       {

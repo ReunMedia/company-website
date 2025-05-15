@@ -11,6 +11,7 @@ services:
       context: .
       args:
         PUBLIC_DIRECTUS_URL: ${PUBLIC_DIRECTUS_URL}
+        PUBLIC_ASTRO_SITE: ${PUBLIC_ASTRO_SITE}
     restart: unless-stopped
     expose:
       - 80
@@ -21,3 +22,4 @@ services:
       # NOTE - These variable variables must be overridden in `.env` for
       # development. See `.env.example` for more.
       PUBLIC_DIRECTUS_URL: ${PUBLIC_DIRECTUS_URL}
+      PUBLIC_ASTRO_SITE: ${PUBLIC_ASTRO_SITE}
