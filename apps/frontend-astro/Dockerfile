@@ -17,8 +17,9 @@ FROM builder-base AS dependencies-production
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
 
 FROM dependencies-production AS build-production
-# Needed during build to access GraphQL schema and data from Directus
+# Define ENV variables used during build
 ARG PUBLIC_DIRECTUS_URL
+ARG PUBLIC_ASTRO_SITE
 # Copy app source files and build
 COPY astro.config.ts codegen.ts tsconfig.json /app/
 COPY public /app/public

@@ -21,5 +21,8 @@ services:
       #
       # NOTE - These variable variables must be overridden in `.env` for
       # development. See `.env.example` for more.
+      #
+      # NOTE - All variables must be added to `build.args` and `Dockerfile` with
+      # `ARG` in order for them to be accessible when building the site.
       PUBLIC_DIRECTUS_URL: ${PUBLIC_DIRECTUS_URL}
       PUBLIC_ASTRO_SITE: ${PUBLIC_ASTRO_SITE}
