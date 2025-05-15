@@ -6,10 +6,13 @@ import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 import ogImages from "@reunmedia/astro-og-images";
 import appIntegration from "./src/integrations/appIntegration";
 import { readFile } from "fs/promises";
+import { loadEnv } from "vite";
+
+const env = loadEnv(process.env.NODE_ENV ?? "", process.cwd(), "");
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.PUBLIC_ASTRO_SITE || "https://reun.eu",
+  site: env.PUBLIC_ASTRO_SITE || "https://reun.eu",
   i18n: {
     locales: [
       {
