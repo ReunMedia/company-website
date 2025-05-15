@@ -53,6 +53,7 @@ export default function getTemplate<T>(
           flex: 1,
           width: "100%",
           gap: "4em",
+          alignItems: "flex-start",
         }}
         >
           <h2
@@ -67,6 +68,7 @@ export default function getTemplate<T>(
               alignItems: "center",
               lineHeight: "1em",
               wordBreak: "break-word",
+              minHeight: `${logomarkSvgMeta.height / 2}px`,
             }}
           >
             ${title}
@@ -74,12 +76,11 @@ export default function getTemplate<T>(
             <img
               width=${logomarkSvgMeta.width / 2}
               height=${logomarkSvgMeta.height / 2}
-              style=${{ objectFit: "contain" }}
               src=${logomarkSvg}
             />
 
         </div>
-        <div style=${{ display: "flex", flex: 1, alignItems: "center" }}>
+        <div style=${{ display: "flex", flex: 1, alignItems: "flex-start" }}>
           <p
             style=${{
               margin: 0,
@@ -89,6 +90,9 @@ export default function getTemplate<T>(
               flex: 1,
               color: colors["--color-slate-900"],
               wordBreak: "break-word",
+              display: "flex",
+              alignItems: "center",
+              minHeight: `${logomarkSvgMeta.height / 2}px`,
             }}
           >
             ${description}
