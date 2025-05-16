@@ -12,9 +12,8 @@ import { SEO } from "astro-seo";
 import { ogImage } from "@reunmedia/astro-og-images";
 
 const imgOptions = {
-  title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Inc",
-  description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eleifend porttitor penatibus taciti lectus sapien aliquet ac. Lacinia fringilla enim id ullamcorper id nunc mattis. Scelerisque ligula bibendum",
+  title: "Lorem ipsum dolor sit amet",
+  description: "Nostra orci parturient eu ac facilisi elit nullam.",
 } satisfies Parameters<typeof dynamicPageOgTemplate>[0];
 
 const preactTemplate = dynamicPageOgTemplate(imgOptions, html);
@@ -40,5 +39,7 @@ const imageUrl = await ogImage(dynamicPageOgTemplate(imgOptions));
   </head>
   <body style={{ margin: 0 }}>
     <OgTemplatePreview templateHtml={templateHtml} />
+    <hr />
+    <img src={imageUrl} />
   </body>
 </html>
