@@ -2,13 +2,24 @@
 import "../styles/global.css";
 import "@fontsource/poppins";
 import "@fontsource-variable/inter";
-import { getPathByLocale } from "astro:i18n";
+import { getAbsoluteLocaleUrl, getPathByLocale } from "astro:i18n";
 import type { LocalizedPath } from "../types/localizedPath";
-import DynamicPageLocalizedLinks from "../components/DynamicPageLocalizedLinks.astro";
 import { SEO, type SEOProps } from "astro-seo";
-import type { PartialDeep, PickDeep } from "type-fest";
+import type { OmitDeep, PartialDeep, PickDeep } from "type-fest";
 import defaultOgImageSource from "../assets/og-image-logo-with-bg.webp";
 import { getImage } from "astro:assets";
+
+/**
+ * These OpenGraph fields are made optional, because this layout contains
+ * fallback OG image configuration.
+ */
+type OptionalOgFields =
+  | "basic.title"
+  | "basic.type"
+  | "basic.image"
+  | "optional.description"
+  | "image.height"
+  | "image.width";
 
 export interface Props {
   /**
@@ -21,26 +32,14 @@ export interface Props {
    * `<link rel="alternate">` tags and language switcher links.
    */
   localizedPaths?: LocalizedPath[] | undefined;
-  openGraph?:
-    | PartialDeep<
-        PickDeep<
-          SEOProps["openGraph"],
-          | "basic.title"
-          | "basic.image"
-          | "optional.description"
-          | "image.height"
-          | "image.width"
-        >
-      >
-    | undefined;
+  seo?: Omit<SEOProps, "openGraph"> & {
+    openGraph: OmitDeep<SEOProps["openGraph"], OptionalOgFields>;
+  } & {
+    openGraph: PartialDeep<PickDeep<SEOProps["openGraph"], OptionalOgFields>>;
+  };
 }
 
-const {
-  title = "Reun Media",
-  metaDescription,
-  localizedPaths,
-  openGraph,
-} = Astro.props;
+const { localizedPaths, seo } = Astro.props;
 
 const defaultOgImage = await getImage({
   src: defaultOgImageSource,
@@ -65,34 +64,38 @@ const defaultOgImageUrl = new URL(defaultOgImage.src, Astro.url).href;
     <meta name="apple-mobile-web-app-title" content="Reun Media" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <title>{title}</title>
-    <meta name="description" content={metaDescription} />
     <script is:inline src="/static/dist/setInitialTheme.js"></script>
 
-    <DynamicPageLocalizedLinks {localizedPaths} />
-
     <SEO
-      openGraph={{
+      titleTemplate="%s - Reun Media"
+      titleDefault="Reun Media"
+      languageAlternates={localizedPaths?.map(({ code, slug }) => {
+        const href = getAbsoluteLocaleUrl(code, slug);
+        return { href, hrefLang: code };
+      }) ?? []}
+      {...seo}
+      openGraph={// OG is manually constructed with custon fallback properties
+      {
         basic: {
           type: "website",
           title: "",
           image: defaultOgImageUrl,
-          ...openGraph?.basic,
+          ...seo?.openGraph?.basic,
         },
         optional: {
           // Open Graph uses `_` instead of `-` as locale delimiter
           locale: Astro.currentLocale?.replace("-", "_") ?? "",
           siteName: "Reun Media",
-          ...openGraph?.optional,
+          ...seo?.openGraph?.optional,
         },
         image: {
           // astro-og-images outputs PNG
-          type: openGraph?.image
+          type: seo?.openGraph?.image
             ? "image/png"
             : `image/${defaultOgImage.options.format}`,
           width: defaultOgImageSource.width,
           height: defaultOgImageSource.height,
-          ...openGraph?.image,
+          ...seo?.openGraph?.image,
           // Alt tag is deliberately omitted, since OG images are mostly
           // decorative and might not always represent the content itself. See
           // also: https://yoast.com/developer-blog/why-we-dont-set-the-og-image-alt-tag/

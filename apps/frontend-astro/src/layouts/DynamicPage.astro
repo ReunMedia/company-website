@@ -33,21 +33,23 @@ const ogImageUrl = await ogImage(
 
 <Layout
   localizedPaths={astroPage.localizedPaths}
-  title={astroPage.title ? `${astroPage.title} - Reun Media` : undefined}
-  metaDescription={astroPage.metaDescription}
-  openGraph={{
-    basic: {
-      title: astroPage.openGraphTitle,
-      image: ogImageUrl,
-    },
-    optional: {
-      description: astroPage.openGraphDescription,
-    },
-    image: {
-      // TODO - These shouldn't be hardcoded, but rather inferred from the
-      // computed options of OG image.
-      height: 627,
-      width: 1200,
+  seo={{
+    title: astroPage.title,
+    description: astroPage.metaDescription,
+    openGraph: {
+      basic: {
+        title: astroPage.openGraphTitle,
+        image: ogImageUrl,
+      },
+      optional: {
+        description: astroPage.openGraphDescription,
+      },
+      image: {
+        // TODO - These shouldn't be hardcoded, but rather inferred from the
+        // computed options of OG image.
+        height: 627,
+        width: 1200,
+      },
     },
   }}
 >

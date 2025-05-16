@@ -23,7 +23,12 @@ const localePaths = getRelativeLocaleUrlList().map((x) =>
 const defaultLocalePath = getPathByLocale(i18n?.defaultLocale ?? "");
 const defaultLocale = getLocaleByPath(defaultLocalePath);
 const delay = 3;
-const url = `${Astro.site}/${defaultLocalePath}/`;
+/**
+ * Absolute URL to default language index.
+ *
+ * Dynamically updated by client-side language detection.
+ */
+const url = `${Astro.site}${defaultLocalePath}/`;
 
 const indexPageQuery = graphql(`
   query indexPageQuery($langCode: String!) {
@@ -86,10 +91,16 @@ const metaDescription =
 ---
 
 <Blank
-  title="Reun Media"
-  openGraph={{
-    basic: { title: tagline ? `${tagline} - Reun Media` : "Reun Media" },
-    optional: { description: metaDescription },
+  seo={{
+    title: tagline,
+    description: metaDescription,
+    // Use default language index as canonical URL. This will be dynamically
+    // updated by client-side language detection.
+    canonical: url,
+    openGraph: {
+      basic: { title: tagline ? `${tagline} - Reun Media` : "Reun Media" },
+      optional: { description: metaDescription },
+    },
   }}
 >
   <Fragment slot="additional-head">
@@ -144,7 +155,8 @@ const metaDescription =
     JSON.parse(wrapperEl?.dataset.indexRedirect ?? "{}") ?? {};
 
   // Get elements that are changed dynamically
-  const metaEl = document.querySelector('meta[http-equiv="refresh"]');
+  const canonicalEl = document.querySelector('link[rel="canonical"]');
+  const metaRefreshEl = document.querySelector('meta[http-equiv="refresh"]');
   const anchorEls = document.querySelectorAll("a");
 
   // Check if current browser language matches any of the available locales and
@@ -153,8 +165,9 @@ const metaDescription =
   const lang = regex.exec(navigator.language)?.[0] ?? defaultLocalePath;
   if (lang && wrapperEl) {
     // Dynamically update attributes to the preferred language
-    const newUrl = `/${lang}/`;
-    metaEl?.setAttribute("content", `${delay};url=${newUrl}`);
+    const newUrl = `${window.location.origin}/${lang}/`;
+    metaRefreshEl?.setAttribute("content", `${delay};url=${newUrl}`);
+    canonicalEl?.setAttribute("href", newUrl);
     [...anchorEls].map((el) => el?.setAttribute("href", newUrl));
 
     // Fade out loader before redirect

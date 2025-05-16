@@ -48,8 +48,8 @@ if (error) {
   throw error;
 }
 
-const tagline = data?.indexContent?.heroContentTranslations?.[0]?.tagline;
-const title = tagline ? `${tagline} - Reun Media` : undefined;
+const tagline = data?.indexContent?.heroContentTranslations?.[0]?.tagline ?? "";
+const title = tagline ? `${tagline} - Reun Media` : "";
 const metaDescription =
   data?.globalOptions?.translations?.[0]?.indexMetaDescription ?? "";
 
@@ -66,15 +66,17 @@ const htmlContent = await markdownToHtml(
 ---
 
 <Default
-  title={title}
   localizedPaths={localizedPaths}
-  metaDescription={metaDescription}
-  openGraph={{
-    basic: {
-      title: title ?? "",
-    },
-    optional: {
-      description: metaDescription,
+  seo={{
+    title: tagline,
+    description: metaDescription,
+    openGraph: {
+      basic: {
+        title: title,
+      },
+      optional: {
+        description: metaDescription,
+      },
     },
   }}
 >
