@@ -28,7 +28,6 @@ export default function getTemplate<T>(
   return (compiler || html)/* html */ `
     <div
       style=${{
-        position: "relative",
         backgroundColor: colors["--color-clouds-500"],
         width: "100%",
         height: "100%",
@@ -42,7 +41,6 @@ export default function getTemplate<T>(
       <div
         style=${{
           display: "flex",
-          position: "relative",
           width: "100%",
           flexDirection: "column",
         }}
@@ -52,23 +50,19 @@ export default function getTemplate<T>(
           display: "flex",
           flex: 1,
           width: "100%",
-          gap: "4em",
-          alignItems: "flex-start",
         }}
         >
           <h2
             style=${{
+              display: "flex",
               fontFamily: "Poppins",
               fontWeight: 400,
               fontSize: "4.5em",
-              margin: 0,
+              margin: "50px 50px 0 0",
               color: colors["--color-sky-500"],
               flex: 1,
-              display: "flex",
-              alignItems: "center",
               lineHeight: "1em",
               wordBreak: "break-word",
-              minHeight: `${logomarkSvgMeta.height / 2}px`,
             }}
           >
             ${title}
@@ -80,9 +74,10 @@ export default function getTemplate<T>(
             />
 
         </div>
-        <div style=${{ display: "flex", flex: 1, alignItems: "flex-start" }}>
+        <div style=${{ display: "flex", flex: 1, alignItems: "center" }}>
           <p
             style=${{
+              display: "flex",
               margin: 0,
               fontFamily: "Inter",
               fontWeight: 500,
@@ -90,9 +85,6 @@ export default function getTemplate<T>(
               flex: 1,
               color: colors["--color-slate-900"],
               wordBreak: "break-word",
-              display: "flex",
-              alignItems: "center",
-              minHeight: `${logomarkSvgMeta.height / 2}px`,
             }}
           >
             ${description}
