@@ -6,17 +6,48 @@
 
 import Blank from "../layouts/Blank.astro";
 import LogomarkLoadingAnimatedSvg from "../assets/logomark-loading-animated.svg?raw";
-import { getRelativeLocaleUrlList } from "astro:i18n";
+import {
+  getLocaleByPath,
+  getPathByLocale,
+  getRelativeLocaleUrlList,
+} from "astro:i18n";
 import { graphql } from "../graphql/generated";
 import { client } from "../graphql/urql";
 import type { JsonFields } from "../components/TheFooter.astro";
 import { uniq } from "es-toolkit";
 import { i18n } from "astro:config/client";
 
-const locales = getRelativeLocaleUrlList().map((x) => x.replaceAll("/", ""));
-const defaultLocale = i18n?.defaultLocale;
+const localePaths = getRelativeLocaleUrlList().map((x) =>
+  x.replaceAll("/", ""),
+);
+const defaultLocalePath = getPathByLocale(i18n?.defaultLocale ?? "");
+const defaultLocale = getLocaleByPath(defaultLocalePath);
 const delay = 3;
-const url = `/${defaultLocale}/`;
+const url = `${Astro.site}/${defaultLocalePath}/`;
+
+const indexPageQuery = graphql(`
+  query indexPageQuery($langCode: String!) {
+    globalOptions {
+      translations {
+        socialMediaLinks
+      }
+      translationsLanguages: translations(
+        filter: { languages_code: { code: { _eq: $langCode } } }
+      ) {
+        indexMetaDescription
+      }
+    }
+    indexContent {
+      heroContentTranslations(
+        filter: { languages_code: { code: { _eq: $langCode } } }
+      ) {
+        tagline
+      }
+    }
+  }
+`);
+const { data, error } =
+  (await client?.query(indexPageQuery, { langCode: defaultLocale })) ?? {};
 
 /**
  * Social media verification links.
@@ -26,17 +57,6 @@ const url = `/${defaultLocale}/`;
  * `<link>` tags to `<head>`. This is primarily done for Mastodon verification.
  */
 const socialMediaVerificationLinks = await (async () => {
-  const indexPageQuery = graphql(`
-    query indexPageQuery {
-      globalOptions {
-        translations {
-          socialMediaLinks
-        }
-      }
-    }
-  `);
-  const { data, error } = (await client?.query(indexPageQuery, {})) ?? {};
-
   // GraphQL error should prevent building the site
   if (error) {
     throw error;
@@ -59,9 +79,19 @@ const socialMediaVerificationLinks = await (async () => {
 
   return uniqueUrlsWithRelMe;
 })();
+
+const tagline = data?.indexContent?.heroContentTranslations?.[0]?.tagline ?? "";
+const metaDescription =
+  data?.globalOptions?.translationsLanguages?.[0]?.indexMetaDescription ?? "";
 ---
 
-<Blank>
+<Blank
+  title="Reun Media"
+  openGraph={{
+    basic: { title: tagline ? `${tagline} - Reun Media` : "Reun Media" },
+    optional: { description: metaDescription },
+  }}
+>
   <Fragment slot="additional-head">
     <meta http-equiv="refresh" content={`${delay};url=${url}`} />
     <link rel="alternate" href={Astro.site} hreflang="x-default" />
@@ -69,7 +99,11 @@ const socialMediaVerificationLinks = await (async () => {
   </Fragment>
 
   <div
-    data-index-redirect={JSON.stringify({ locales, delay, defaultLocale })}
+    data-index-redirect={JSON.stringify({
+      localePaths,
+      delay,
+      defaultLocalePath,
+    })}
     class="flex flex-col h-dvh w-dvw items-center justify-center transition-opacity duration-300"
   >
     <div class="h-full"></div>
@@ -106,7 +140,7 @@ const socialMediaVerificationLinks = await (async () => {
   );
 
   // Get frontmatter data
-  const { locales, delay, defaultLocale } =
+  const { localePaths, delay, defaultLocalePath } =
     JSON.parse(wrapperEl?.dataset.indexRedirect ?? "{}") ?? {};
 
   // Get elements that are changed dynamically
@@ -115,8 +149,8 @@ const socialMediaVerificationLinks = await (async () => {
 
   // Check if current browser language matches any of the available locales and
   // select the most preferred one or fallback to default locale.
-  const regex = new RegExp("^(" + locales.join("|") + ")");
-  const lang = regex.exec(navigator.language)?.[0] ?? defaultLocale;
+  const regex = new RegExp("^(" + localePaths.join("|") + ")");
+  const lang = regex.exec(navigator.language)?.[0] ?? defaultLocalePath;
   if (lang && wrapperEl) {
     // Dynamically update attributes to the preferred language
     const newUrl = `/${lang}/`;
