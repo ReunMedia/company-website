@@ -64,6 +64,9 @@ const defaultOgImageUrl = new URL(defaultOgImage.src, Astro.url).href;
     <meta name="apple-mobile-web-app-title" content="Reun Media" />
     <link rel="manifest" href="/site.webmanifest" />
 
+    <!-- https://github.com/ai-robots-txt/ai.robots.txt/blob/main/docs/additional-steps/bing.md -->
+    <meta name="robots" content="noarchive" />
+
     <script is:inline src="/static/dist/setInitialTheme.js"></script>
 
     <SEO
