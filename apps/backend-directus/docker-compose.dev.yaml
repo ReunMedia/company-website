@@ -2,6 +2,7 @@
 
 services:
   backend-directus:
+    restart: no
     ports:
       - 8055:8055
     volumes:
