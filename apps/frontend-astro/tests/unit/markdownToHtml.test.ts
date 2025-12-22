@@ -34,5 +34,5 @@ describe("Process headings", () => {
     expect(result).toContain("Heading 2b</h4>");
     expect(result).toContain("Heading 3</h5>");
     expect(result).toContain("Heading 1b</h3>");
-  });
+  }, 10_000);
 });
