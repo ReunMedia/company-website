@@ -20,9 +20,9 @@
     "@fontsource-variable/inter": "^5.2.8",
     "@fontsource/inter": "^5.2.8",
     "@fontsource/poppins": "^5.2.7",
-    "@graphql-codegen/cli": "^5.0.7",
-    "@graphql-codegen/client-preset": "^4.8.3",
-    "@graphql-codegen/schema-ast": "^4.1.0",
+    "@graphql-codegen/cli": "^6.1.0",
+    "@graphql-codegen/client-preset": "^5.2.2",
+    "@graphql-codegen/schema-ast": "^5.0.0",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@headlessui/vue": "^1.7.23",
     "@iconify-json/simple-icons": "^1.2.63",
@@ -31,8 +31,8 @@
     "@shikijs/rehype": "^3.20.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
-    "@urql/core": "^5.2.0",
-    "@urql/vue": "^1.4.3",
+    "@urql/core": "^6.0.1",
+    "@urql/vue": "^2.0.0",
     "@vee-validate/zod": "^4.15.1",
     "@vueuse/core": "^14.1.0",
     "astro": "^5.16.6",
@@ -89,7 +89,7 @@
     "prettier-plugin-packagejson": "^2.5.20",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript-eslint": "^8.50.0",
-    "vitest": "^3.2.4"
+    "vitest": "^4.0.16"
   },
   "packageManager": "pnpm@10.11.0+sha512.6540583f41cc5f628eb3d9773ecee802f4f9ef9923cc45b69890fb47991d4b092964694ec3a4f738a420c918a333062c8b925d312f42e4f0c263eb603551f977",
   "engines": {
