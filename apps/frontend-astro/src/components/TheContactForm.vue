@@ -138,12 +138,15 @@ const { handleSubmit, errors, isSubmitting, isValidating } = useForm({
   validationSchema: toTypedSchema(
     zod.object({
       name: zodRequiredString(t("formErrors.name.required")),
-      email: zodRequiredString(t("formErrors.email.required")).email(
-        t("formErrors.email.invalid"),
-      ),
+      email: zod.email({
+        error: ({ input }) =>
+          input
+            ? t("formErrors.email.invalid")
+            : t("formErrors.email.required"),
+      }),
       message: zodRequiredString(t("formErrors.message.required")),
       acceptPrivacy: zod.literal(true, {
-        required_error: t("formErrors.acceptPrivacy.required"),
+        error: t("formErrors.acceptPrivacy.required"),
       }),
       submitButton: zod.any(),
       honey_message: zod.string().or(zod.undefined()),

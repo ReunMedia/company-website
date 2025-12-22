@@ -64,7 +64,7 @@ importers:
         version: 2.0.0(@urql/core@6.0.1(graphql@16.12.0))(vue@3.5.26(typescript@5.9.3))
       '@vee-validate/zod':
         specifier: ^4.15.1
-        version: 4.15.1(vue@3.5.26(typescript@5.9.3))(zod@3.25.76)
+        version: 4.15.1(vue@3.5.26(typescript@5.9.3))(zod@4.2.1)
       '@vueuse/core':
         specifier: ^14.1.0
         version: 14.1.0(vue@3.5.26(typescript@5.9.3))
@@ -159,8 +159,8 @@ importers:
         specifier: ^11.2.7
         version: 11.2.7(vue@3.5.26(typescript@5.9.3))
       zod:
-        specifier: ^3.25.76
-        version: 3.25.76
+        specifier: ^4.2.1
+        version: 4.2.1
     devDependencies:
       '@astrojs/check':
         specifier: ^0.9.6
@@ -5365,6 +5365,9 @@ packages:
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
+  zod@4.2.1:
+    resolution: {integrity: sha512-0wZ1IRqGGhMP76gLqz8EyfBXKk0J2qo2+H3fi4mcUP/KtTocoX08nmIAHl1Z2kJIZbZee8KOpBCSNPRgauucjw==}
+
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
@@ -7358,11 +7361,11 @@ snapshots:
       vue: 3.5.26(typescript@5.9.3)
       wonka: 6.3.5
 
-  '@vee-validate/zod@4.15.1(vue@3.5.26(typescript@5.9.3))(zod@3.25.76)':
+  '@vee-validate/zod@4.15.1(vue@3.5.26(typescript@5.9.3))(zod@4.2.1)':
     dependencies:
       type-fest: 4.41.0
       vee-validate: 4.15.1(vue@3.5.26(typescript@5.9.3))
-      zod: 3.25.76
+      zod: 4.2.1
     transitivePeerDependencies:
       - vue
 
@@ -11110,5 +11113,7 @@ snapshots:
       zod: 3.25.76
 
   zod@3.25.76: {}
+
+  zod@4.2.1: {}
 
   zwitch@2.0.4: {}
