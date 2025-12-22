@@ -25,7 +25,7 @@ export default function getTemplate<T>(
   { title, description }: Options,
   compiler?: Compiler<T>,
 ) {
-  return (compiler || html)/* html */ `
+  return (compiler || html) /* html */ `
     <div
       style=${{
         backgroundColor: colors["--color-clouds-500"],

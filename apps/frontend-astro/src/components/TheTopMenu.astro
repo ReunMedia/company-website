@@ -3,11 +3,10 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import TheTopMenuVue from "./TheTopMenu.vue";
 import type { Props as TheTopMenuProps } from "./TheTopMenu.vue";
 
-export interface Props
-  extends Pick<
-    TheTopMenuProps["selectLanguageButtonProps"],
-    "localizedPaths"
-  > {}
+export interface Props extends Pick<
+  TheTopMenuProps["selectLanguageButtonProps"],
+  "localizedPaths"
+> {}
 
 const { localizedPaths } = Astro.props;
 
