@@ -74,7 +74,6 @@ const validationListeners = {
   duration-300
   focus-within:outline-2
   focus-within:outline-theme-primary
-  [.theme-sky-dark_&]:bg-theme-background-highlight;
 }
 
 /**
