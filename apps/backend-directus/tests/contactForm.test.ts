@@ -3,9 +3,9 @@ import { Client, fetchExchange, gql } from "@urql/core";
 
 describe("Contact Form submission", async () => {
   const defaultInput = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    message: "Hello Reun!",
+    name: "Form Test",
+    email: "formtest@example.com",
+    message: "Test message submitted by contactForm.test.ts",
     acceptPrivacy: true,
   };
 
