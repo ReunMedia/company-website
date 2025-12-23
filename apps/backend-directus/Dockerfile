@@ -30,7 +30,7 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 COPY data/extensions/custom-utils-endpoint/src ./src
 RUN pnpm build
 
-FROM directus/directus:11.5.1
+FROM directus/directus:11.14.0
 
 # Copy Directus Sync
 COPY --from=directus-extensions /extensions/directus /directus/extensions
@@ -43,7 +43,7 @@ COPY directus-config /directus/directus-config
 #
 # In the entrypoint we use `npx` instead of `pnpm dlx` to avoid downlading the
 # package again.
-RUN cd /directus && pnpm install directus-sync@3.2.3
+RUN cd /directus && pnpm install directus-sync@3.4.1
 
 # Copy custom extensions
 COPY --from=directus-custom-extensions \

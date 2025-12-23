@@ -2,5 +2,8 @@
   "name": "directus-extensions",
   "dependencies": {
     "directus-extension-sync": "^3.0.2"
-  }
+  },
+  "//": [
+    "Remember to also update `directus-sync` version in Dockerfile"
+  ]
 }

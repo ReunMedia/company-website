@@ -185,7 +185,7 @@ input directus_files_filter {
   focal_point_x: number_filter_operators
   focal_point_y: number_filter_operators
   height: number_filter_operators
-  id: string_filter_operators
+  id: id_filter_operators
   location: string_filter_operators
   metadata: string_filter_operators
   metadata_func: count_function_filter_operators
@@ -219,7 +219,7 @@ input globalOptions_filter {
   _or: [globalOptions_filter]
   copyrightYearStart: number_filter_operators
   id: number_filter_operators
-  translations: globalOptions_translations_filter
+  translations: globalOptions_translations_quantifier_filter
   translations_func: count_function_filter_operators
 }
 
@@ -312,6 +312,27 @@ type globalOptions_translations_mutated {
   key: ID!
 }
 
+""""""
+input globalOptions_translations_quantifier_filter {
+  _and: [globalOptions_translations_filter]
+  _none: globalOptions_translations_filter
+  _or: [globalOptions_translations_filter]
+  _some: globalOptions_translations_filter
+  address: string_filter_operators
+  companyName: string_filter_operators
+  contactInfoLinks: string_filter_operators
+  contactInfoLinks_func: count_function_filter_operators
+  footerAdditionalContent: string_filter_operators
+  footerAdditionalLinks: string_filter_operators
+  footerAdditionalLinks_func: count_function_filter_operators
+  globalOptions_id: globalOptions_filter
+  id: number_filter_operators
+  indexMetaDescription: string_filter_operators
+  languages_code: languages_filter
+  socialMediaLinks: string_filter_operators
+  socialMediaLinks_func: count_function_filter_operators
+}
+
 type heroContent_translations {
   ctaButtonText: String
   id: ID!
@@ -373,6 +394,42 @@ type heroContent_translations_mutated {
   key: ID!
 }
 
+""""""
+input heroContent_translations_quantifier_filter {
+  _and: [heroContent_translations_filter]
+  _none: heroContent_translations_filter
+  _or: [heroContent_translations_filter]
+  _some: heroContent_translations_filter
+  ctaButtonText: string_filter_operators
+  id: number_filter_operators
+  indexContent_id: indexContent_filter
+  languages_code: languages_filter
+  message: string_filter_operators
+  tagline: string_filter_operators
+}
+
+input id_filter_operators {
+  _contains: ID
+  _empty: Boolean
+  _ends_with: ID
+  _eq: ID
+  _icontains: ID
+  _iends_with: ID
+  _in: [ID]
+  _istarts_with: ID
+  _ncontains: ID
+  _nempty: Boolean
+  _nends_with: ID
+  _neq: ID
+  _niends_with: ID
+  _nin: [ID]
+  _nistarts_with: ID
+  _nnull: Boolean
+  _nstarts_with: ID
+  _null: Boolean
+  _starts_with: ID
+}
+
 type indexContent {
   backgroundImageDark(filter: directus_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): directus_files
   backgroundImageLight(filter: directus_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): directus_files
@@ -394,12 +451,12 @@ input indexContent_filter {
   backgroundImageLight: directus_files_filter
   date_updated: date_filter_operators
   date_updated_func: datetime_function_filter_operators
-  heroContentTranslations: heroContent_translations_filter
+  heroContentTranslations: heroContent_translations_quantifier_filter
   heroContentTranslations_func: count_function_filter_operators
   id: number_filter_operators
-  indexContentTranslations: indexContent_translations_filter
+  indexContentTranslations: indexContent_translations_quantifier_filter
   indexContentTranslations_func: count_function_filter_operators
-  workShowcaseItems: workShowcaseItems_filter
+  workShowcaseItems: workShowcaseItems_quantifier_filter
   workShowcaseItems_func: count_function_filter_operators
 }
 
@@ -462,6 +519,18 @@ type indexContent_translations_mutated {
   data: indexContent_translations
   event: EventEnum
   key: ID!
+}
+
+""""""
+input indexContent_translations_quantifier_filter {
+  _and: [indexContent_translations_filter]
+  _none: indexContent_translations_filter
+  _or: [indexContent_translations_filter]
+  _some: indexContent_translations_filter
+  id: number_filter_operators
+  indexContent_id: indexContent_filter
+  languages_code: languages_filter
+  markdownContent: string_filter_operators
 }
 
 type languages {
@@ -565,7 +634,7 @@ input pages_filter {
   id: number_filter_operators
   layout: string_filter_operators
   status: string_filter_operators
-  translations: pages_translations_filter
+  translations: pages_translations_quantifier_filter
   translations_func: count_function_filter_operators
 }
 
@@ -661,6 +730,23 @@ type pages_translations_mutated {
   data: pages_translations
   event: EventEnum
   key: ID!
+}
+
+""""""
+input pages_translations_quantifier_filter {
+  _and: [pages_translations_filter]
+  _none: pages_translations_filter
+  _or: [pages_translations_filter]
+  _some: pages_translations_filter
+  content: string_filter_operators
+  id: number_filter_operators
+  languages_id: languages_filter
+  metaDescription: string_filter_operators
+  openGraphDescription: string_filter_operators
+  openGraphTitle: string_filter_operators
+  pages_id: pages_filter
+  slug: string_filter_operators
+  title: string_filter_operators
 }
 
 input string_filter_operators {
@@ -900,7 +986,7 @@ input workShowcaseItems_filter {
   indexContent_id: indexContent_filter
   indexContent_sort: number_filter_operators
   status: string_filter_operators
-  translations: workShowcaseItems_translations_filter
+  translations: workShowcaseItems_translations_quantifier_filter
   translations_func: count_function_filter_operators
 }
 
@@ -908,6 +994,25 @@ type workShowcaseItems_mutated {
   data: workShowcaseItems
   event: EventEnum
   key: ID!
+}
+
+""""""
+input workShowcaseItems_quantifier_filter {
+  _and: [workShowcaseItems_filter]
+  _none: workShowcaseItems_filter
+  _or: [workShowcaseItems_filter]
+  _some: workShowcaseItems_filter
+  coverImage: directus_files_filter
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  id: number_filter_operators
+  indexContent_id: indexContent_filter
+  indexContent_sort: number_filter_operators
+  status: string_filter_operators
+  translations: workShowcaseItems_translations_quantifier_filter
+  translations_func: count_function_filter_operators
 }
 
 type workShowcaseItems_translations {
@@ -986,4 +1091,19 @@ type workShowcaseItems_translations_mutated {
   data: workShowcaseItems_translations
   event: EventEnum
   key: ID!
+}
+
+""""""
+input workShowcaseItems_translations_quantifier_filter {
+  _and: [workShowcaseItems_translations_filter]
+  _none: workShowcaseItems_translations_filter
+  _or: [workShowcaseItems_translations_filter]
+  _some: workShowcaseItems_translations_filter
+  id: number_filter_operators
+  languages_code: languages_filter
+  localizedCoverImage: directus_files_filter
+  markdownContent: string_filter_operators
+  slug: string_filter_operators
+  title: string_filter_operators
+  workShowcaseItems_id: workShowcaseItems_filter
 }

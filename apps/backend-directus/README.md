@@ -18,17 +18,25 @@ Use `admin@example.com` as email and `admin123` as password to sign in.
 > [Mailpit](https://mailpit.axllent.org/) container for testing form submission
 > notification emails.
 
-## Saving / loading Directus schema
+## Saving / loading Directus schema with Directus Sync
+
+[Directus Sync](https://tractr.github.io/directus-sync/) is used for schema
+management. Run the following command to save schema snapshot from a running
+developemnt container:
 
 ```sh
 pnpm snapshot
 ```
 
-This saves the sync schema to `data/directus-config`. You can alternatively run
-`npx directus-sync pull` inside the container.
+This saves the sync schema to `data/directus-config`. The schema can then be
+committed to version control and it is automatically applied when the container
+is started.
 
-The schema is automatically applied when the container is started, but you can
-also apply it manually by running `npx directus-sync push` in the container.
+### Updating Directus Sync
+
+`directus-extension-sync` is installed in `directus-extensions/package.json`.
+
+`directus-sync` is installed in `Dockerfile`.
 
 ## Running tests
 
