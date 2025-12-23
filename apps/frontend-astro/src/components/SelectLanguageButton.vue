@@ -6,7 +6,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import BaseTopMenuButton from "./BaseTopMenuButton.vue";
 import BaseSideMenu from "./BaseSideMenu.vue";
 import type { LocalizedPath } from "../types/localizedPath";
-import { normalizeTrailingSlash } from "../utils/normalizeTrailingSlash.ts";
+import { normalizeTrailingSlash } from "@reunmedia/astro-normalize-trailing-slash";
 import { normalizedLocales } from "../i18n/i18n.ts";
 
 export interface Props {

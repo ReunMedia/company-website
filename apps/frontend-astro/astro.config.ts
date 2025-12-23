@@ -4,6 +4,7 @@ import icon from "astro-icon";
 import vue from "@astrojs/vue";
 import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 import ogImages from "@reunmedia/astro-og-images";
+import normalizeTrailingSlash from "@reunmedia/astro-normalize-trailing-slash";
 import appIntegration from "./src/integrations/appIntegration";
 import { readFile } from "fs/promises";
 import { loadEnv } from "vite";
@@ -67,5 +68,6 @@ export default defineConfig({
       ],
     }),
     appIntegration(),
+    normalizeTrailingSlash(),
   ],
 });

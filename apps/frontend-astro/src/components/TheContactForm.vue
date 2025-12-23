@@ -16,7 +16,7 @@ import ButtonPrimary from "./ButtonPrimary.vue";
 import SvgIcon from "./SvgIcon.vue";
 import MdiLoading from "../icons/MdiLoading.svg";
 import { zodRequiredString } from "../utils/zodRequiredString";
-import { normalizeTrailingSlash } from "../utils/normalizeTrailingSlash";
+import { normalizeTrailingSlash } from "@reunmedia/astro-normalize-trailing-slash";
 
 export interface Props {
   currentLocale: string;
