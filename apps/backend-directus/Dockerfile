@@ -3,7 +3,9 @@
 FROM node:22-alpine AS directus-extensions
 RUN apk add python3 g++ make
 WORKDIR /extensions
-ADD directus-extensions .
+COPY directus-extensions/package.json \
+  directus-extensions/package-lock.json \
+  ./
 
 # We're using `npm` instead of `pnpm` to make it easier to copy the extensions
 # from `node_modules` directory.
