@@ -30,7 +30,7 @@ const { handleChange, checked, errorMessage } = useField(
     <label class="flex h-10 flex-wrap items-center rounded-lg">
       <!-- transition-[] is needed because Tailwind's `transition-color` doesn't transition outline and adding both `transition-color` and `transition-[outline-color]` makes the background color not transition. -->
       <input
-        class="outline-theme-borders checked:!bg-theme-primary [.theme-sky-dark_&]:border-theme-background-highlight [.theme-sky-dark_&]:bg-theme-background-highlight focus-visible:outline-theme-primary mr-4 h-6 w-6 appearance-none rounded-md border-4 border-white bg-white outline transition-[outline-color,background-color] duration-300 hover:cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-0"
+        class="outline-theme-borders checked:bg-theme-primary! in-[.theme-sky-dark]:border-theme-background-highlight in-[.theme-sky-dark]:bg-theme-background-highlight focus-visible:outline-theme-primary mr-4 h-6 w-6 appearance-none rounded-md border-4 border-white bg-white outline transition-[outline-color,background-color] duration-300 hover:cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-0"
         :value="checkedValue"
         :checked="checked ?? false"
         type="checkbox"

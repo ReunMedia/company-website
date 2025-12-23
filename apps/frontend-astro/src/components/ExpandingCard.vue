@@ -21,7 +21,7 @@ const { coverImageUrl, title, slug } = defineProps<Props>();
         See: https://www.nngroup.com/articles/write-alt-text/#toc-decorative-images-dont-need-alt-text-4
       -->
       <img
-        class="aspect-[16/9] w-full object-cover"
+        class="aspect-video w-full object-cover"
         :src="coverImageUrl"
         alt=""
       />

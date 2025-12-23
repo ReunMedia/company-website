@@ -77,7 +77,7 @@ const { message, tagline, ctaButtonText } =
             custom media query.
           */
         }
-        <picture class="flex-shrink">
+        <picture class="shrink">
           {/* Aligned logo with left margin for larger screens (sm+) */}
           <source
             media="(min-width: 640px)"
@@ -87,7 +87,7 @@ const { message, tagline, ctaButtonText } =
           />
           {/* Centered logo for smaller screens*/}
           <img
-            class="w-full mx-auto min-h-0 max-w-[1420px]"
+            class="w-full mx-auto min-h-0 max-w-355"
             src={logoSvg.src}
             width={logoSvg.width}
             height={logoSvg.height}
@@ -99,7 +99,7 @@ const { message, tagline, ctaButtonText } =
         <div class="mt-3 flex items-center justify-center lg:mt-12">
           <the-hero-tagline>
             <h1
-              class="taglineText flex flex-wrap justify-center gap-x-[.8em] text-theme-secondary [.theme-sky-dark_&]:text-silver-500"
+              class="taglineText flex flex-wrap justify-center gap-x-[.8em] text-theme-secondary in-[.theme-sky-dark]:text-silver-500"
             >
               {
                 // Split tagline elements by `•` character.
@@ -221,7 +221,7 @@ const { message, tagline, ctaButtonText } =
       overflow-x-clip
       before:absolute
       before:-inset-1/4
-      before:bg-[image:var(--hero-bg-light)]
+      before:bg-(image:--hero-bg-light)
       before:bg-contain
       before:bg-center
       before:bg-no-repeat
@@ -230,7 +230,7 @@ const { message, tagline, ctaButtonText } =
   }
 
   :global(.theme-sky-dark) .heroBackground {
-    @apply before:bg-[image:var(--hero-bg-dark)];
+    @apply before:bg-(image:--hero-bg-dark);
   }
 
   /**

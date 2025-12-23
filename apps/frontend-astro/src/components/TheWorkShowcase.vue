@@ -188,7 +188,7 @@ function findItemByHash(hash: string) {
             v-bind="transitionProps"
           >
             <DialogPanel
-              class="border-theme-borders bg-theme-background h-full w-full max-w-screen-lg overflow-hidden rounded-2xl border-2"
+              class="border-theme-borders bg-theme-background h-full w-full max-w-5xl overflow-hidden rounded-2xl border-2"
             >
               <div
                 class="scrollbar-thin flex h-full w-full flex-col overflow-y-auto"
@@ -199,7 +199,7 @@ function findItemByHash(hash: string) {
                   See: https://www.nngroup.com/articles/write-alt-text/#toc-decorative-images-dont-need-alt-text-4
                 -->
                 <img
-                  class="aspect-[3/1] w-full object-cover"
+                  class="aspect-3/1 w-full object-cover"
                   alt=""
                   :src="lastSelectedItem?.coverImage.url ?? ''"
                 />
