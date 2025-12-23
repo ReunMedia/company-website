@@ -9,7 +9,7 @@ COPY directus-extensions/package.json \
 
 # We're using `npm` instead of `pnpm` to make it easier to copy the extensions
 # from `node_modules` directory.
-RUN npm install
+RUN npm ci
 
 # Move all extensions the starts with directus-extension-, using find, to the
 # /extensions/directus folder
