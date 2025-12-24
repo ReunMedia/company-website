@@ -56,6 +56,20 @@ This app uses Docker Compose for deployment. See
 that need to be configured and deploy to Coolify or another service supporting
 Docker Compose.
 
+## Data backup / restore
+
+### Backup
+
+```sh
+./tools/backup-data.sh backup john@example.com container-id /directus/database /directus/uploads
+```
+
+### Restore
+
+```sh
+./tools/backup-data.sh restore john@example.com container-id backup-archive.tar.gz
+```
+
 ## Troubleshooting
 
 ### Directus cannot create (open) database in dev environment
