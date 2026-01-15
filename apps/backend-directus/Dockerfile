@@ -35,7 +35,7 @@ FROM directus/directus:11.14.0
 # Copy Directus Sync
 COPY --from=directus-extensions /extensions/directus /directus/extensions
 COPY directus-sync.config.cjs /directus
-COPY directus-config /directus/directus-config
+COPY data/directus-config /directus/directus-config
 
 # Install Directus Sync CLI. This makes it so that when we run `npx
 # directus-sync`, the package already exists. We need to use `pnpm` to install
