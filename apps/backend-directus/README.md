@@ -74,17 +74,37 @@ Docker Compose.
 
 ### Directus cannot create (open) database in dev environment
 
-This _might_ be due to user / permission mismatch between host and Directus
-container that makes Directus unable to write to mounted volumes. Directus
-container expects your `u:g` to be `1000:1000`.
+This is be due to user / permission mismatch between host and Directus container
+that makes Directus unable to write to mounted volumes.
 
-**Easy solution is to not use mounted volumes** by creating
-`_docker-compose.dev2.yml` (the `_` prefix ensures it is not committed) and
-overriding `volumes` configuration for `backend-directus`. If you still insist
-on making Directus write files inside `apps/backend-directus/data`, here are
-two links to take you down the rabbit hole:
+Here's how to fix this:
 
-- https://github.com/directus/directus/discussions/15986
-- https://jtreminio.com/blog/running-docker-containers-as-current-host-user/
+1. Temporarily allow container to write database file
 
-Good luck!
+```sh
+chmod 777 data/database/
+```
+
+2. Run `pnpm dev` and wait for container to start
+3. Check the user ID of `data/database/data.db` file created by container. It's
+   most likely `100999`.
+
+```sh
+stat -c '%u' data/database/data.db
+```
+
+4. Create ACL rules that grant both host and container access to files inside
+   data directory. Replace `100999` with the user ID of the container user.
+
+```sh
+sudo setfacl -Rm u:$(id -u):rw,u:100999:rwx data/
+sudo setfacl -Rdm u:$(id -u):rw,u:100999:rwx data/
+```
+
+5. Revert temporary permissions set in step 1
+
+```sh
+sudo chmod 775 data/database/
+```
+
+6. Restart the container with `pnpm dev`
